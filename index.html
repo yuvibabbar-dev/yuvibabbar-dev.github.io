@@ -1,96 +1,644 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark light" />
-    <title>Yuvi Babbar — Portfolio</title>
-    <meta name="description" content="Portfolio of Yuvi Babbar — Cloud Engineer, Full‑Stack Developer, and DevOps Professional." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2315d1ff'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='url(%23g)'/%3E%3Ctext x='50' y='62' font-size='52' text-anchor='middle' fill='white' font-family='Inter' font-weight='900'%3EY%3C/text%3E%3C/svg%3E" />
-  </head>
-  <body>
-    <div id="progress"></div>
-    <div class="bg">
-      <div class="bg-aurora"></div>
-      <div class="bg-grid"></div>
-      <canvas id="stars"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuvi Babbar — Project Portfolio</title>
+<style>
+  :root {
+    --navy: #1B3A5C;
+    --dark: #1a1a2e;
+    --card-bg: #ffffff;
+    --bg: #f5f7fa;
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --green: #059669;
+    --green-light: #d1fae5;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --orange: #d97706;
+    --orange-light: #fef3c7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --gray: #64748b;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-light: #475569;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .header { background: linear-gradient(135deg, var(--navy) 0%, #2d5a8e 100%); color: white; padding: 48px 24px 40px; text-align: center; }
+  .header h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+  .header .subtitle { font-size: 1.05rem; opacity: 0.9; font-weight: 400; margin-bottom: 16px; }
+  .header .contact { font-size: 0.85rem; opacity: 0.75; }
+  .header .contact a { color: #93c5fd; text-decoration: none; }
+
+  .nav { display: flex; justify-content: center; gap: 8px; padding: 16px 24px; background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
+  .nav button { padding: 8px 20px; border: 1px solid var(--border); background: white; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: var(--text-light); transition: all 0.2s; }
+  .nav button:hover { border-color: var(--accent); color: var(--accent); }
+  .nav button.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat-card { background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid var(--border); }
+  .stat-card .num { font-size: 1.8rem; font-weight: 700; color: var(--navy); }
+  .stat-card .label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+  .project { background: white; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 24px; overflow: hidden; transition: box-shadow 0.2s; }
+  .project:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .project-header { padding: 24px 24px 16px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .project-title { font-size: 1.15rem; font-weight: 700; color: var(--dark); }
+  .project-company { font-size: 0.85rem; color: var(--gray); margin-top: 4px; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .tag-ai { background: var(--purple-light); color: var(--purple); }
+  .tag-infra { background: var(--accent-light); color: var(--accent); }
+  .tag-auto { background: var(--green-light); color: var(--green); }
+  .tag-data { background: var(--orange-light); color: var(--orange); }
+  .tag-backend { background: var(--red-light); color: var(--red); }
+  .tag-security { background: #fef9c3; color: #a16207; }
+  .tag-swe { background: #fce7f3; color: #be185d; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .project-body { padding: 0 24px 20px; }
+  .project-body p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 16px; }
+
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .metric { background: var(--bg); border-radius: 8px; padding: 12px; text-align: center; }
+  .metric .val { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+  .metric .desc { font-size: 0.72rem; color: var(--gray); margin-top: 2px; }
+
+  .tech-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tech { background: var(--bg); border: 1px solid var(--border); padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; color: var(--text-light); font-weight: 500; }
+
+  .arch { background: var(--bg); border-radius: 8px; padding: 16px; margin-bottom: 16px; font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--text-light); line-height: 1.8; white-space: pre-wrap; overflow-x: auto; }
+
+  .section-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin-bottom: 8px; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .footer { text-align: center; padding: 32px 24px; color: var(--gray); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px; }
+  .footer strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>YUVI BABBAR</h1>
+  <div class="subtitle">Cloud & Software Engineer | Backend Systems | Platform & Infrastructure | AI/ML Pipelines</div>
+  <div class="contact">
+    <a href="mailto:yuvisbabbar@gmail.com">yuvisbabbar@gmail.com</a> &nbsp;|&nbsp; 778-522-2737 &nbsp;|&nbsp; New Westminster, BC &nbsp;|&nbsp; <a href="https://linkedin.com/in/babbary">linkedin.com/in/babbary</a>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="showTab('all')">All Projects (15)</button>
+  <button onclick="showTab('swe')">Software Engineering</button>
+  <button onclick="showTab('infra')">Infrastructure</button>
+  <button onclick="showTab('backend')">Backend</button>
+  <button onclick="showTab('auto')">Automation</button>
+  <button onclick="showTab('ai')">AI / ML</button>
+  <button onclick="showTab('data')">Data & Analytics</button>
+  <button onclick="showTab('security')">Security</button>
+</div>
+
+<div class="container">
+
+  <div class="stats">
+    <div class="stat-card"><div class="num">7+</div><div class="label">Years Experience</div></div>
+    <div class="stat-card"><div class="num">42</div><div class="label">Apps Modernized</div></div>
+    <div class="stat-card"><div class="num">$200K+</div><div class="label">Annual Savings</div></div>
+    <div class="stat-card"><div class="num">99.99%</div><div class="label">Uptime</div></div>
+    <div class="stat-card"><div class="num">15K+</div><div class="label">Lines of Terraform</div></div>
+    <div class="stat-card"><div class="num">50K+</div><div class="label">Lines of Code Shipped</div></div>
+  </div>
+
+  <div id="tab-all" class="tab-content active">
+
+    <!-- 1. Multi-Cloud IaC Platform -->
+    <div class="project" data-tags="infra auto">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Multi-Cloud Infrastructure as Code Platform</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer — 2024–Present</div>
+        </div>
+        <div class="tags"><span class="tag tag-infra">Infrastructure</span><span class="tag tag-auto">IaC</span></div>
+      </div>
+      <div class="project-body">
+        <p>Authored and maintained 15,000+ lines of Terraform managing 100+ cloud resources across AWS and Azure. Implemented Git-based workflows with mandatory PR review, automated plan/apply pipelines, and comprehensive state management. Reduced cloud infrastructure costs by 40% ($200K+ annually) through right-sizing, reserved instances, and cross-platform resource optimization.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">15,000+</div><div class="desc">Lines of Terraform</div></div>
+          <div class="metric"><div class="val">100+</div><div class="desc">Cloud resources</div></div>
+          <div class="metric"><div class="val">$200K+</div><div class="desc">Annual savings</div></div>
+          <div class="metric"><div class="val">40%</div><div class="desc">Cost reduction</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Developer → Terraform PR → Automated Plan (GitHub Actions)
+  → PR Review (mandatory) → Merge to Main
+    → Terraform Apply → AWS + Azure Resources
+      → State Lock (S3 + DynamoDB) → Drift Detection
+        → Cost Monitoring → Automated Right-Sizing Alerts</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Terraform</span><span class="tech">AWS</span><span class="tech">Azure</span>
+          <span class="tech">CloudFormation</span><span class="tech">IAM</span><span class="tech">RBAC</span>
+          <span class="tech">GitHub Actions</span><span class="tech">S3</span><span class="tech">DynamoDB</span>
+        </div>
+      </div>
     </div>
 
-    <header class="site-header container">
-      <a class="brand" href="#home">
-        <span class="brand-logo">YB</span>
-        <span class="brand-text">Yuvi Babbar</span>
-      </a>
-
-      <nav class="nav" aria-label="Primary">
-        <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-        <ul class="nav-list">
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#achievements">Achievements</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <a id="headerLinkedin" class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.94 8.5V20H3.5V8.5h3.44ZM5.22 7.1c-1.1 0-1.98-.87-1.98-1.94 0-1.08.88-1.95 1.98-1.95s1.98.87 1.98 1.95c0 1.07-.88 1.94-1.98 1.94ZM20.5 20h-3.38v-6.13c0-1.46-.03-3.33-2.03-3.33-2.03 0-2.34 1.59-2.34 3.22V20H9.38V8.5h3.24v1.56h.05c.45-.86 1.54-1.76 3.17-1.76 3.39 0 4.02 2.23 4.02 5.12V20Z" fill="currentColor"/></svg>
-        </a>
-        <a id="headerGithub" class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.84 3.14 8.94 7.49 10.39.55.1.75-.24.75-.53 0-.26-.01-1.14-.02-2.06-3.05.66-3.7-1.29-3.7-1.29-.5-1.26-1.22-1.6-1.22-1.6-1-.68.08-.66.08-.66 1.1.08 1.68 1.14 1.68 1.14.98 1.67 2.56 1.19 3.18.91.1-.71.38-1.2.69-1.48-2.44-.28-5-1.22-5-5.43 0-1.2.43-2.18 1.14-2.95-.12-.28-.5-1.41.11-2.94 0 0 .94-.3 3.08 1.13.9-.25 1.86-.38 2.82-.38.96 0 1.92.13 2.82.38 2.14-1.43 3.08-1.13 3.08-1.13.61 1.53.23 2.66.11 2.94.71.77 1.14 1.75 1.14 2.95 0 4.22-2.56 5.15-5 5.43.39.33.73.98.73 1.98 0 1.43-.01 2.58-.01 2.93 0 .29.2.64.76.53 4.34-1.45 7.49-5.55 7.49-10.39C23.02 5.24 18.27.5 12 .5Z" fill="currentColor"/></svg>
-        </a>
-        <a id="headerEmail" class="icon-btn" href="#" aria-label="Email" title="Email">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2Zm0 2v.01L12 13 4 8.01V8h16ZM4 16V9.24l7.4 4.94c.37.25.83.25 1.2 0L20 9.24V16H4Z" fill="currentColor"/></svg>
-        </a>
-        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">🌙</button>
-      </div>
-    </header>
-
-    <main id="home" class="container">
-      <section id="hero" class="card hero no-photo" aria-labelledby="intro-title">
-        <div class="hero-left">
-          <h1 id="intro-title" class="title">Hi, I’m <span class="grad">Yuvi Babbar</span></h1>
-          <p class="subtitle">Cloud Engineer • Full‑Stack Developer • DevOps Professional</p>
-          <p class="summary" id="summary"></p>
-          <div class="stats" id="hero-stats"></div>
+    <!-- 2. Kubernetes & Container Platform -->
+    <div class="project" data-tags="infra auto">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Kubernetes Container Orchestration Platform</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer — 2024–Present</div>
         </div>
-        
-      </section>
-
-      <section id="skills" class="card section reveal" aria-labelledby="skills-title">
-        <h2 id="skills-title" class="section-title">Technical Skills</h2>
-        <div id="skills-grid" class="grid skills-grid"></div>
-      </section>
-
-      <section id="experience" class="card section reveal" aria-labelledby="exp-title">
-        <h2 id="exp-title" class="section-title">Professional Experience</h2>
-        <div id="timeline" class="timeline"></div>
-      </section>
-
-      <section id="projects" class="card section reveal" aria-labelledby="projects-title">
-        <h2 id="projects-title" class="section-title">Key Enterprise Projects</h2>
-        <div id="projects-grid" class="grid projects-grid"></div>
-      </section>
-
-      <section id="achievements" class="card section reveal" aria-labelledby="ach-title">
-        <h2 id="ach-title" class="section-title">Key Achievements & Metrics</h2>
-        <div id="achievements-grid" class="grid achievements-grid"></div>
-      </section>
-    </main>
-
-    <footer id="contact" class="site-footer container">
-      <div class="card contact">
-        <h2 class="section-title">Contact</h2>
-        <ul class="contact-list" id="contact-list"></ul>
-        <p class="footnote">© <span id="year"></span> Yuvi Babbar. All rights reserved.</p>
+        <div class="tags"><span class="tag tag-infra">Infrastructure</span><span class="tag tag-auto">Containers</span></div>
       </div>
-    </footer>
+      <div class="project-body">
+        <p>Containerized 15+ production applications with Docker and deployed them to Kubernetes (EKS/AKS) clusters with Helm charts, health checks, and automated scaling. Built self-healing infrastructure with liveness/readiness probes, horizontal pod autoscaling, and node auto-provisioning across multi-cloud environments.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">15+</div><div class="desc">Apps containerized</div></div>
+          <div class="metric"><div class="val">99.99%</div><div class="desc">Uptime</div></div>
+          <div class="metric"><div class="val">Auto</div><div class="desc">Scaling</div></div>
+          <div class="metric"><div class="val">Self-Healing</div><div class="desc">Infrastructure</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Dockerfile → Build (GitHub Actions) → Container Registry (ECR)
+  → Helm Chart → Kubernetes (EKS / AKS)
+    → Services, Deployments, ConfigMaps, Secrets
+      → HPA (Horizontal Pod Autoscaler)
+        → Liveness/Readiness Probes → Auto-Restart
+          → Prometheus Metrics → Grafana Dashboards</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Kubernetes</span><span class="tech">Docker</span><span class="tech">Helm</span>
+          <span class="tech">EKS</span><span class="tech">AKS</span><span class="tech">ECR</span>
+          <span class="tech">Prometheus</span><span class="tech">Grafana</span><span class="tech">HPA</span>
+        </div>
+      </div>
+    </div>
 
-    <script src="assets/js/resume-data.js"></script>
-    <script src="assets/js/app.js"></script>
-  </body>
-  </html>
+    <!-- 3. GitOps CI/CD -->
+    <div class="project" data-tags="infra auto">
+      <div class="project-header">
+        <div>
+          <div class="project-title">GitOps CI/CD & Deployment Automation</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer — 2024–Present</div>
+        </div>
+        <div class="tags"><span class="tag tag-infra">Infrastructure</span><span class="tag tag-auto">CI/CD</span></div>
+      </div>
+      <div class="project-body">
+        <p>Designed a complete GitOps workflow with ArgoCD that transformed the engineering team from weekly manual releases to 40+ automated daily deployments. Built with Git-based development workflows, mandatory code review, automated testing, canary deployments, and comprehensive runbooks.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">40+</div><div class="desc">Daily deployments</div></div>
+          <div class="metric"><div class="val">75%</div><div class="desc">Fewer failures</div></div>
+          <div class="metric"><div class="val">99.99%</div><div class="desc">Uptime</div></div>
+          <div class="metric"><div class="val">< 1hr</div><div class="desc">MTTR</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Developer → Git Push → GitHub Actions (Lint, Test, Build)
+  → Container Registry → ArgoCD (GitOps Sync)
+    → Kubernetes (EKS) → Canary Deployment
+      → Datadog/Prometheus/Grafana Monitoring
+        → Automated Rollback on Failure</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">ArgoCD</span><span class="tech">Kubernetes</span><span class="tech">Docker</span>
+          <span class="tech">GitHub Actions</span><span class="tech">Terraform</span><span class="tech">Helm</span>
+          <span class="tech">Datadog</span><span class="tech">Prometheus</span><span class="tech">Grafana</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. ML Prediction Pipeline -->
+    <div class="project" data-tags="ai auto backend">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Production ML Prediction Pipeline</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer — 2024–Present</div>
+        </div>
+        <div class="tags"><span class="tag tag-ai">AI/ML</span><span class="tag tag-auto">Automation</span></div>
+      </div>
+      <div class="project-body">
+        <p>Designed and built an end-to-end machine learning prediction pipeline from scratch — covering automated data ingestion, feature engineering, model training, deployment, and production monitoring. The system runs autonomously 24/7 with alerting and automated retraining triggers.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">500+</div><div class="desc">Daily predictions</div></div>
+          <div class="metric"><div class="val">< 100ms</div><div class="desc">Inference latency</div></div>
+          <div class="metric"><div class="val">24/7</div><div class="desc">Autonomous operation</div></div>
+          <div class="metric"><div class="val">Zero</div><div class="desc">Manual intervention</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Data Sources → S3 Raw Bucket → Python ETL (Lambda)
+  → Feature Store → TensorFlow Model Training (SageMaker)
+    → Model Registry → Endpoint Deployment
+      → API Gateway → Real-time Predictions
+        → Datadog/Grafana Monitoring → Alerting → Automated Retrain</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">TensorFlow</span><span class="tech">AWS SageMaker</span>
+          <span class="tech">AWS Lambda</span><span class="tech">S3</span><span class="tech">API Gateway</span>
+          <span class="tech">Datadog</span><span class="tech">Grafana</span><span class="tech">Docker</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. RESTful API Platform (SWE) -->
+    <div class="project" data-tags="swe backend">
+      <div class="project-header">
+        <div>
+          <div class="project-title">RESTful API Platform — Multi-Service Backend</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer / Senior Software Engineer — 2022–Present</div>
+        </div>
+        <div class="tags"><span class="tag tag-swe">Software Engineering</span><span class="tag tag-backend">Backend</span></div>
+      </div>
+      <div class="project-body">
+        <p>Designed and built a production REST API platform in Python (FastAPI) and Java (Spring Boot) serving 12 internal services. Implemented OpenAPI spec-first development, JWT authentication, request validation, pagination, rate limiting, and comprehensive error handling. Wrote 300+ unit and integration tests with pytest and JUnit achieving 92% code coverage. Built shared client SDKs in Python and TypeScript so other teams could integrate without reading raw API docs.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">12</div><div class="desc">Services built</div></div>
+          <div class="metric"><div class="val">300+</div><div class="desc">Tests written</div></div>
+          <div class="metric"><div class="val">92%</div><div class="desc">Code coverage</div></div>
+          <div class="metric"><div class="val">3</div><div class="desc">Client SDKs</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">OpenAPI Spec (YAML) → Code Generation (models, validators)
+  → FastAPI / Spring Boot Service
+    → JWT Auth Middleware → Request Validation → Rate Limiter
+      → Business Logic → PostgreSQL / Redis
+        → Response Serialization → OpenTelemetry Tracing
+          → pytest / JUnit (300+ tests, 92% coverage)</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">FastAPI</span><span class="tech">Java</span>
+          <span class="tech">Spring Boot</span><span class="tech">PostgreSQL</span><span class="tech">Redis</span>
+          <span class="tech">JWT</span><span class="tech">OpenAPI</span><span class="tech">pytest</span>
+          <span class="tech">JUnit</span><span class="tech">TypeScript</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Database Design & Migration (SWE) -->
+    <div class="project" data-tags="swe backend data">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Database Architecture & Migration Framework</div>
+          <div class="project-company">Livanova Inc. — Senior Software Engineer — 2019–2024</div>
+        </div>
+        <div class="tags"><span class="tag tag-swe">Software Engineering</span><span class="tag tag-data">Data</span></div>
+      </div>
+      <div class="project-body">
+        <p>Designed relational schemas for 8 production applications, wrote migration scripts (Alembic/Flyway), and optimized slow queries that reduced P95 response times by 60%. Built a versioned migration framework with rollback support, seed data management, and automated schema validation in CI. Migrated 3 legacy SQL Server databases (50+ tables each) to PostgreSQL on Azure with zero data loss and no downtime using a custom blue-green cutover strategy.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">150+</div><div class="desc">Tables designed</div></div>
+          <div class="metric"><div class="val">60%</div><div class="desc">Query speedup (P95)</div></div>
+          <div class="metric"><div class="val">3</div><div class="desc">DB migrations (zero-downtime)</div></div>
+          <div class="metric"><div class="val">100%</div><div class="desc">Data integrity</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Schema Design (ERD) → Alembic / Flyway Migrations
+  → CI Validation (schema diff, seed data check)
+    → Blue Environment (new PostgreSQL) ← Replication
+      → Parallel Reads (shadow traffic) → Verify Parity
+        → Green Cutover → Decommission Legacy SQL Server</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">PostgreSQL</span><span class="tech">SQL Server</span><span class="tech">Alembic</span>
+          <span class="tech">Flyway</span><span class="tech">SQLAlchemy</span><span class="tech">Azure SQL</span>
+          <span class="tech">Python</span><span class="tech">Query Optimization</span><span class="tech">Indexing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Event-Driven Microservices (SWE) -->
+    <div class="project" data-tags="swe backend auto">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Event-Driven Microservices Architecture</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer — 2024–Present</div>
+        </div>
+        <div class="tags"><span class="tag tag-swe">Software Engineering</span><span class="tag tag-auto">Automation</span></div>
+      </div>
+      <div class="project-body">
+        <p>Architected and implemented an event-driven system using SQS/SNS and Kafka to decouple 6 tightly-coupled services into independently deployable microservices. Designed dead-letter queues, retry policies, idempotency keys, and saga-pattern workflows for distributed transactions. Reduced inter-service latency by 70% and eliminated cascading failures that previously caused system-wide outages.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">6</div><div class="desc">Services decoupled</div></div>
+          <div class="metric"><div class="val">70%</div><div class="desc">Latency reduction</div></div>
+          <div class="metric"><div class="val">Zero</div><div class="desc">Cascading failures</div></div>
+          <div class="metric"><div class="val">50K+</div><div class="desc">Events/day processed</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Service A → SNS Topic → SQS Queues (fan-out)
+  → Service B, C, D (independent consumers)
+    → Idempotency Check → Process → Emit Result Event
+      → Dead Letter Queue → Retry Logic → Alert
+        → Saga Orchestrator → Compensating Transactions</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">AWS SQS</span><span class="tech">AWS SNS</span>
+          <span class="tech">Kafka</span><span class="tech">Docker</span><span class="tech">PostgreSQL</span>
+          <span class="tech">Redis</span><span class="tech">Saga Pattern</span><span class="tech">DLQ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Developer CLI & Internal Tooling (SWE) -->
+    <div class="project" data-tags="swe auto">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Developer CLI & Internal Tooling Platform</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer — 2024–Present</div>
+        </div>
+        <div class="tags"><span class="tag tag-swe">Software Engineering</span><span class="tag tag-auto">DevEx</span></div>
+      </div>
+      <div class="project-body">
+        <p>Built a Python CLI tool (Click framework) that standardized local development workflows across the engineering team. The tool automates environment setup, secret injection, service bootstrapping, database seeding, and running integration tests against local Docker Compose stacks. Also built a Slack bot (Python + Bolt framework) for on-call workflows — incident triage, escalation, runbook retrieval, and post-mortem scheduling — cutting mean-time-to-acknowledge from 15 minutes to under 2.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">85%</div><div class="desc">Onboarding time reduced</div></div>
+          <div class="metric"><div class="val">< 2 min</div><div class="desc">Mean time to acknowledge</div></div>
+          <div class="metric"><div class="val">20+</div><div class="desc">CLI commands shipped</div></div>
+          <div class="metric"><div class="val">Team-wide</div><div class="desc">Adoption</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Developer → CLI (Python Click)
+  → env setup | secret inject | db seed | test run
+    → Docker Compose (local services) → Integration Tests
+
+Slack Event → Bolt Framework → Incident Bot
+  → Triage | Escalate | Runbook Lookup | Post-Mortem
+    → PagerDuty API → Confluence API → Jira API</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">Click</span><span class="tech">Docker Compose</span>
+          <span class="tech">Slack Bolt</span><span class="tech">Bash</span><span class="tech">PagerDuty API</span>
+          <span class="tech">Jira API</span><span class="tech">pytest</span><span class="tech">Makefile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. High-Performance Microservices -->
+    <div class="project" data-tags="backend infra swe">
+      <div class="project-header">
+        <div>
+          <div class="project-title">High-Performance Python Microservices</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer — 2024–Present</div>
+        </div>
+        <div class="tags"><span class="tag tag-backend">Backend</span><span class="tag tag-infra">Infrastructure</span></div>
+      </div>
+      <div class="project-body">
+        <p>Developed production Python microservices handling high-throughput API traffic with comprehensive rate limiting, Redis caching, and full observability. Built with automated scaling, health checks, and self-healing infrastructure on Kubernetes.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">500+</div><div class="desc">Requests/second</div></div>
+          <div class="metric"><div class="val">< 100ms</div><div class="desc">P99 latency</div></div>
+          <div class="metric"><div class="val">1,000+</div><div class="desc">Concurrent users</div></div>
+          <div class="metric"><div class="val">Zero</div><div class="desc">Data loss</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Client Request → API Gateway → Rate Limiter
+  → Python Microservice (Flask/FastAPI)
+    → Redis Cache (hot data) → PostgreSQL (persistence)
+      → Response + Async Logging
+        → Datadog APM → Grafana Dashboard → PagerDuty Alerts</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">Redis</span><span class="tech">Kubernetes</span>
+          <span class="tech">Docker</span><span class="tech">Datadog</span><span class="tech">Grafana</span>
+          <span class="tech">API Gateway</span><span class="tech">Rate Limiting</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Enterprise Integration Platform -->
+    <div class="project" data-tags="auto backend">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Enterprise Integration & Automation Platform</div>
+          <div class="project-company">Livanova Inc. — System Integration Engineer — 2023–2024</div>
+        </div>
+        <div class="tags"><span class="tag tag-auto">Automation</span><span class="tag tag-backend">Backend</span></div>
+      </div>
+      <div class="project-body">
+        <p>Designed and built a modular Python middleware platform connecting 8 enterprise systems with shared libraries, API contracts, and reference architectures. Created 20+ automation scripts eliminating 90% of manual data entry errors across HR, IT, and operations workflows.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">8</div><div class="desc">Systems integrated</div></div>
+          <div class="metric"><div class="val">10,000+</div><div class="desc">Daily API calls</div></div>
+          <div class="metric"><div class="val">90%</div><div class="desc">Error reduction</div></div>
+          <div class="metric"><div class="val">20+</div><div class="desc">Automation scripts</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Workday API ──┐
+FreshService ──┤                    ┌── HR Workflows
+Splunk ────────┼── Python Middleware ┼── IT Automation
+Azure AD ──────┤   (Shared Libs)    ├── Reporting
+Office 365 ────┤   (API Contracts)  └── Data Sync
+UiPath ────────┘   (Error Handling / Retry Logic / Monitoring)</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">REST APIs</span><span class="tech">GraphQL</span>
+          <span class="tech">Azure Functions</span><span class="tech">PowerShell</span><span class="tech">Workday API</span>
+          <span class="tech">Azure AD</span><span class="tech">UiPath</span><span class="tech">Splunk</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Cloud Security & IAM -->
+    <div class="project" data-tags="security infra">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Cloud Security & Identity Management Framework</div>
+          <div class="project-company">Livanova Inc. — Cloud Engineer / System Integration Engineer — 2023–Present</div>
+        </div>
+        <div class="tags"><span class="tag tag-security">Security</span><span class="tag tag-infra">Infrastructure</span></div>
+      </div>
+      <div class="project-body">
+        <p>Designed and implemented enterprise-wide IAM policies, RBAC, conditional access, and identity management across AWS and Azure. Built secure API integration layer with authentication, authorization, and audit logging for 8 enterprise systems. Enforced mandatory PR review for all Terraform changes and implemented SOC 2 compliance controls.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">100%</div><div class="desc">PR review coverage</div></div>
+          <div class="metric"><div class="val">Multi-Cloud</div><div class="desc">IAM management</div></div>
+          <div class="metric"><div class="val">SOC 2</div><div class="desc">Compliance</div></div>
+          <div class="metric"><div class="val">8</div><div class="desc">Systems secured</div></div>
+        </div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">AWS IAM</span><span class="tech">Azure AD</span><span class="tech">RBAC</span>
+          <span class="tech">Conditional Access</span><span class="tech">MFA</span><span class="tech">Terraform</span>
+          <span class="tech">SOC 2</span><span class="tech">Audit Logging</span><span class="tech">Intune</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Zero-Downtime Office 365 Migration -->
+    <div class="project" data-tags="auto infra">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Zero-Downtime Office 365 Migration</div>
+          <div class="project-company">Livanova Inc. — System Integration Engineer — 2023–2024</div>
+        </div>
+        <div class="tags"><span class="tag tag-auto">Automation</span><span class="tag tag-infra">Migration</span></div>
+      </div>
+      <div class="project-body">
+        <p>Executed a zero-downtime migration of 200+ mailboxes from on-premise Exchange to Office 365. Built custom Python validation scripts to verify data integrity pre- and post-migration, with automated runbooks and rollback procedures for each batch.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">200+</div><div class="desc">Mailboxes migrated</div></div>
+          <div class="metric"><div class="val">Zero</div><div class="desc">Downtime</div></div>
+          <div class="metric"><div class="val">100%</div><div class="desc">Data integrity</div></div>
+          <div class="metric"><div class="val">Automated</div><div class="desc">Validation</div></div>
+        </div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">PowerShell</span><span class="tech">Office 365</span>
+          <span class="tech">Exchange</span><span class="tech">Azure AD</span><span class="tech">Automation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Enterprise App Modernization -->
+    <div class="project" data-tags="backend infra">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Enterprise Application Modernization (42 Apps)</div>
+          <div class="project-company">Livanova Inc. — Senior Software Engineer — 2019–2023</div>
+        </div>
+        <div class="tags"><span class="tag tag-backend">Backend</span><span class="tag tag-infra">Migration</span></div>
+      </div>
+      <div class="project-body">
+        <p>Led the complete migration of 42 legacy Visual Basic applications to cloud-native Python, Java, and C# — full lifecycle from code analysis to data migration — across 3 production environments with zero downtime. Designed microservices architecture (Spring Boot + .NET Core) supporting 1,000+ concurrent users.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">42</div><div class="desc">Apps modernized</div></div>
+          <div class="metric"><div class="val">60%</div><div class="desc">Performance gain</div></div>
+          <div class="metric"><div class="val">$50K</div><div class="desc">Annual savings</div></div>
+          <div class="metric"><div class="val">Zero</div><div class="desc">Downtime</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Legacy VB App → Code Analysis → Data Mapping
+  → New Microservice (Python / Java / C#)
+    → Spring Boot or .NET Core API
+      → Docker Container → Kubernetes Deployment
+        → React Frontend → Real-time Dashboards
+          → Parallel Run (old + new) → Cutover → Decommission</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">Java</span><span class="tech">C#</span>
+          <span class="tech">Spring Boot</span><span class="tech">.NET Core</span><span class="tech">React</span>
+          <span class="tech">Docker</span><span class="tech">Kubernetes</span><span class="tech">Azure Functions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Real-Time Manufacturing Dashboards -->
+    <div class="project" data-tags="backend data">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Real-Time Manufacturing Monitoring Dashboards</div>
+          <div class="project-company">Livanova Inc. — Senior Software Engineer — 2019–2023</div>
+        </div>
+        <div class="tags"><span class="tag tag-backend">Backend</span><span class="tag tag-data">Data</span></div>
+      </div>
+      <div class="project-body">
+        <p>Built real-time React monitoring dashboards tracking 1,000+ daily manufacturing operations across 3 production facilities. Integrated with backend microservices, SQL Server databases, and Azure Functions to deliver live operational visibility to production managers and executives.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">1,000+</div><div class="desc">Daily operations tracked</div></div>
+          <div class="metric"><div class="val">3</div><div class="desc">Production sites</div></div>
+          <div class="metric"><div class="val">Real-Time</div><div class="desc">Data refresh</div></div>
+          <div class="metric"><div class="val">70%</div><div class="desc">Faster reports</div></div>
+        </div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">React</span><span class="tech">JavaScript</span><span class="tech">SQL Server</span>
+          <span class="tech">Azure Functions</span><span class="tech">REST APIs</span><span class="tech">.NET Core</span>
+          <span class="tech">WebSockets</span><span class="tech">PowerBI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Analytics & ETL Transformation -->
+    <div class="project" data-tags="data auto">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Analytics & Data Pipeline Transformation</div>
+          <div class="project-company">Livanova Inc. + Pearl Enterprises — 2017–2023</div>
+        </div>
+        <div class="tags"><span class="tag tag-data">Data</span><span class="tag tag-auto">ETL</span></div>
+      </div>
+      <div class="project-body">
+        <p>Migrated enterprise analytics from legacy Cognos to modern PowerBI, building 50+ automated dashboards with custom data models and DAX queries. Designed Python ETL pipelines processing 1M+ records daily with zero data loss. Migrated on-premise SQL Server to Azure SQL, enabling real-time reporting for 3,000+ users with 70% faster report generation.</p>
+        <div class="section-label">Key Metrics</div>
+        <div class="metrics">
+          <div class="metric"><div class="val">50+</div><div class="desc">PowerBI dashboards</div></div>
+          <div class="metric"><div class="val">1M+</div><div class="desc">Records/day (ETL)</div></div>
+          <div class="metric"><div class="val">3,000+</div><div class="desc">Users served</div></div>
+          <div class="metric"><div class="val">70%</div><div class="desc">Faster reports</div></div>
+        </div>
+        <div class="section-label">Architecture</div>
+        <div class="arch">Source Systems → Python ETL Pipeline (scheduled)
+  → Data Validation → Transformation → Azure SQL
+    → PowerBI Data Model (DAX) → 50+ Dashboards
+      → Scheduled Refresh → Executive Reports
+        → 3,000+ Users (Real-Time Access)</div>
+        <div class="section-label">Tech Stack</div>
+        <div class="tech-stack">
+          <span class="tech">Python</span><span class="tech">PowerBI</span><span class="tech">DAX</span>
+          <span class="tech">SQL Server</span><span class="tech">Azure SQL</span><span class="tech">ETL</span>
+          <span class="tech">Cognos</span><span class="tech">Data Modeling</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="tab-swe" class="tab-content"></div>
+  <div id="tab-infra" class="tab-content"></div>
+  <div id="tab-backend" class="tab-content"></div>
+  <div id="tab-auto" class="tab-content"></div>
+  <div id="tab-ai" class="tab-content"></div>
+  <div id="tab-data" class="tab-content"></div>
+  <div id="tab-security" class="tab-content"></div>
+
+</div>
+
+<div class="footer">
+  <strong>Yuvi Babbar</strong> &nbsp;|&nbsp; yuvisbabbar@gmail.com &nbsp;|&nbsp; 778-522-2737 &nbsp;|&nbsp; New Westminster, BC, Canada<br>
+  Canadian Citizen &nbsp;|&nbsp; TN Visa Eligible &nbsp;|&nbsp; Available for Remote Work
+</div>
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+
+  if (tab === 'all') {
+    document.getElementById('tab-all').classList.add('active');
+    return;
+  }
+
+  const target = document.getElementById('tab-' + tab);
+  target.innerHTML = '';
+  document.querySelectorAll('#tab-all .project').forEach(p => {
+    if ((p.getAttribute('data-tags') || '').includes(tab)) {
+      target.appendChild(p.cloneNode(true));
+    }
+  });
+  if (!target.children.length) {
+    target.innerHTML = '<p style="text-align:center;color:#64748b;padding:40px;">No projects in this category.</p>';
+  }
+  target.classList.add('active');
+}
+</script>
+</body>
+</html>
