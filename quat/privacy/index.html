@@ -6,23 +6,43 @@
 <meta name="description" content="What Quat does with what you capture. No accounts, no analytics, no advertising.">
 <meta name="color-scheme" content="light dark">
 <style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
 :root {
-  --ink: #0E0E0E; --paper: #EDEDEB; --panel: #F7F7F6;
-  --muted: #5A5A58; --line: #D6D6D3;
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
-  :root { --ink: #FAFAFA; --paper: #0E0E0E; --panel: #171717;
-          --muted: #9C9C99; --line: #2C2C2A; }
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
 }
 :root[data-theme="dark"] {
-  --ink: #FAFAFA; --paper: #0E0E0E; --panel: #171717;
-  --muted: #9C9C99; --line: #2C2C2A;
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
 }
 :root[data-theme="light"] {
-  --ink: #0E0E0E; --paper: #EDEDEB; --panel: #F7F7F6;
-  --muted: #5A5A58; --line: #D6D6D3;
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
 }
 * { box-sizing: border-box; }
 body {
@@ -76,9 +96,8 @@ footer a { color: var(--muted); }
 <li>your location</li>
 <li>your contacts, calendar, or health data</li>
 <li>advertising identifiers, and there is no advertising in the app</li>
-<li>analytics or usage tracking of any kind — there is no analytics SDK, no crash</li>
+<li>analytics or usage tracking of any kind — there is no analytics SDK, no crash reporter, and no telemetry in the app</li>
 </ul>
-<p>reporter, and no telemetry in the app</p>
 <h2>What stays on your device</h2>
 <p>Everything you create stays in the app's private storage on your phone and is never uploaded:</p>
 <ul>
@@ -96,13 +115,9 @@ footer a { color: var(--muted); }
 <h2>Who processes it</h2>
 <p>Material sent for processing passes through two services and is not stored by either as part of providing this feature:</p>
 <ul>
-<li><strong>Cloudflare Workers</strong> hosts the small relay that forwards requests. It exists</li>
+<li><strong>Cloudflare Workers</strong> hosts the small relay that forwards requests. It exists so that no API credential has to ship inside the app. It does not store the content of your requests, and it does not log them.</li>
+<li><strong>Google Cloud Vertex AI</strong> runs the model that produces the transcript, the extracted text, the summary or the answer. Processing is governed by the Google Cloud terms, under which customer data is not used to train Google's models. Google's own documentation on data handling: <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance">https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance</a></li>
 </ul>
-<p>so that no API credential has to ship inside the app. It does not store the content of your requests, and it does not log them.</p>
-<ul>
-<li><strong>Google Cloud Vertex AI</strong> runs the model that produces the transcript, the</li>
-</ul>
-<p>extracted text, the summary or the answer. Processing is governed by the Google Cloud terms, under which customer data is not used to train Google's models. Google's own documentation on data handling: <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance">https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance</a></p>
 <p>We do not sell or share your material with anyone, and there is no third party beyond those two.</p>
 <h2>The device identifier</h2>
 <p>To stop one device using the AI features without limit, Quat generates a random string the first time it needs one — for example <code>d-k3f9a2xq1b8w</code>. It is created on your device, stored there, and sent with AI requests so a daily allowance can be counted.</p>
@@ -128,13 +143,9 @@ footer a { color: var(--muted); }
 <p>Because Quat stores your content on your device and holds no account, you already have direct control:</p>
 <ul>
 <li><strong>Access and portability</strong> — export your decks from within the app at any time</li>
-<li><strong>Deletion</strong> — delete individual items in the app, or delete the app to remove</li>
+<li><strong>Deletion</strong> — delete individual items in the app, or delete the app to remove everything at once</li>
+<li><strong>Withdrawing consent</strong> — revoke microphone, camera or photo access in your device settings, or simply stop using the capture features</li>
 </ul>
-<p>everything at once</p>
-<ul>
-<li><strong>Withdrawing consent</strong> — revoke microphone, camera or photo access in your</li>
-</ul>
-<p>device settings, or simply stop using the capture features</p>
 <p>If you are in the EEA, the UK, or a US state with a comprehensive privacy law, those rights apply to you and are exercised as above. There is no account for us to look up, and no stored copy of your material for us to return or erase.</p>
 <h2>Changes</h2>
 <p>If this policy changes materially, the effective date at the top changes and the new version is published here before the change takes effect.</p>

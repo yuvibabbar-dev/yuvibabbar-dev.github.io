@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quat — capture it, then be tested on it</title>
+<meta name="description" content="Record the lecture, photograph the page, paste the link — Quat turns what you captured into flashcards that test you, and every card knows where it came from. Free on iPhone and iPad, no account.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Quat — capture it, then be tested on it">
+<meta property="og:description" content="Record the lecture, photograph the page, paste the link — Quat turns what you captured into flashcards that test you, and every card knows where it came from. Free on iPhone and iPad, no account.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+
+body.landing { padding: 0 20px 72px; }
+.landing main { max-width: 860px; }
+.landing header.site { display: flex; align-items: center; justify-content: space-between;
+  padding: 26px 0; border-bottom: 1px solid var(--line); margin-bottom: 0; }
+.landing .brand { display: flex; align-items: flex-end; gap: 11px; }
+.landing .brand .mark { margin-bottom: 0; }
+.landing .word { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; line-height: 1; }
+.landing .top-link { font-family: var(--mono); font-size: 13px; color: var(--muted);
+  text-decoration: none; }
+.landing .top-link:hover, .landing .top-link:focus-visible { color: var(--ink);
+  text-decoration: underline; }
+
+.landing .hero { padding: 76px 0 64px; border-bottom: 1px solid var(--line); }
+.landing .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); margin: 0 0 22px; }
+.landing h1 { font-size: clamp(29px, 6.2vw, 52px); line-height: 1.07; letter-spacing: -0.025em;
+  font-weight: 600; margin: 0 0 22px; }
+.landing h1 span { display: block; }
+.landing .lead { font-size: clamp(18px, 2.3vw, 22px); line-height: 1.5; max-width: 36ch;
+  margin: 0 0 32px; }
+.landing .cta { margin: 0 0 12px; }
+.landing .btn { display: inline-block; background: var(--ink); color: var(--on-ink);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 14px 24px; font-size: 17px;
+  font-weight: 600; text-decoration: none; }
+.landing .btn:hover, .landing .btn:focus-visible { background: transparent; color: var(--ink); }
+.landing .cta-note { font-size: 15px; color: var(--muted); margin: 0; }
+
+.landing .sec { padding: 56px 0; border-bottom: 1px solid var(--line); }
+.landing .sec h2 { font-size: clamp(23px, 3.1vw, 30px); line-height: 1.18;
+  letter-spacing: -0.015em; font-weight: 600; margin: 0 0 16px; }
+.landing .sec p, .landing .sec li { max-width: 64ch; }
+.landing .sec ul { margin-top: 4px; }
+.landing .caption { color: var(--muted); font-size: 15px; margin: 16px 0 0; max-width: 52ch; }
+.landing .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* The session card, redrawn. Radios rather than script: three real controls,
+   keyboard-operable, and the page needs no JavaScript to work at all. */
+.landing .device { margin: 30px 0 0; max-width: 460px; border: 0; padding: 0;
+  min-width: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; }
+.landing .src { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.landing .seg { display: flex; gap: 8px; margin-bottom: 14px; }
+.landing .seg label { flex: 1; text-align: center; border: 1px solid var(--line);
+  border-radius: 6px; padding: 9px 6px; font-size: 14px; font-weight: 600; color: var(--ink);
+  cursor: pointer; }
+.landing .seg label:hover { border-color: var(--ink); }
+.landing .face { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  min-height: 236px; display: flex; }
+.landing .card { display: none; flex: 1; flex-direction: column; padding: 20px 20px 0; }
+.landing .card .q, .landing .card .a { font-size: 20px; line-height: 1.4; }
+.landing .card .rule { height: 1px; background: var(--line); margin: 18px 0; }
+.landing .card .stamp { margin: auto -20px 0; padding: 10px 20px;
+  border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.6px; color: var(--muted); }
+.landing .card .stamp span:first-child { overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; }
+.landing .card .stamp span:last-child { flex: none; }
+.landing .keys { display: flex; gap: 6px; margin-top: 14px; }
+.landing .key { flex: 1; border: 1px solid; border-radius: 6px; padding: 10px 4px 9px;
+  text-align: center; }
+.landing .key b { display: block; font-size: 15px; font-weight: 600; }
+.landing .key i { display: block; font-style: normal; font-family: var(--mono);
+  font-size: 13px; margin-top: 3px; }
+.landing .k-again { background: var(--again); border-color: var(--again-bezel); color: var(--again-ink); }
+.landing .k-hard  { background: var(--hard);  border-color: var(--hard-bezel);  color: var(--hard-ink); }
+.landing .k-good  { background: var(--good);  border-color: var(--good-bezel);  color: var(--good-ink); }
+.landing .k-easy  { background: var(--easy);  border-color: var(--easy-bezel);  color: var(--easy-ink); }
+
+.landing .blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
+  margin-top: 30px; }
+.landing .blocks .b { border-top: 1px solid var(--line); padding-top: 14px; }
+.landing .blocks h3 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); font-weight: 400; margin: 0 0 8px; }
+.landing .blocks p { font-size: 16px; margin: 0; }
+
+.landing .shots { display: flex; gap: 14px; overflow-x: auto; margin-top: 30px;
+  padding-bottom: 12px; scroll-snap-type: x proximity; }
+.landing .shots figure { margin: 0; flex: 0 0 auto; width: 240px; scroll-snap-align: start; }
+.landing .shots img { display: block; width: 100%; height: auto; border: 1px solid var(--line);
+  border-radius: 6px; }
+.landing .shots figcaption { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted); line-height: 1.5; margin-top: 10px; }
+
+.landing .close { padding: 60px 0 44px; border-bottom: 1px solid var(--line); }
+.landing footer.site { display: flex; flex-wrap: wrap; justify-content: space-between;
+  gap: 8px 24px; margin-top: 28px; padding-top: 0; border-top: 0; color: var(--muted);
+  font-size: 14px; }
+.landing footer.site p { margin: 0; max-width: 44ch; }
+.landing footer.site .links a { color: var(--muted); }
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (max-width: 720px) {
+  .landing .blocks { grid-template-columns: 1fr; gap: 22px; }
+  .landing .hero { padding: 52px 0 48px; }
+  .landing .sec { padding: 44px 0; }
+}
+
+.landing #src0:checked ~ .seg label[for="src0"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.landing #src0:checked ~ .face .card[data-src="0"] { display: flex; }
+.landing #src0:focus ~ .seg label[for="src0"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+.landing #src1:checked ~ .seg label[for="src1"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.landing #src1:checked ~ .face .card[data-src="1"] { display: flex; }
+.landing #src1:focus ~ .seg label[for="src1"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+.landing #src2:checked ~ .seg label[for="src2"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.landing #src2:checked ~ .face .card[data-src="2"] { display: flex; }
+.landing #src2:focus ~ .seg label[for="src2"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+</style>
+</head><body class="landing"><main>
+<header class="site"><div class="brand"><div class="mark"><i></i><i></i><i></i><i></i></div><span class="word">Quat</span></div><a class="top-link" href="https://apps.apple.com/app/id6797544518">App Store</a></header>
+<section class="hero"><p class="eyebrow">iPhone and iPad · Free · No account</p><h1><span>Record the lecture.</span><span>Photograph the page.</span><span>Paste the link.</span></h1><p class="lead">It becomes cards that test you, and every card knows where it came from.</p><p class="cta"><a class="btn" href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a></p><p class="cta-note">Reviewing, exams and games are free without limit.</p></section>
+<section class="sec" id="where-a-card-comes-from"><h2>Where a card comes from</h2>
+<p>Cards carry their origin: what captured it, the day it arrived, and the note it came from. Weeks later, when a card surfaces and you cannot place it, you can go back to the thing it came from.</p><fieldset class="device"><legend class="sr-only">Pick what captured the card</legend><input class="src" type="radio" name="src" id="src0" checked><input class="src" type="radio" name="src" id="src1"><input class="src" type="radio" name="src" id="src2"><div class="seg"><label for="src0">Recording</label><label for="src1">Photo</label><label for="src2">Link</label></div><div class="face"><div class="card" data-src="0"><div class="q">Preload is the volume the ventricle holds at ______</div><div class="rule"></div><div class="a">end-diastole</div><div class="stamp"><span>MIC · JUL 26 · HEART FAILUR</span><span>ease 250</span></div></div><div class="card" data-src="1"><div class="q">Which drug class ends in -olol, and what does it block?</div><div class="rule"></div><div class="a">Beta blockers — β-adrenergic receptors</div><div class="stamp"><span>SCAN · AUG 02 · PHARM P.214</span><span>ease 240</span></div></div><div class="card" data-src="2"><div class="q">What does the sepsis hour-one bundle include?</div><div class="rule"></div><div class="a">Lactate, cultures, antibiotics, fluids</div><div class="stamp"><span>LINK · AUG 05 · SEPSIS BUNDL</span><span>ease 260</span></div></div></div><div class="keys"><div class="key k-again"><b>Again</b><i>now</i></div><div class="key k-hard"><b>Hard</b><i>12h</i></div><div class="key k-good"><b>Good</b><i>1d</i></div><div class="key k-easy"><b>Easy</b><i>4d</i></div></div></fieldset><p class="caption">The line at the foot of the card is the source. It is on every card, in every session. The four keys print what pressing them will do before you press.</p>
+</section>
+<section class="sec" id="most-study-apps-start-after-the-hard-part"><h2>Most study apps start after the hard part</h2>
+<p>They assume the material is already typed in, already organised, already yours. Quat starts at the lecture.</p><div class="blocks"><div class="b"><h3>Audio</h3><p>Record a lecture, a seminar, or yourself talking through a topic. Quat transcribes it and pulls out what is worth remembering.</p></div><div class="b"><h3>Photo</h3><p>Point your camera at a textbook page, a whiteboard, a handout, or your own handwriting. Quat reads the text off it.</p></div><div class="b"><h3>Link</h3><p>Paste a URL. Quat fetches the page, reads it, and summarises what matters. It reads the actual page, so it cannot invent what is not there.</p></div></div>
+</section>
+<section class="sec" id="review-that-ends"><h2>Review that ends</h2>
+<p>Spaced repetition schedules each card for the day you are about to forget it. When the day's cards are done, the session ends and tells you so. It does not invent more work to keep you in the app.</p>
+<p>No confetti, no streak guilt, no badge that congratulates you for opening the app. Every number is set in a monospaced face with tabular figures, so counts and intervals stay legible at a glance.</p>
+</section>
+<section class="sec" id="screens"><h2>Screens</h2>
+<div class="shots"><figure><img src="shots/capture.png" width="280" height="608" loading="lazy" alt="Capture — record, photograph, or paste"><figcaption>Capture — record, photograph, or paste</figcaption></figure><figure><img src="shots/session-front.png" width="280" height="608" loading="lazy" alt="A card, before the answer"><figcaption>A card, before the answer</figcaption></figure><figure><img src="shots/session-rating.png" width="280" height="608" loading="lazy" alt="Four keys, each printing its interval"><figcaption>Four keys, each printing its interval</figcaption></figure><figure><img src="shots/notes.png" width="280" height="608" loading="lazy" alt="The note the cards came from"><figcaption>The note the cards came from</figcaption></figure><figure><img src="shots/explore.png" width="280" height="608" loading="lazy" alt="Folders, tags and search"><figcaption>Folders, tags and search</figcaption></figure></div>
+</section>
+<section class="sec" id="private-by-default"><h2>Private by default</h2>
+<p>No account. No sign-up. Your notes and cards are stored on your device, not on a server.</p><ul><li>Nothing is uploaded unless you use a capture feature, and then only the thing you handed it</li><li>No analytics, no tracking, no advertising</li><li>The App Store product page reads "Data Not Linked to You"</li><li>Everything except capture works offline</li></ul>
+</section>
+<section class="sec" id="what-it-costs"><h2>What it costs</h2>
+<p>Everything on your device — reviewing, exams, games, notes, cards — is free without limit. A subscription raises how much you can capture each month: <span class="num">$9.99</span> monthly or <span class="num">$79.99</span> a year, billed through your App Store account. It renews until cancelled, which you can do at any time in your account settings.</p>
+</section>
+<section class="sec" id="also-inside"><h2>Also inside</h2>
+<ul><li>A tutor that answers from your own notes, and cites which one</li><li>Self-scored exam mode, separate from your review schedule</li><li>Matching, speed round, quiz and a study timer</li><li>Encrypted deck sharing — decks are sealed on your device before they leave it</li><li>Card content in 21 languages</li></ul>
+</section>
+<section class="close"><p class="cta"><a class="btn" href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a></p><p class="cta-note">Reviewing, exams and games are free without limit.</p></section>
+<footer class="site"><p>Quat is made by one person. If something is broken, the support page is the fastest way to reach a fix.</p><p class="links"><a href="privacy/">Privacy</a> · <a href="support/">Support</a> · <a href="https://apps.apple.com/app/id6797544518">App Store</a></p></footer>
+</main></body></html>
