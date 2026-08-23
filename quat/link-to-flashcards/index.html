@@ -2,16 +2,16 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quat — Support</title>
-<meta name="description" content="Help and contact for Quat.">
+<title>Turn an article or a link into flashcards — Quat</title>
+<meta name="description" content="Paste a URL and Quat reads the actual page, summarises it into a note, and builds flashcards on a spaced-repetition schedule — sources stamped on.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Quat — Support">
-<meta property="og:description" content="Help and contact for Quat.">
-<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/support/">
+<meta property="og:title" content="Turn an article or a link into flashcards — Quat">
+<meta property="og:description" content="Paste a URL and Quat reads the actual page, summarises it into a note, and builds flashcards on a spaced-repetition schedule — sources stamped on.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/link-to-flashcards/">
 <meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/support/">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/link-to-flashcards/">
 <style>
 /* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
    bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
@@ -104,22 +104,28 @@ ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
 .store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
 </style>
 </head><body><main>
-<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Quat — Support</h1><div class="eff"></div></header>
-<p>Quat turns things you capture — a recording, a photo of a page, a link — into flashcards that test you.</p>
-<h2>Contact</h2>
-<p>Email <strong>yuvisbabbar@gmail.com</strong>. Include your device and iOS version if you are reporting something broken; it is usually the fastest way to a fix.</p>
-<h2>Common questions</h2>
-<p><strong>Where is my data?</strong> On your device. Quat has no accounts and no server that stores your content. Deleting the app deletes everything, and there is no backup we can restore from — export your deck if it matters to you.</p>
-<p><strong>Why does a capture need a connection?</strong> Recordings, photos and links are read by an AI model, which runs remotely. Everything else — reviewing, exams, games, writing notes, searching — works offline.</p>
-<p><strong>What do the four buttons mean during review?</strong> Each one prints what pressing it will do before you press it: <code>now</code>, <code>12h</code>, <code>1d</code>, <code>4d</code>. That is when the card comes back. There is nothing to guess.</p>
-<p><strong>Why did my session end?</strong> Because the cards scheduled for today are done. Quat does not invent more work to keep you in the app. New cards become due as their intervals come round.</p>
-<p><strong>What does <code>MIC · JUL 26 · HEART FAILUR</code> mean under a card?</strong> Where the card came from — the capture method, the date, and the note. It is there so that weeks later, when a card surfaces and you cannot place it, you can find the lecture or page it came from.</p>
-<p><strong>A transcript came back cut off.</strong> Recordings up to about 40 minutes work. Past that the app refuses in about a second and tells you so, rather than returning a truncated transcript.</p>
-<p><strong>Why can Quat not read a YouTube link?</strong> Caption tracks require a signed session that the app does not have. Rather than guess at the content from the title, Quat refuses the link and says why.</p>
-<h2>Subscriptions</h2>
-<p>Reviewing, exams, games, and everything you have already captured are unlimited on every tier, forever. A subscription raises how much new material you can capture each month.</p>
-<p>Manage or cancel a subscription in <strong>Settings → your name → Subscriptions</strong> on your device. Cancelling stops the renewal; you keep what you paid for until the period ends.</p>
-<h2>Privacy</h2>
-<p>Quat collects no personal information, has no analytics, and shows no advertising. The full policy is at <a href="https://yuvibabbar-dev.github.io/quat/privacy">https://yuvibabbar-dev.github.io/quat/privacy</a>.</p>
-<footer>Quat · <a href="../privacy/">Privacy policy</a></footer>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Turn an article or a link into flashcards</h1><div class="eff"></div></header>
+<p>Some of what you study never goes through your keyboard at all — a guideline page, a documentation chapter, an article someone sent you. It gets read once, agreed with, and forgotten.</p>
+<p>Quat takes the link instead. It fetches the page, reads it, summarises what matters into a note, and turns the note into flashcards that come back on a spaced-repetition schedule.</p>
+<h2>The steps</h2>
+<ol>
+<li>Open Quat, go to the Capture tab, and choose Link.</li>
+<li>Paste the URL.</li>
+<li>Tell it what to focus on, if you want — "key concepts and examples", or whatever the page should be reduced to. You can add tags at the same step.</li>
+<li>Quat fetches the page and reads it. It reads the actual page, so it cannot invent what is not there — if a page only shows its content behind a login, Quat can only read what a visitor without one would see.</li>
+<li>Check the note it wrote, then let it build the cards. Each carries its origin — <code>LINK · AUG 05 · SEPSIS BUNDL</code> — so any card can point you back to its source.</li>
+<li>Review on schedule. Sessions end when the day's cards are done.</li>
+</ol>
+<h2>Worth knowing before you paste</h2>
+<ul>
+<li>The focus line is the difference between "summarise this page" and "pull out what I need from this page". One phrase is enough.</li>
+<li>Long reference pages card better than homepages — paste the chapter, not the site.</li>
+<li>Because every card is stamped, a deck built from five different sources stays auditable: you always know which claim came from where.</li>
+</ul>
+<h2>What it costs</h2>
+<p>Reviewing, exams and games are free without limit — the subscription only raises how much you can capture each month. No account, no sign-up; your notes and cards stay on the device.</p>
+<h2>The other two captures</h2>
+<p>You can also <a href="../lecture-to-flashcards/">record a lecture</a> or <a href="../photo-to-flashcards/">photograph a page</a> — the same pipeline, a different stamp.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a></footer>
 </main></body></html>
