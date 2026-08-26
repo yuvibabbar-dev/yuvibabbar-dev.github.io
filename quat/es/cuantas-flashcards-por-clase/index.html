@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Cuántas flashcards hacer por clase? — Quat</title>
+<meta name="description" content="Por qué la respuesta honesta es menos de las que te da cualquier generador, y cómo decidir qué merece una tarjeta.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="¿Cuántas flashcards hacer por clase? — Quat">
+<meta property="og:description" content="Por qué la respuesta honesta es menos de las que te da cualquier generador, y cómo decidir qué merece una tarjeta.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/cuantas-flashcards-por-clase/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/cuantas-flashcards-por-clase/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-lecture/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/cuantas-flashcards-por-clase/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-lecture/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>¿Cuántas flashcards hacer por clase?</h1><div class="eff"></div></header>
+<p>Pregúntalo donde haya estudiantes y salen números: veinte, treinta, cuarenta, ciento setenta para la clase de anatomía con todos los agujeros del cráneo. Todas las respuestas son reales, todas vienen de gente que aprobó, y se contradicen porque el número nunca fue una propiedad de la clase.</p>
+<p>Una tarjeta no es algo que haces. Es algo a lo que te comprometes. El minuto que cuesta escribirla es la parte barata; la cara es cada repaso que agenda desde hoy hasta el día en que el tema deje de importarte. Así que la pregunta que sí tiene respuesta no es "cuántas tarjetas merece esta clase", sino "cuántas tarjetas puedo repasar en un día malo cualquiera, y qué queda de ahí para esta clase".</p>
+<h2>La respuesta corta</h2>
+<p>Las cifras que se publican para una clase van de unas quince a más de cien, y se concentran alrededor de treinta o cuarenta. Para tarjetas nuevas al día, el consejo habitual es de diez a veinte en general y de veinte a cincuenta en medicina. Para el total de repasos diarios, los rangos que se citan como sostenibles rondan entre sesenta y ciento cincuenta, y suben en las materias de mucha memoria.</p>
+<p>Esa dispersión no es un desacuerdo sobre la memoria. Es la misma ecuación resuelta con datos distintos: otra materia, otra calidad de tarjeta, otra cantidad de vida encima. Empieza por unas veinte tarjetas nuevas al día y corrige con la cuenta de abajo antes de dos semanas. Corregir es lo que importa.</p>
+<h2>La cuenta que decide</h2>
+<ol>
+<li><strong>Fija los minutos.</strong> No los de tu mejor día — los de un día con entrega, con turno, con cuatro horas de sueño. Ese es el presupuesto, porque el calendario solo funciona si apareces los días malos. Digamos 25 minutos.</li>
+<li><strong>Cronometra una tarjeta.</strong> Haz una sesión con reloj y divide. Una tarjeta bien hecha se responde en segundos; una que te lleva un minuto carga demasiado y hay que partirla. Digamos 10 segundos.</li>
+<li><strong>Saca el techo.</strong> 25 minutos a 10 segundos por tarjeta son unos 150 repasos al día. Eso es toda tu capacidad diaria, para siempre y para todas las materias a la vez.</li>
+<li><strong>Divide por el multiplicador.</strong> En un sistema de repetición espaciada los repasos diarios se estabilizan en varias veces las tarjetas nuevas diarias — la regla que se usa habitualmente es entre cinco y diez veces, y sube cuanto más alta pongas la retención que buscas. Toma siete: 150 ÷ 7 son unas 20 tarjetas nuevas al día.</li>
+<li><strong>Repártelo en la semana.</strong> 20 al día son unas 140 por semana. Con cinco clases a la semana salen unas 30 tarjetas por clase — justo donde aterrizan los foros, pero llegando por un camino que puedes ajustar.</li>
+<li><strong>Mide tu proporción real a las dos semanas.</strong> Tu app sabe cuántas tarjetas te tocan hoy. Divide las de hoy entre tu promedio de tarjetas nuevas al día. Esa proporción es tuya, y es el precio verdadero de cada tarjeta que añadas de aquí en adelante. Si es más alta de lo que suponías, el arreglo está antes: menos tarjetas, o mejores.</li>
+</ol>
+<p>Todos los números de los pasos uno a cinco son marcadores de posición para los tuyos. Lo que se conserva es la forma: minutos, segundos por tarjeta, techo, multiplicador, semana.</p>
+<h2>Qué se gana una tarjeta</h2>
+<ul>
+<li><strong>Pregunta qué te van a exigir de verdad.</strong> Lo que solo necesitas reconocer en una página rara vez necesita tarjeta. Lo que tienes que producir de la nada — un mecanismo, una dosis, una fecha, una definición que debes poder decir en voz alta — sí.</li>
+<li><strong>Una tarjeta, una cosa.</strong> Si una respuesta tiene tres partes que no puedes recordar por separado, vas a fallar la tarjeta entera durante meses por la parte que nunca supiste, y a reaprender las dos que sí.</li>
+<li><strong>No hagas tarjetas de lo que puedes deducir.</strong> Una fórmula que reconstruyes en diez segundos cuesta más como tarjeta, a lo largo de un año, que reconstruirla cada vez.</li>
+<li><strong>No hagas tarjetas de lo que aún no entiendes.</strong> Una tarjeta escrita desde una frase que no sabes explicar se convierte en una tarjeta que fallas para siempre, y fallarla no te enseña por qué. Primero entender, después la tarjeta. Es el motivo más común de que un mazo empiece a parecer imposible.</li>
+<li><strong>Corta lo que se responde por la forma de la pregunta.</strong> Si todas tus tarjetas de verdadero o falso son verdaderas, la tarjeta evalúa que recuerdas haberla escrito.</li>
+<li><strong>Dos tarjetas que siempre respondes juntas eran una tarjeta.</strong></li>
+</ul>
+<h2>Cuántas son demasiadas</h2>
+<p>Demasiadas no es un número de tarjetas. Es el punto en que la cola diaria supera los minutos que fijaste, y sigue ahí una semana entera. Una carga que en septiembre iba cómoda te ahoga en noviembre, porque noviembre arrastra también septiembre y octubre.</p>
+<p>Las señales, en el orden en que suelen llegar:</p>
+<ul>
+<li>Te saltas un día, y te saltas el siguiente por el atraso del primero.</li>
+<li>Empiezas a pulsar la tecla más rápida para vaciar la cola y no porque supieras la respuesta.</li>
+<li>Un puñado de tarjetas falla siempre y no sabes explicar ninguna. Esas se hicieron demasiado pronto.</li>
+<li>Sigues manteniendo tarjetas de un tema que se examinó en marzo.</li>
+</ul>
+<p>El arreglo no es disciplina. Deja de añadir tarjetas nuevas una semana entera y deja que la cola se vacíe — cero es una cifra legítima. Borra sin ceremonia: el desperdicio es el tiempo de repaso que una tarjeta mala te va a quitar a partir de ahora, no el minuto que costó escribirla. Parte las imposibles. Y entonces vuelve a añadir, en la cifra que dio la cuenta.</p>
+<h2>Un capítulo no es una clase</h2>
+<p>Una clase dura lo que dura, así que una cifra por hora al menos significa algo. Un capítulo no. Treinta páginas de un libro de matemáticas y treinta de uno de historia no piden lo mismo, y el número de páginas no predice casi nada.</p>
+<p>Dos ajustes hacen honesta la cuenta por capítulo. El primero: un libro está escrito para releerse — ejemplos resueltos, repeticiones, un recuadro que resume lo que está tres páginas más arriba. Una clase ya viene filtrada una vez por quien la dio. Espera menos tarjetas por página de las que sugiere su longitud. El segundo: cuenta hacia atrás desde el examen y el calendario, no desde el libro. Toma tu presupuesto semanal y divídelo entre los capítulos que quedan antes de la prueba. Si salen menos tarjetas por capítulo de las que te gustaría, has aprendido algo cierto sobre el calendario — no es motivo para subir el presupuesto.</p>
+<h2>Vale la pena saber</h2>
+<ul>
+<li>Decidir qué se gana una tarjeta es donde el material se procesa de verdad. Un mazo descargado se salta ese trabajo y conserva entero el coste de repasarlo. Los mazos hechos por otros no son un error, pero no son la misma compra.</li>
+<li>Las tarjetas hechas la semana antes del examen no reciben espaciado que valga el nombre. Eso es cramming con pasos de más. Puede funcionar — solo que no dejes que fije tu ritmo normal.</li>
+<li>Reparte las tarjetas nuevas. Veinte al día es mejor que ciento cuarenta el domingo, porque el lote del domingo vuelve siempre en bloque.</li>
+<li>Si una tarjeta falla tres o cuatro veces seguidas, no la machaques. Vuelve a la fuente y reescríbela. El problema es la tarjeta.</li>
+<li>Las veinte reglas de Wozniak sobre cómo formular conocimiento se leen en un rato y siguen siendo lo más útil que se ha publicado sobre qué hace que una tarjeta se pueda responder.</li>
+<li>Cuenta minutos, no tarjetas. El número de tarjetas es el fácil de medir y el equivocado para optimizar.</li>
+</ul>
+<h2>Dónde encaja Quat</h2>
+<p>Cualquier herramienta que genere tarjetas, Quat incluida, te va a dar más de las que deberías quedarte. Generar es barato y repasar no lo es, así que el paso de editar es donde se decide el número de verdad — y es justo el paso que casi todos los flujos de "hazme las tarjetas" se saltan.</p>
+<p>Quat lo pone en medio a propósito. Una captura — una clase grabada, una página fotografiada, un enlace pegado — se convierte primero en un apunte, y el apunte es tuyo antes de ser ninguna otra cosa. Las tarjetas heredan lo que diga el apunte, así que cortar un párrafo ahora sale más barato que borrar doce tarjetas dentro de tres semanas. Déjalo en lo que te van a preguntar, y deja que cree las tarjetas desde ahí.</p>
+<p>Tres cosas hacen visible la carga en vez de teórica:</p>
+<ul>
+<li>Cada tarjeta lleva su origen impreso al pie, como texto — <code>MIC · 26 JUL · CAPÍTULO 12</code>: qué la capturó, la fecha y el apunte del que salió. Cuando un lote falla siempre, puedes ver de qué clase vino y si lo hiciste entero antes de entender el material.</li>
+<li>Cada tecla de calificación muestra el intervalo que va a agendar antes de que la pulses: ahora, 12h, 1d, 4d. Ves a qué te comprometes en el momento de comprometerte.</li>
+<li>La sesión termina cuando se acaban las tarjetas del día, y te lo dice. Ese final es lo que convierte "la cola superó mis minutos" en algo que notas en la semana dos y no en la nueve.</li>
+</ul>
+<p>Quat también tiene una escalera de niveles con insignias y rachas. Tómalas como registro de que apareciste, no como razón para hacer más tarjetas. Funciona solo en iPhone y iPad.</p>
+<h2>Qué cuesta</h2>
+<p>Repasar, exámenes y juegos son gratis sin límite — la cuenta de arriba nunca es lo que estás pagando. La suscripción amplía los límites mensuales de lo que usa el modelo: la captura, el tutor y la creación de tarjetas. Sin cuenta y sin registro; tus apuntes y tarjetas se quedan en tu dispositivo.</p>
+<h2>Las tres entradas</h2>
+<p>Cuando ya sabes tu número, capturar es la parte fácil. Puedes <a href="../clase-a-flashcards/">grabar una clase</a>, <a href="../foto-a-flashcards/">fotografiar una página</a> o <a href="../enlace-a-flashcards/">pegar un enlace</a> — el mismo camino de apunte a tarjetas, con otro sello.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../how-many-flashcards-per-lecture/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

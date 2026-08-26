@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convierte un PDF en flashcards desde el iPhone — Quat</title>
+<meta name="description" content="Cómo sacar tarjetas de un capítulo o un apunte en PDF sin volver a escribirlo, con el límite de páginas y lo que gasta de tu cuota.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Convierte un PDF en flashcards desde el iPhone — Quat">
+<meta property="og:description" content="Cómo sacar tarjetas de un capítulo o un apunte en PDF sin volver a escribirlo, con el límite de páginas y lo que gasta de tu cuota.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/pdf-a-flashcards/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/pdf-a-flashcards/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/pdf-to-flashcards/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/pdf-a-flashcards/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/pdf-to-flashcards/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Convierte un PDF en flashcards desde el iPhone</h1><div class="eff"></div></header>
+<p>La lectura ya está escrita, ya está asignada y ya está en tu teléfono — un capítulo escaneado en el campus virtual, un impreso que alguien te mandó por correo, una guía de estudio en iCloud Drive. Es el material del que te van a examinar, y está dentro de un archivo que no te hace ni una sola pregunta.</p>
+<p>Volver a teclearlo en una app de tarjetas es justo el paso para el que nadie tiene tiempo. Esto es cómo sacar tarjetas de un PDF sin teclearlo, empezando por lo que decide si alguna herramienta va a funcionar.</p>
+<h2>Primero: averigua qué clase de PDF tienes</h2>
+<p>Hay dos clases y se ven idénticas hasta que las pruebas. Abre el PDF e intenta seleccionar una frase, o busca dentro del archivo una palabra que estés viendo en la página.</p>
+<ul>
+<li>Si el texto se resalta, es un <strong>PDF de texto</strong>. Salió de un procesador de texto y las palabras están de verdad dentro del archivo.</li>
+<li>Si no se resalta nada y la búsqueda no encuentra nada, es un **PDF escaneado**: fotos de páginas dentro de un envoltorio PDF. Para el software, cada página es una imagen.</li>
+</ul>
+<p>Vale la pena comprobarlo porque casi todas las herramientas que convierten PDF en tarjetas pasan un extractor de texto por encima del archivo. Con un PDF de texto funciona. Con uno escaneado el extractor vuelve con las manos vacías, y lo que sale es un error o, peor, un mazo flaco hecho con las pocas palabras que sí eran seleccionables. Comprueba primero y elige después.</p>
+<p>Quat lee las dos clases, y por un motivo concreto: el PDF se envía al modelo como PDF, sin pasar antes por un extractor de texto, así que las páginas que son imágenes se leen como imágenes. Un escaneo de una fotocopia funciona. Una foto de una página torcida y a media luz funciona peor, igual que le pasaría a una persona.</p>
+<h2>Los pasos</h2>
+<ol>
+<li>Abre Quat, ve a la pestaña de captura y elige Archivo.</li>
+<li>Pulsa Elegir un archivo y escoge el documento. Sirve todo lo que alcance la app Archivos — iCloud Drive, Descargas, un adjunto que guardaste. Quat lee PDF, <code>.docx</code>, <code>.pptx</code>, <code>.xlsx</code> y texto plano o HTML.</li>
+<li>Quat abre el archivo <strong>en el dispositivo</strong> y te muestra lo que encontró: el nombre, de qué tipo es y cuánto va a gastar — en un PDF, su número de páginas. Todavía no se ha enviado nada ni se ha gastado nada.</li>
+<li>Añade una línea de enfoque si el documento es más ancho de lo que necesitas: "conceptos clave y ejemplos", o "solo las definiciones". Las etiquetas van en el mismo paso.</li>
+<li>Pulsa Crear una nota. Este es el paso que envía el documento y necesita conexión. Quat lo lee y escribe el apunte.</li>
+<li>Lee el apunte antes de convertirlo en tarjetas. Es tuyo y puedes editarlo; las tarjetas heredan lo que diga.</li>
+<li>Deja que Quat cree las flashcards. Cada una imprime de dónde viene — <code>DOC · 26 AGO · QUIMICA ORGA</code> — para que una tarjeta que aparezca dentro de tres semanas te devuelva al archivo. Después repasa: el calendario trae cada tarjeta de vuelta, y la sesión termina cuando se acaban las tarjetas del día.</li>
+</ol>
+<h2>Cuántas páginas caben de verdad</h2>
+<ul>
+<li><strong>50 páginas es el tope de un PDF.</strong> A partir de ahí Quat lo rechaza antes de enviar nada y te dice que lo partas por capítulos.</li>
+<li><strong>Un PDF gasta una captura por página.</strong> Las capturas de foto y de documento comparten un límite mensual: 20 en el plan gratuito, 300 con suscripción. Así que una lectura de 20 páginas es el mes gratuito entero, y un impreso de 12 te deja ocho. Con suscripción, 300 páginas al mes son unos seis capítulos de 50.</li>
+<li><strong>Un <code>.docx</code>, <code>.pptx</code>, <code>.xlsx</code> o archivo de texto gasta exactamente una</strong>, por largo que sea, porque se reduce a texto en el dispositivo antes de salir. Ese texto tiene un techo de longitud: un documento demasiado largo para leerse de una vez se rechaza y te sugiere partirlo.</li>
+<li><strong>Un libro entero no cabe, y aquí no se finge lo contrario.</strong> Si quieres tarjetas de un libro de 400 páginas, la unidad de trabajo es el capítulo, y siempre lo fue.</li>
+</ul>
+<h2>Conviene saber</h2>
+<ul>
+<li>Parte por capítulos aunque no haga falta. Un volcado de 50 páginas con cuatro temas distintos da tarjetas vagas; un capítulo con una línea de enfoque da tarjetas que se pueden responder. Exporta un rango de páginas desde la app Archivos, o pide el PDF del capítulo en vez del lector completo.</li>
+<li>Los formatos antiguos de Office — <code>.doc</code>, <code>.ppt</code>, <code>.xls</code>, los de antes de 2007 — se rechazan por su nombre y con la solución: guarda el archivo como <code>.docx</code>, <code>.pptx</code>, <code>.xlsx</code> o PDF e inténtalo otra vez. Adivinar su contenido produciría apuntes seguros y equivocados, que es peor que un rechazo.</li>
+<li>Las presentaciones dan buenas tarjetas cuando las diapositivas llevan texto, y malas cuando cada diapositiva es la imagen de un esquema. Si el mazo es sobre todo imágenes, expórtalo a PDF para que las páginas se lean como páginas.</li>
+<li>Sea cual sea la herramienta, busca un límite de páginas declarado y un límite mensual declarado antes de entregar un capítulo entero. La mayoría de las herramientas web gratuitas no publican ninguno de los dos, que suele significar que el techo se encuentra chocando contra él.</li>
+<li>Si el material está en papel y no en un archivo, no lo escanees a PDF primero: <a href="../foto-a-flashcards/">fotografíalo</a>. El mismo límite y un paso menos.</li>
+</ul>
+<h2>Qué cuesta</h2>
+<p>Repasar, exámenes y juegos son gratis sin límite. La suscripción amplía los límites mensuales de lo que usa el modelo: la captura, el tutor y la creación de tarjetas. Sin cuenta y sin registro. Leer el archivo para mostrarte su nombre, su tipo y sus páginas ocurre en el dispositivo y no envía nada; crear la nota es el paso que envía el documento, y el apunte y las tarjetas que salen de ahí se quedan en tu teléfono.</p>
+<h2>Las otras tres capturas</h2>
+<p>Un archivo es una de las cuatro entradas. También puedes <a href="../clase-a-flashcards/">grabar una clase</a>, <a href="../foto-a-flashcards/">fotografiar una página</a> o <a href="../enlace-a-flashcards/">pegar un enlace</a> — el mismo camino de apunte a tarjetas, otro sello.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../pdf-to-flashcards/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

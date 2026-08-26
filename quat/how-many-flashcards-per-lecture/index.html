@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How many flashcards should you make per lecture? — Quat</title>
+<meta name="description" content="Why the honest answer is fewer than any generator hands you, how to decide what deserves a card, and what a day&#x27;s review load actually costs you.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How many flashcards should you make per lecture? — Quat">
+<meta property="og:description" content="Why the honest answer is fewer than any generator hands you, how to decide what deserves a card, and what a day&#x27;s review load actually costs you.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-lecture/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-lecture/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-lecture/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/cuantas-flashcards-por-clase/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-lecture/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>How many flashcards should you make per lecture?</h1><div class="eff"></div></header>
+<p>Ask this anywhere students gather and numbers come back: twenty, thirty, forty, a hundred and seventy for the anatomy lecture with every foramen in it. The answers are all real, they all come from people who passed, and they disagree because the number was never a property of the lecture.</p>
+<p>A flashcard is not a thing you make. It is a commitment you take on. The minute it costs to write is the cheap part; the expensive part is every review it schedules between now and the day you stop caring about the subject. So the answerable version of the question is not "how many cards does this lecture deserve". It is "how many cards a day can I review on an ordinary bad day, and what does that leave for this lecture".</p>
+<h2>The short answer</h2>
+<p>The numbers people publish for one lecture run from about fifteen to over a hundred, clustering around thirty to forty. For new cards a day, the common advice is ten to twenty for general study and twenty to fifty in medicine. For total daily reviews, the ranges quoted as sustainable sit around sixty to a hundred and fifty, higher for heavy recall subjects.</p>
+<p>Those spreads are not disagreement about memory. They are different people solving the same equation with different inputs — different subjects, different card quality, different amounts of life. Start from about twenty new cards a day, and then correct it with the arithmetic below inside two weeks. The correction is the part that matters.</p>
+<h2>The arithmetic that decides it</h2>
+<ol>
+<li><strong>Decide the minutes.</strong> Not your best day — a day with a deadline, a shift, four hours of sleep. That is the budget, because the schedule only works if you turn up on the bad days. Say 25 minutes.</li>
+<li><strong>Time one card.</strong> Run a session with a clock and divide. A well-made card takes seconds; a card that takes you a minute is a card carrying too much and should be split. Say 10 seconds.</li>
+<li><strong>Multiply out the ceiling.</strong> 25 minutes at 10 seconds a card is about 150 reviews a day. That is the whole of your daily capacity, forever, for every subject at once.</li>
+<li><strong>Divide by the review multiplier.</strong> In a spaced system your daily reviews settle at several times your daily new cards — the rule of thumb people use is roughly five to ten times, and it climbs the higher you push your target retention. Take seven: 150 ÷ 7 is about 20 new cards a day.</li>
+<li><strong>Spread it across the week.</strong> 20 a day is about 140 a week. Five lectures a week makes roughly 30 cards a lecture — which is where the forums landed, arrived at honestly and adjustable for a reason.</li>
+<li><strong>Measure the real ratio after two weeks.</strong> Your app knows how many cards are due today. Divide today's due count by your average new cards a day. That ratio is yours, and it is the true price of every card you add from here. If it is higher than you assumed, the fix is upstream: fewer cards, or better ones.</li>
+</ol>
+<p>Every number in steps one to five is a placeholder for yours. The shape is what carries over: minutes, seconds a card, ceiling, multiplier, week.</p>
+<h2>What earns a card</h2>
+<ul>
+<li><strong>Ask what will actually be demanded of you.</strong> Material you only need to recognise on a page rarely needs a card. Material you need to produce out of nothing — a mechanism, a dose, a date, a definition you must say out loud — does.</li>
+<li><strong>One card, one thing.</strong> If an answer has three parts you cannot recall independently, you will fail the whole card for months over the one part you never knew, and relearn the two you did.</li>
+<li><strong>Do not card what you can derive.</strong> A formula you can rebuild in ten seconds costs more as a card, over a year, than rebuilding it every time.</li>
+<li><strong>Do not card what you do not understand yet.</strong> A card written from a sentence you cannot explain becomes a card you fail forever, and failing it teaches you nothing about why. Understand first, card second. This is the most common reason a deck starts to feel impossible.</li>
+<li><strong>Cut anything answerable from the shape of the question.</strong> If every true-or-false card you wrote is true, the card is testing your memory of having written it.</li>
+<li><strong>Two cards you always answer together were one card.</strong></li>
+</ul>
+<h2>How many is too many</h2>
+<p>Too many is not a card count. It is the point where the daily queue outruns the minutes you set, and stays there for a week. A load that felt comfortable in September drowns you in November, because November is carrying September and October as well.</p>
+<p>The signs, in the order they usually arrive:</p>
+<ul>
+<li>You skip a day, and then skip the next one because of the backlog from the first.</li>
+<li>You start pressing the fastest key to get through the queue rather than because you knew the answer.</li>
+<li>A handful of cards keep failing and you cannot explain any of them. Those were made too early.</li>
+<li>You are still maintaining cards for a module that was examined in March.</li>
+</ul>
+<p>The fix is not discipline. Stop adding new cards entirely for a week and let the queue drain — zero is a legitimate setting. Delete without ceremony: the waste is the review time a bad card will take from now on, not the minute that made it. Split the impossible ones. Then start adding again, at the number the arithmetic gave you.</p>
+<h2>Chapters are not lectures</h2>
+<p>A lecture has a duration, so a per-hour figure at least means something. A chapter does not. Thirty pages of a maths text and thirty pages of a history survey are not the same ask, and page count predicts almost nothing.</p>
+<p>Two adjustments make chapter counts honest. First, a textbook has been written to be re-read: worked examples, restatements, a box summarising the thing three pages above. A lecture has usually been filtered once already by whoever gave it. Expect a chapter to yield fewer cards per page than its length suggests. Second, work backwards from the exam and the calendar, not from the book. Take your weekly card budget and divide it by the chapters left before the paper. If that leaves fewer cards per chapter than you would like, you have learned something true about the schedule — it is not a reason to raise the budget.</p>
+<h2>Worth knowing</h2>
+<ul>
+<li>Deciding what earns a card is where the material actually gets processed. A downloaded deck skips that work and keeps the full review cost. Premade decks are not a mistake, but they are not the same purchase.</li>
+<li>Cards made in the week before an exam get no spacing worth the name. That is cramming with extra steps. It can still work — just do not let it set your normal card count.</li>
+<li>Stagger new cards. Twenty a day beats a hundred and forty on Sunday, because the Sunday batch comes back as one lump every time, forever.</li>
+<li>If a card fails three or four times running, do not grind it. Go back to the source and rewrite it. The card is the problem.</li>
+<li>Wozniak's twenty rules of formulating knowledge is a short read and still the most useful published thing on what makes a card answerable at all.</li>
+<li>Count minutes, not cards. Card count is the easy number to measure and the wrong one to optimise.</li>
+</ul>
+<h2>Where Quat fits</h2>
+<p>Any tool that generates cards, Quat included, will hand you more than you should keep. Generation is cheap and review is not, which means the edit step is where the real number gets decided — and it is the step most generate-my-cards workflows leave out entirely.</p>
+<p>Quat puts it in the middle on purpose. A capture — a recorded lecture, a photographed page, a pasted link — becomes a note first, and the note is yours before it becomes anything else. The cards inherit whatever the note says, so cutting a paragraph out of the note now is cheaper than deleting twelve cards in three weeks. Cut it to what you would be tested on, then let it build from that.</p>
+<p>Three things make the load visible rather than theoretical:</p>
+<ul>
+<li>Every card prints its origin along the foot as plain text — <code>MIC · JUL 26 · CHAPTER 12</code>, the capture source, the date, and the note it came from. When a batch keeps failing, you can see which lecture produced it, and whether you made the whole batch before you understood the material.</li>
+<li>Each rating key shows the interval it will schedule before you press it: now, 12h, 1d, 4d. You can see what you are committing to at the moment you commit to it.</li>
+<li>A session ends when the day's cards are done, and says so. An ending is what turns "the queue outran my minutes" into something you notice in week two rather than week nine.</li>
+</ul>
+<p>Quat also has an XP ladder with badges and streaks. Treat them as a record of turning up, not as a reason to make more cards. It runs on iPhone and iPad only.</p>
+<h2>What it costs</h2>
+<p>Reviewing, exams and games are free without limit — the arithmetic above is never the thing you are paying for. A subscription raises the monthly ceilings on the parts that call a model: capture, the tutor, and card generation. No account, no sign-up; your notes and cards stay on the device.</p>
+<h2>The three ways in</h2>
+<p>Once you know your number, the capture is the easy part. You can <a href="../lecture-to-flashcards/">record a lecture</a>, <a href="../photo-to-flashcards/">photograph a page</a>, or <a href="../link-to-flashcards/">paste a link</a> — the same note-then-cards pipeline, with a different stamp.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/cuantas-flashcards-por-clase/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>
