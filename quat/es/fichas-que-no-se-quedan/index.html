@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fichas que no se quedan — Quat</title>
+<meta name="description" content="Las cuatro razones por las que una tarjeta se falla siempre, las soluciones por orden de eficacia, y lo que cuesta insistir.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fichas que no se quedan — Quat">
+<meta property="og:description" content="Las cuatro razones por las que una tarjeta se falla siempre, las soluciones por orden de eficacia, y lo que cuesta insistir.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/fichas-que-no-se-quedan/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/fichas-que-no-se-quedan/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/cards-that-wont-stick/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/fichas-que-no-se-quedan/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/cards-that-wont-stick/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Fichas que no se quedan</h1><div class="eff"></div></header>
+<p>Todo mazo acaba criando unas cuantas. Esa tarjeta que has fallado once veces, que vuelve cada dos días, y que a estas alturas reconoces por la forma del texto y no porque sepas la respuesta. En Anki tienen nombre — <em>leeches</em>, sanguijuelas — y el nombre está bien puesto: se llevan una parte desproporcionada de tus repasos y no devuelven casi nada.</p>
+<p>El instinto es insistir. El instinto se equivoca. Una tarjeta que fallas una y otra vez casi nunca es un problema de memoria, y repetir más veces una ficha rota solo produce una ficha rota mejor memorizada.</p>
+<h2>Diagnostica antes de tocar nada</h2>
+<p>Casi siempre es una de estas cuatro cosas, y la solución cambia.</p>
+<p><strong>Pide demasiado de golpe.</strong> "Enumera las causas de X" con seis puntos detrás no se puede corregir: has dicho cuatro, ¿eso es acierto? Si la corrección es ambigua tus valoraciones son ruido, y con ruido el algoritmo no puede ayudarte. Esta es, con diferencia, la causa más común.</p>
+<p><strong>No tiene contexto.</strong> Memorizaste la respuesta sin llegar a entender la cosa, así que el dato no tiene dónde agarrarse. Se reconoce en que puedes soltar las palabras y no sabrías explicárselas a nadie.</p>
+<p><strong>Es ambigua.</strong> El anverso admite varias respuestas razonables y te estás corrigiendo contra una redacción concreta que escribiste tú.</p>
+<p><strong>Interfiere con su vecina.</strong> Dos fichas parecidas — dos fármacos, dos fechas, dos definiciones que se diferencian en una palabra — y las cambias sistemáticamente. Por separado van bien; juntas son cara o cruz.</p>
+<h2>Las soluciones, por orden de eficacia</h2>
+<p><strong>Pártela.</strong> Una tarjeta de seis puntos se convierte en seis tarjetas, o en una por pareja. Parece más trabajo y es justo lo contrario: seis fichas sin ambigüedad se repasan bien y se van, mientras que una ambigua vuelve para siempre.</p>
+<p><strong>Añade una pista al anverso.</strong> No la respuesta: algo que discrimine. Si confundes dos tarjetas parecidas, mete en la pregunta aquello que las distingue, para que te estén preguntando algo contestable.</p>
+<p><strong>Reescríbela como te la preguntarían.</strong> Las fichas que copian la redacción del temario acaban evaluando que reconoces esa redacción. Formúlala como lo haría quien te examina.</p>
+<p><strong>Ve a entender el fondo.</strong> Si la tarjeta no tiene contexto, ninguna reescritura la salva. Vuelve a leer el apartado y después reescribe la ficha desde el entendimiento. Es más lento y muchas veces es lo único que funciona.</p>
+<p><strong>Bórrala.</strong> En serio. Hay datos que no valen lo que cuestan de repasar, y una tarjeta fallada once veces ya te ha dicho su precio. Borrar es una decisión de calendario legítima, no un fallo de carácter.</p>
+<p>Lo que <em>no</em> está en la lista: repasarla más a menudo, ponerle una regla mnemotécnica a algo que no entiendes, o pulsar <em>difícil</em> siempre y confiar.</p>
+<h2>Lo que te cuestan los fallos repetidos</h2>
+<p>Conviene saberlo, porque explica por qué dejarlas correr sale caro.</p>
+<p>En casi todos los sistemas de repaso espaciado cada ficha lleva un multiplicador de facilidad que decide a qué ritmo crecen sus intervalos. Fallar recorta ese multiplicador, y no se recupera deprisa. Una tarjeta fallada muchas veces se queda clavada cerca del suelo, así que aunque acabes aprendiéndotela seguirá volviendo mucho más a menudo de lo necesario. Estás pagando intereses de una deuda de hace tres semanas.</p>
+<p>Ese es el argumento real para arreglarlas o borrarlas en vez de insistir: la insistencia deja daño detrás incluso cuando al final funciona.</p>
+<p><strong>En Anki concretamente</strong> para esto está el manejo de leeches: a partir de cierto número de fallos etiqueta la tarjeta y la suspende, que es una interrupción forzada para obligarte a mirarla. Si usas Anki, deja esa función activada. Está haciendo lo que esta página te está pidiendo que hagas a mano.</p>
+<h2>Cómo lo hace Quat, y qué no tiene</h2>
+<p>Quat es una app para iPhone y iPad que desarrollo yo, así que léelo sabiendo quién lo escribe, incluida la parte que no me favorece.</p>
+<p>El algoritmo se comporta como arriba: una ficha valorada <em>otra vez</em> vuelve en la misma sesión y pierde facilidad, y como la facilidad tiene suelo, una tarjeta muy fallada se queda con intervalos cortos. Las fichas se pueden editar en cualquier momento, que es lo importante aquí: partir o reescribir una tarjeta mala es la solución de verdad, y se hace desde la pestaña de Tarjetas sin ceremonia.</p>
+<p><strong>Lo que Quat no tiene: detección de leeches, suspender ni posponer.</strong> Nada cuenta tus fallos, nada etiqueta una ficha problemática y nada te va a interrumpir para decirte que esta te ha costado once repasos. Así que en Quat el diagnóstico de arriba es manual del todo: o te das cuenta, o no.</p>
+<p>Si tus mazos son lo bastante grandes como para que las leeches sean un impuesto real, el manejo automático de Anki es mejor que nada de lo que Quat hace hoy, y eso es una comparación directa y no una forma de escurrir el bulto. Lo que Quat te da a cambio es el sello de origen en cada tarjeta, que es lo que hace practicable la solución de <em>reescribir</em>: puedes volver a la clase o a la página y escribir la ficha bien, en lugar de adivinar qué querías decir.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../cards-that-wont-stick/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

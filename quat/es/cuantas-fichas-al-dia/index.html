@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Cuántas tarjetas hay que repasar al día? — Quat</title>
+<meta name="description" content="Por qué la palanca son las tarjetas nuevas y no el tiempo de repaso, y cómo calcular un número diario que puedas sostener.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="¿Cuántas tarjetas hay que repasar al día? — Quat">
+<meta property="og:description" content="Por qué la palanca son las tarjetas nuevas y no el tiempo de repaso, y cómo calcular un número diario que puedas sostener.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/cuantas-fichas-al-dia/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/cuantas-fichas-al-dia/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-day/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/cuantas-fichas-al-dia/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-day/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>¿Cuántas tarjetas hay que repasar al día?</h1><div class="eff"></div></header>
+<p>El número que repasas no lo eliges tú. Lo decidió tu yo de hace semanas cuando añadió fichas, y la cola de hoy es la factura llegando.</p>
+<p>Ese es todo el mecanismo, y explica por qué la pregunta casi siempre se hace del revés. La gente pregunta cuántos repasos debería hacer, cuando la palanca que de verdad controla eso es <strong>cuántas tarjetas nuevas mete</strong>.</p>
+<p><em>(Si lo que te preguntas es cuántas fichas merece una clase, esa es la <a href="../cuantas-flashcards-por-clase/">pregunta hermana</a>, y su respuesta alimenta las cuentas de aquí.)</em></p>
+<h2>El multiplicador que nadie menciona</h2>
+<p>Una tarjeta nueva no es un repaso. Una ficha que conservas un año se repasa entre cinco y diez veces mientras los intervalos se estiran: varias en la primera quincena y cada vez menos después.</p>
+<p>Así que un ritmo constante de tarjetas nuevas se estabiliza en torno a <strong>cinco a diez veces ese ritmo</strong> en repasos diarios cuando el mazo madura. Veinte nuevas al día acaban siendo del orden de cien a doscientos repasos diarios, en unos meses, de forma permanente.</p>
+<p>Esa es la cuenta que sorprende al tercer mes. El mazo no se rompió: llegó.</p>
+<h2>Los rangos publicados, como rangos</h2>
+<p>Las cifras que se manejan, y hay que leerlas como horquillas y no como hallazgos:</p>
+<ul>
+<li><strong>Tarjetas nuevas al día:</strong> de diez a veinte es el consejo general habitual; de veinte a cincuenta es normal en medicina y en otras materias de mucho volumen.</li>
+<li><strong>Repasos diarios:</strong> de sesenta a ciento cincuenta es la horquilla que suele describirse como sostenible, más en campos de memorización intensa.</li>
+</ul>
+<p>No coinciden porque son personas distintas, con asignaturas distintas, fichas de distinta calidad y distinta cantidad de vida. Sirven para empezar, no para zanjarlo.</p>
+<h2>Calcula tu número</h2>
+<p>Haz esto en lugar de adoptar el de otro:</p>
+<ol>
+<li><strong>Cronométrate tres días.</strong> Cuenta tarjetas y apunta minutos. La mayoría se mueve entre cuatro y diez segundos por ficha una vez entrada en calor; te hace falta <em>tu</em> cifra, y en un día cansado será peor de lo que crees.</li>
+<li><strong>Decide los minutos que vas a darle de verdad un mal día.</strong> No un buen día. El mal día es el que determina si el hábito sobrevive.</li>
+<li><strong>Divide.</strong> Minutos de mal día ÷ tus segundos por tarjeta = tus repasos diarios sostenibles.</li>
+<li><strong>Vuelve a dividir entre siete, más o menos.</strong> Eso es aproximadamente tus tarjetas nuevas sostenibles al día.</li>
+</ol>
+<p>Veinte minutos en un mal día, a seis segundos por ficha, son doscientos repasos, que sostienen algo del orden de treinta tarjetas nuevas al día. Si tu entrada real está muy por encima, la cola va a crecer hagas lo que hagas.</p>
+<h2>Qué hacer cuando el número no cuadra</h2>
+<p><strong>Si se te acumulan los repasos:</strong> recorta primero las nuevas, no el tiempo de repaso. Es la única palanca con efecto multiplicador, porque cada ficha que no añades hoy son cinco a diez repasos que no debes después. Recortar el tiempo solo mueve la deuda.</p>
+<p><strong>Si terminas en cinco minutos:</strong> puedes permitirte más nuevas, pero revisa la calidad de las fichas antes de subir el volumen. Repasar muy rápido suele significar tarjetas demasiado fáciles para estar enseñándote algo.</p>
+<p><strong>Si aciertas poco, no añadas nada.</strong> Una cola que fallas es una cola que crece, porque las falladas vuelven enseguida. Arregla antes las tarjetas: mira <a href="../fichas-que-no-se-quedan/">fichas que no se quedan</a>.</p>
+<h2>Cómo lo hace Quat</h2>
+<p>Quat es una app para iPhone y iPad que desarrollo yo, así que léelo sabiendo quién lo escribe.</p>
+<p>Una sesión enseña las tarjetas que vencen hoy y termina cuando se acaban, de modo que "cuántas hago hoy" tiene respuesta visible en vez de cola abierta. El panel muestra una cifra de tarjetas diarias.</p>
+<p><strong>Esa cifra es un objetivo que pones tú, no un tope.</strong> No frena las tarjetas nuevas, no impide que entre material en tu mazo y no corta una sesión. Quat <strong>no tiene ningún limitador de tarjetas nuevas por día</strong>, lo que significa que la disciplina de entrada de la que habla esta página te toca mantenerla a mano: capturando menos, no girando un mando.</p>
+<p>Esa es una diferencia real con Anki, cuyo límite de nuevas por mazo hace eso automáticamente y lo hace bien. Si tu problema es exactamente una entrada que se te desmadra, el limitador de Anki es hoy la mejor herramienta, y decir lo contrario sería venderte algo.</p>
+<p>Lo que Quat sí hace es enseñarte la entrada en el momento en que la contraes: el panel de captura te muestra lo que va a costar un documento o una grabación antes de enviarlo, así que la decisión ocurre cuando estás añadiendo y no tres semanas después, cuando llegan los repasos.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../how-many-flashcards-per-day/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

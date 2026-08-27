@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How many flashcards should you review a day? — Quat</title>
+<meta name="description" content="Why new cards, not review time, is the lever that controls your queue, and how to work out a daily number you can actually sustain.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How many flashcards should you review a day? — Quat">
+<meta property="og:description" content="Why new cards, not review time, is the lever that controls your queue, and how to work out a daily number you can actually sustain.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-day/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-day/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-day/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/cuantas-fichas-al-dia/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-day/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>How many flashcards should you review a day?</h1><div class="eff"></div></header>
+<p>The number you can review is not something you choose. It is something your past self already decided when they added cards, and today's queue is the bill arriving.</p>
+<p>That is the whole mechanic, and it explains why the question is almost always asked backwards. People ask how many reviews they should do, when the lever that actually controls it is <strong>how many new cards they add</strong>.</p>
+<p><em>(If you are asking how many cards one lecture deserves in the first place, that is the <a href="../how-many-flashcards-per-lecture/">companion question</a>, and the answer there feeds the arithmetic here.)</em></p>
+<h2>The multiplier nobody mentions</h2>
+<p>One new card is not one review. A card you keep for a year is reviewed somewhere between five and ten times as the intervals stretch — a few times in the first fortnight, then progressively less often.</p>
+<p>So a steady rate of new cards settles at roughly <strong>five to ten times that rate</strong> in daily reviews once the deck matures. Twenty new cards a day becomes something like a hundred to two hundred daily reviews, in a few months, permanently.</p>
+<p>That is the arithmetic that surprises people in month three. The deck did not break. It arrived.</p>
+<h2>The published ranges, as ranges</h2>
+<p>The figures people report, and they should be read as spreads rather than findings:</p>
+<ul>
+<li><strong>New cards a day:</strong> ten to twenty is the common general advice; twenty to fifty is normal in medicine and other high-volume subjects.</li>
+<li><strong>Daily reviews:</strong> sixty to a hundred and fifty is the range usually described as sustainable, higher for heavy-recall fields.</li>
+</ul>
+<p>They disagree because they are different people with different subjects, card quality, and amounts of life. Use them to start, not to settle it.</p>
+<h2>Work out your own number</h2>
+<p>Do this instead of adopting someone else's:</p>
+<ol>
+<li><strong>Time yourself for three days.</strong> Count cards, note minutes. Most people land somewhere between four and ten seconds a card once warmed up; you need <em>your</em> figure, and it will be worse than you think on a tired day.</li>
+<li><strong>Decide the minutes you will genuinely give it on a bad day.</strong> Not a good day. The bad day is the one that determines whether the habit survives.</li>
+<li><strong>Divide.</strong> Bad-day minutes ÷ your seconds-per-card = your sustainable daily reviews.</li>
+<li><strong>Divide again by about seven.</strong> That is roughly your sustainable new cards per day.</li>
+</ol>
+<p>Twenty minutes on a bad day, at six seconds a card, is two hundred reviews, which supports something in the region of thirty new cards a day. If your actual intake is far above that, the queue is going to grow whatever you intend.</p>
+<h2>What to do when the number is wrong</h2>
+<p><strong>If reviews are piling up:</strong> cut new cards first, not review time. It is the only lever with leverage — every card you do not add today is five to ten reviews you do not owe later. Cutting review time just moves the debt.</p>
+<p><strong>If you are getting through in five minutes:</strong> you can afford more new cards, but check card quality before increasing volume. Fast reviews often mean cards that are too easy to be teaching you anything.</p>
+<p><strong>If your accuracy is low, do not add anything.</strong> A queue you fail is a queue that grows, because failed cards come back immediately. Fix the cards first — see <a href="../cards-that-wont-stick/">cards that will not stick</a>.</p>
+<h2>How Quat handles it</h2>
+<p>Quat is an iPhone and iPad app I make, so read this knowing who wrote it.</p>
+<p>A session shows the day's due cards and ends when they are done, so "how many should I do today" has a visible answer rather than an open queue. The dashboard shows a daily cards figure.</p>
+<p><strong>That figure is a goal you set, not a cap.</strong> It does not throttle new cards, it does not stop material entering your deck, and it does not truncate a session. Quat has <strong>no new-cards-per-day limiter at all</strong>, which means the intake discipline described above is yours to keep manually — by capturing less, not by turning a dial.</p>
+<p>That is a real difference from Anki, whose per-deck new-card limit does this automatically and does it well. If your problem is specifically an intake that runs away from you, Anki's limiter is the better tool today, and saying otherwise would be selling you something.</p>
+<p>What Quat does do is make the intake visible at the point you incur it: the capture panel shows what a document or recording will cost before it is sent, so the decision happens when you are adding rather than three weeks later when the reviews arrive.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/cuantas-fichas-al-dia/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>

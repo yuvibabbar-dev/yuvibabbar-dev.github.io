@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Premade decks or make your own? — Quat</title>
+<meta name="description" content="What each one actually buys you, the costs nobody mentions, and the order that lets you use both without drowning.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Premade decks or make your own? — Quat">
+<meta property="og:description" content="What each one actually buys you, the costs nobody mentions, and the order that lets you use both without drowning.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/premade-decks-vs-your-own/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/premade-decks-vs-your-own/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/premade-decks-vs-your-own/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/mazos-hechos-o-propios/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/premade-decks-vs-your-own/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Premade decks or make your own?</h1><div class="eff"></div></header>
+<p>The argument usually gets framed as discipline versus laziness, which is wrong and unhelpful. It is a trade between two real costs, and which one you should pay depends on the subject and on how much time you have.</p>
+<p>The short version: <strong>a good shared deck beats the cards you never got round to writing, and loses to the cards you actually wrote.</strong> Most people should use both, in a particular order.</p>
+<h2>What making your own actually buys</h2>
+<p>Not virtue. Three specific things.</p>
+<p><strong>The encoding.</strong> Deciding what deserves a card, and phrasing the question, is itself study. By the time you have written thirty cards from a lecture you have processed that lecture in a way that reading it three times does not achieve. This is most of the value, and it is the part that disappears when you download.</p>
+<p><strong>Cards that match your exam.</strong> Your course emphasises things a national deck cannot know about. The lecturer who spent forty minutes on one mechanism is telling you something, and a shared deck flattens that signal.</p>
+<p><strong>Cards you can interpret later.</strong> You know what you meant. You know which lecture it came from and why it mattered.</p>
+<h2>What a shared deck actually buys</h2>
+<p><strong>Coverage you would not have managed.</strong> For large standardised bodies of knowledge — a medical curriculum, a language's core vocabulary, a professional certification — a mature community deck is enormous, curated for years, and better than anything you would write in the time available. Refusing it on principle is not rigour, it is just slower.</p>
+<p><strong>Speed on day one.</strong> You review tonight instead of building for a week.</p>
+<p><strong>Someone else's error-checking.</strong> A widely used deck has had thousands of people fail its worst cards and complain. Yours has had you.</p>
+<h2>The costs nobody mentions</h2>
+<p><strong>Volume you did not choose.</strong> A twenty-thousand-card deck is not a resource, it is an obligation, and it will bury the two hundred cards from your own lectures that actually predict your exam.</p>
+<p><strong>No context.</strong> This is the one that bites months in. A card fires, you have no idea where it came from, you cannot tell whether it is examinable or a tangent, and you cannot check it — because it was never yours. People end up deleting cards they could not place, on the assumption they must be wrong, and throwing away work that was fine.</p>
+<p><strong>Somebody else's phrasing.</strong> You learn to recognise their wording, which is not the same as knowing the fact.</p>
+<p><strong>Cards that are simply wrong.</strong> Popular does not mean correct, and a deck maintained by nobody in particular drifts out of date silently.</p>
+<h2>The order that works</h2>
+<ol>
+<li><strong>Write your own from your own lectures first.</strong> This is the part nobody else can do for you and the part your exam is actually testing.</li>
+<li><strong>Add a shared deck for breadth</strong>, if one exists that is respected in your field, and only for the parts your own material does not cover.</li>
+<li><strong>Prune the shared deck hard.</strong> Suspend or delete whole sections you will not be examined on. This is the step that separates people who use big decks successfully from people who drown in them.</li>
+<li><strong>Fix or delete any card you cannot place.</strong> If you cannot tell where it came from or why it matters, it is costing you reviews and teaching you a phrase.</li>
+</ol>
+<h2>How Quat handles it</h2>
+<p>Quat is an iPhone and iPad app I make, so this is an interested party's description.</p>
+<p>Quat is built around the first step: capture something you were actually in the room for — a lecture, a page, a link, a PDF — and it becomes cards stamped with where they came from. That stamp is precisely what shared decks cannot give you, and it is why the fourth step above is easy in Quat and hard elsewhere.</p>
+<p><strong>Deck sharing exists but is deliberately small.</strong> You can seal a deck into a code protected by a generated password and send it to a specific person — a study partner, a group. <strong>There is no marketplace, no public deck library and no way to browse other people's decks</strong>, so if you want a big community deck, Quat is not where you will find one.</p>
+<p>What you can do is bring one in: the Cards tab takes pasted CSV, so a deck exported from elsewhere can be imported. Those cards arrive without provenance, because they never had any — which is an honest illustration of the whole trade-off on this page.</p>
+<p>If your field has a canonical shared deck and you are on Anki using it well, that is a good setup and you should not abandon it. Quat is aimed at the material that deck does not have: the lectures you personally sat through.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/mazos-hechos-o-propios/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>

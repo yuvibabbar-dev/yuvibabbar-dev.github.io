@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I skipped a week and now I have 800 reviews — Quat</title>
+<meta name="description" content="Why the number is inflated, the six-step plan that clears a backlog in days, and why blitzing it makes those cards harder for life.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I skipped a week and now I have 800 reviews — Quat">
+<meta property="og:description" content="Why the number is inflated, the six-step plan that clears a backlog in days, and why blitzing it makes those cards harder for life.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/flashcard-backlog/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/flashcard-backlog/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/flashcard-backlog/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/atrasado-con-las-fichas/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/flashcard-backlog/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>I skipped a week and now I have 800 reviews</h1><div class="eff"></div></header>
+<p>The number is frightening and mostly a lie. A backlog looks like eight hundred pieces of work, and it is closer to two hundred pieces of work wearing eight hundred hats — because a large share of those cards are ones you knew perfectly well, that were scheduled while you were away and have been sitting there ever since.</p>
+<p>Here is the plan, and then why it works.</p>
+<h2>The plan</h2>
+<ol>
+<li><strong>Turn new cards to zero.</strong> Before anything else. Adding new material to a backlog is pouring water into a bath you are trying to drain.</li>
+<li><strong>Do not delete the deck.</strong> Whatever you are feeling, this is grief talking. Come back to it in three days.</li>
+<li><strong>Set a timer, not a target.</strong> Twenty or thirty minutes a day. Not "until it is clear".</li>
+<li><strong>Rate honestly, especially the easy ones.</strong> Pressing <em>good</em> on a card you actually knew is what makes the backlog shrink — the interval grows and it leaves for months.</li>
+<li><strong>Expect four to ten days.</strong> A week's backlog does not clear in one sitting and does not need to.</li>
+<li><strong>Only when the count is falling, turn new cards back on</strong> — at half your old rate for a week.</li>
+</ol>
+<p>That is the whole thing. The rest of this page is why each step is what it is, because a plan you understand is one you will actually follow on day three.</p>
+<h2>Why the count is inflated</h2>
+<p>Spaced repetition schedules a card for the day it estimates you are about to forget it. Miss that day and nothing dramatic happens: the card sits in the queue, and your memory decays a bit further along a curve that was always fairly flat by then. A card with a thirty-day interval that you see on day thirty-seven is not a catastrophe. It is a card you will probably still get right.</p>
+<p>So most of a backlog is cards you know, waiting to be confirmed. Each one you get right leaves for longer than it was gone. That is why the count falls faster than it accumulated — the arithmetic is on your side, and it does not feel like it on day one.</p>
+<h2>Why not to blitz it</h2>
+<p>Two reasons, and the second is the one people learn the hard way.</p>
+<p>You will get more wrong when tired, and a failed card is expensive: in most systems it comes back <strong>in the same session</strong>, and it also takes a permanent bite out of that card's ease — the multiplier that decides how fast its intervals grow. Fail a card three times in a marathon and you have not just lost the evening; you have made that card harder for the rest of its life.</p>
+<p>And a three-hour session teaches you that opening the app is dangerous. The person who does one heroic session and then avoids the deck for a month has done more damage than the person who did twenty minutes and stopped.</p>
+<p><strong>A related trap:</strong> you cannot shorten a session by pressing <em>again</em> on things to move past them. Failed cards return in the same run, so that makes the session longer while also lowering ease. If you need to stop, stop.</p>
+<h2>When the backlog is genuinely too big</h2>
+<p>If you are looking at several thousand cards and an exam in two weeks, triage is legitimate:</p>
+<ul>
+<li><strong>Filter to what is on the exam</strong> and review only that until the exam is over. The rest of the backlog will still be there and will still mostly be intact.</li>
+<li><strong>Suspend, do not delete,</strong> if your tool can. Suspension is reversible; deletion throws away the work and the history.</li>
+<li><strong>Consider that some of it is dead.</strong> Cards from a module that finished last year, for a subject you will never touch again, are not a debt. Let them go on purpose rather than by attrition.</li>
+</ul>
+<p>The distinction that matters: pausing is a scheduling decision, deleting is a judgement about whether the material was ever worth having. Do not make the second one at eleven at night in a panic.</p>
+<h2>How Quat handles it</h2>
+<p>Quat is an iPhone and iPad app I make, so this part is an interested party talking.</p>
+<p>The session takes the day's cards as a snapshot when it starts and ends when that queue is empty, so a backlog session has a visible finish line rather than an open-ended one. Cards rated <em>again</em> come back within the same run, for the reason above.</p>
+<p><strong>What Quat does not have, so you do not go looking for it:</strong> there is no suspend, no leech detection, and no per-day new-card cap. The daily figure on the dashboard is a goal you set, not a limit that holds anything back. So "turn new cards to zero" here means the manual version — stop capturing for a few days — and the triage above is done by choosing what you review rather than by a filter that does it for you.</p>
+<p>If you are on Anki, its suspend and leech tools are genuinely better for this specific problem, and using them is the right call.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/atrasado-con-las-fichas/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>

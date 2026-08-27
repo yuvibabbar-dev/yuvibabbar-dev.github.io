@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo hacer fichas que de verdad funcionen — Quat</title>
+<meta name="description" content="Un dato por tarjeta, preguntas en vez de títulos, y las demás reglas que deciden si el repaso espaciado puede ayudarte.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cómo hacer fichas que de verdad funcionen — Quat">
+<meta property="og:description" content="Un dato por tarjeta, preguntas en vez de títulos, y las demás reglas que deciden si el repaso espaciado puede ayudarte.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/como-hacer-fichas-efectivas/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/como-hacer-fichas-efectivas/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/what-makes-a-good-flashcard/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/como-hacer-fichas-efectivas/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/what-makes-a-good-flashcard/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Cómo hacer fichas que de verdad funcionen</h1><div class="eff"></div></header>
+<p>Si las flashcards no te están funcionando, lo más probable es que el problema no sea la constancia ni la app. Son las tarjetas. Una ficha mal escrita no se puede repasar bien por mucho que insistas, y la mayoría de la gente escribe las mismas cuatro cosas mal.</p>
+<h2>Un dato por tarjeta</h2>
+<p>Es la regla que más rendimiento da y la que más se incumple.</p>
+<p>Una ficha que pide cinco cosas no se puede corregir. Has dicho tres, ¿eso es acierto? Como no lo sabes, tu valoración es arbitraria, y a partir de ahí el algoritmo está programando con ruido: te devuelve tarjetas que ya sabías y te retira tarjetas que no.</p>
+<p>Mal:</p>
+<pre><code>Anverso: Causas de la insuficiencia cardíaca
+Reverso: isquemia, hipertensión, valvulopatías, miocardiopatías, arritmias</code></pre>
+<p>Mejor: cinco tarjetas, o una por mecanismo, cada una con una respuesta que es acierto o fallo sin discusión.</p>
+<h2>Pregunta, no enunciado</h2>
+<p>Una tarjeta es una prueba de recuperación. Si el anverso es un título, no estás recuperando nada: estás reconociendo un tema y recitando lo que recuerdas alrededor.</p>
+<p>Mal: <code>La curva del olvido</code>. Bien: <code>¿Qué predice la curva del olvido sobre lo que retienes 24 horas después de estudiar por primera vez?</code></p>
+<h2>Que solo admita una respuesta</h2>
+<p>Si al leer el anverso se te ocurren tres respuestas razonables y solo una cuenta, la tarjeta está mal, no tú. Añade en la pregunta lo que la acota: el contexto, la unidad, el año, el autor.</p>
+<h2>Escríbela con tus palabras</h2>
+<p>Copiar la frase del temario produce fichas que evalúan que reconoces esa frase. En el examen la pregunta estará redactada de otra manera y la reconocerás menos. Reformular al escribirla es además parte del estudio: es donde compruebas si lo entiendes.</p>
+<h2>Que se pueda contestar en pocos segundos</h2>
+<p>Si tardas más de diez segundos, casi siempre es que la tarjeta pide varias cosas. Pártela. Las fichas cortas son las que se repasan de verdad los días malos, y los días malos son los que deciden si el hábito sobrevive.</p>
+<h2>Distingue lo que hay que memorizar de lo que hay que entender</h2>
+<p>Las flashcards son excelentes para hechos aislados y bastante malas para razonamientos largos. Un proceso de seis pasos no se memoriza bien como una tarjeta de seis puntos; se entiende leyendo, y luego se fijan con fichas los puntos concretos donde tu memoria falla.</p>
+<p>Si te descubres haciendo tarjetas de algo que no entiendes, para. Ninguna ficha arregla eso, y memorizar sin entender produce respuestas que no sabes usar.</p>
+<h2>Deja el origen anotado</h2>
+<p>Dentro de dos meses vas a mirar una tarjeta sin recordar de qué clase salió ni por qué importaba, y entonces no podrás comprobarla. Anki tiene un campo Fuente para esto; cualquier herramienta decente debería darte algo equivalente. Está desarrollado en <a href="../de-donde-salio-esta-ficha/">¿de dónde salió esta ficha?</a>.</p>
+<h2>Y borra sin pena</h2>
+<p>Una tarjeta que no aporta cuesta repasos todas las semanas. Borrar es una decisión de calendario perfectamente sana. Si una ficha lleva meses sin enseñarte nada, ya te ha dicho lo que valía.</p>
+<h2>Cómo encaja Quat</h2>
+<p>Quat es una app para iPhone y iPad que desarrollo yo, así que esta parte la escribe alguien interesado.</p>
+<p>Quat genera un primer borrador de tarjetas a partir de lo que capturas —una clase grabada, una foto de una página, un enlace, un PDF— y ese borrador está sujeto exactamente a todo lo anterior. Un modelo tiende a producir fichas largas y con varios datos, así que <strong>la criba es tuya y es la parte que las convierte en buenas</strong>: se editan y se borran desde la pestaña de Tarjetas, y conviene hacerlo el mismo día, con la fuente todavía fresca.</p>
+<p>Lo que sí resuelve por defecto es el punto del origen: cada tarjeta lleva impreso cómo entró, la fecha y el apunte del que salió, así que reescribir una ficha floja meses después es posible en vez de ser adivinar.</p>
+<p>Lo que no hace es juzgar si una tarjeta está bien escrita. Eso sigue siendo criterio tuyo, y es lo único de esta página que ninguna herramienta te va a quitar.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../what-makes-a-good-flashcard/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

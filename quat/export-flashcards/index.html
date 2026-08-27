@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to get your flashcards out of an app — Quat</title>
+<meta name="description" content="What a real export contains, why scheduling almost never transfers, and how to get a CSV into Anki without losing your sources.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to get your flashcards out of an app — Quat">
+<meta property="og:description" content="What a real export contains, why scheduling almost never transfers, and how to get a CSV into Anki without losing your sources.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/export-flashcards/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/export-flashcards/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/export-flashcards/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/exportar-fichas/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/export-flashcards/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>How to get your flashcards out of an app</h1><div class="eff"></div></header>
+<p>Ask this before you put a term's work in, not after. The moment you want an export is usually the moment something has gone wrong — the app changed its pricing, or stopped being updated, or you simply want to move — and that is the worst time to discover the answer is no.</p>
+<p>The good news is that it takes about two minutes to check, and the check is the same for every app.</p>
+<h2>The question to actually ask</h2>
+<p>Not "does it have an export button". Plenty of apps have one that produces something useless. The question is: <strong>does the export contain the things that took you time to make?</strong></p>
+<p>Three tiers, worth being able to tell apart:</p>
+<p><strong>Your text.</strong> The fronts and backs. This is the minimum, and an app that cannot give you this should be disqualified immediately.</p>
+<p><strong>Your organisation.</strong> Tags, decks, and — the one people forget until they need it — <strong>where each card came from</strong>. Losing the source turns a moveable deck into a pile of anonymous assertions, and that is most of what made it valuable.</p>
+<p><strong>Your scheduling.</strong> Intervals, ease, review history. This is the tier almost nothing transfers, and it is worth being realistic: even when an app exports these numbers, the app you are moving <em>to</em> generally will not import them, because every algorithm defines them differently. Treat scheduling as something you will probably rebuild, and do not let its absence be the thing that stops you leaving.</p>
+<h2>What formats actually mean</h2>
+<p><strong>CSV</strong> is the universal one. It is a plain text table, it opens in any spreadsheet, and it is readable by a human with no software at all. That last property is the real argument for it — a format you can read in a text editor cannot die.</p>
+<p><strong><code>.apkg</code></strong> is Anki's own package. It carries scheduling and media and imports cleanly into Anki, and into essentially nothing else.</p>
+<p><strong>A proprietary backup file</strong> is not an export. If the only thing that reads it is the app that wrote it, it protects the app, not you.</p>
+<p>For most people the honest recommendation is: get a CSV out periodically and keep it somewhere boring. It will not preserve your schedule, and it will preserve everything you actually wrote.</p>
+<h2>Getting a CSV into Anki</h2>
+<p>The path exists and is slightly fiddly, so the short version:</p>
+<ol>
+<li>In Anki, File → Import, and pick the CSV.</li>
+<li>Set the field separator to comma and tell it whether the first line is a header.</li>
+<li><strong>Map the columns yourself.</strong> Anki does not guess. Front and Back map to your note type's fields; a source column should map to a <code>Source</code> field you have added, and a tags column can be mapped to Tags.</li>
+<li>Import into a new deck first, look at ten cards, and only then merge.</li>
+</ol>
+<p>Two things to expect. Anki will not read interval or ease columns as scheduling — imported cards start as new, and that is normal. And if your export has no header row, Anki maps strictly by position, so check the preview before committing.</p>
+<h2>How Quat handles it</h2>
+<p>Quat is an iPhone and iPad app I make, so read this knowing who wrote it.</p>
+<p>There is an <strong>Export CSV</strong> button in the Cards tab. It writes every card as a row with these columns:</p>
+<pre><code>front, back, tags, source, noteId, dueAt,
+interval, ease, streak, capture</code></pre>
+<p>That is the second tier above, deliberately: <code>source</code> and <code>capture</code> mean the provenance travels with the card, so an exported deck is still traceable rather than anonymous. <code>capture</code> is how the card came in — <code>MIC</code>, <code>SCAN</code>, <code>LINK</code>, <code>DOC</code> or <code>TYPED</code>. The scheduling columns are there too, for whatever you can do with them.</p>
+<p><strong>Two limits, plainly.</strong> The export goes through the iOS share sheet as <strong>text</strong>, not as a downloaded file — so you send it to yourself, save it to Files, or paste it somewhere, and for a very large deck that is clumsier than a file would be. And it is CSV, not <code>.apkg</code>: Anki will take it with the mapping steps above, and will not adopt the scheduling.</p>
+<p>Import is the same shape in reverse — paste CSV rows into the box in the Cards tab. The parser reads the column order from your header rather than assuming one, so a file that has been through a spreadsheet still lands correctly, and a file with no header at all is read positionally.</p>
+<p>There is no account, which means there is also no backup on a server and nothing for me to restore if you delete the app. That is the real reason to export occasionally, and it is a better reason than distrusting me.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/exportar-fichas/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>

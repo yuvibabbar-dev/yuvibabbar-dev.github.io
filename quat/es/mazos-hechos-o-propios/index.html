@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Mazos ya hechos o hacerlos tú? — Quat</title>
+<meta name="description" content="Qué te da de verdad cada opción, los costes que no se mencionan, y el orden que permite usar los dos sin ahogarte.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="¿Mazos ya hechos o hacerlos tú? — Quat">
+<meta property="og:description" content="Qué te da de verdad cada opción, los costes que no se mencionan, y el orden que permite usar los dos sin ahogarte.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/mazos-hechos-o-propios/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/mazos-hechos-o-propios/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/premade-decks-vs-your-own/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/mazos-hechos-o-propios/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/premade-decks-vs-your-own/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>¿Mazos ya hechos o hacerlos tú?</h1><div class="eff"></div></header>
+<p>El debate suele plantearse como disciplina contra pereza, lo cual es falso y además no ayuda. Es un intercambio entre dos costes reales, y cuál te conviene pagar depende de la asignatura y del tiempo que tengas.</p>
+<p>La versión corta: <strong>un buen mazo compartido le gana a las fichas que nunca llegaste a escribir, y pierde contra las fichas que sí escribiste.</strong> A casi todo el mundo le conviene usar los dos, en un orden concreto.</p>
+<h2>Qué te da de verdad hacerlas tú</h2>
+<p>Virtud no. Tres cosas concretas.</p>
+<p><strong>El procesamiento.</strong> Decidir qué merece una tarjeta y cómo formular la pregunta ya es estudiar. Cuando has escrito treinta fichas de un tema, has trabajado ese tema de una manera que leerlo tres veces no consigue. Ahí está la mayor parte del valor, y es justo lo que desaparece al descargar.</p>
+<p><strong>Fichas que se parecen a tu examen.</strong> Tu asignatura insiste en cosas que un mazo nacional no puede saber. El profesor que dedicó cuarenta minutos a un mecanismo te está diciendo algo, y un mazo compartido aplana esa señal.</p>
+<p><strong>Fichas que sabrás interpretar después.</strong> Sabes qué querías decir, de qué clase salió y por qué importaba.</p>
+<h2>Qué te da de verdad un mazo compartido</h2>
+<p><strong>Una cobertura que no ibas a alcanzar.</strong> Para cuerpos de conocimiento grandes y estandarizados — un temario de oposición, el MIR, el vocabulario básico de un idioma — un mazo comunitario maduro es enorme, lleva años depurándose y es mejor que nada que fueras a escribir con el tiempo disponible. Rechazarlo por principio no es rigor, es ir más lento.</p>
+<p><strong>Velocidad el primer día.</strong> Repasas esta noche en lugar de construir una semana.</p>
+<p><strong>La corrección de errores de otros.</strong> Un mazo muy usado ha tenido a miles de personas fallando sus peores tarjetas y quejándose. El tuyo te ha tenido a ti.</p>
+<h2>Los costes que no se mencionan</h2>
+<p><strong>Un volumen que no elegiste.</strong> Un mazo de veinte mil fichas no es un recurso, es una obligación, y va a enterrar las doscientas tarjetas de tus propias clases que son las que de verdad predicen tu examen.</p>
+<p><strong>Sin contexto.</strong> Este es el que muerde meses después. Sale una tarjeta, no tienes ni idea de dónde salió, no sabes si eso entra o es una digresión, y no lo puedes comprobar, porque nunca fue tuya. La gente acaba borrando fichas que no logra situar, dando por hecho que estarán mal, y tirando trabajo que estaba bien.</p>
+<p><strong>La redacción de otra persona.</strong> Aprendes a reconocer cómo lo escribió alguien, que no es lo mismo que saberte el dato.</p>
+<p><strong>Tarjetas sencillamente equivocadas.</strong> Popular no quiere decir correcto, y un mazo que no mantiene nadie en concreto se queda desfasado en silencio.</p>
+<h2>El orden que funciona</h2>
+<ol>
+<li><strong>Primero las tuyas, de tus propias clases.</strong> Es la parte que nadie puede hacer por ti y la que tu examen está evaluando.</li>
+<li><strong>Añade un mazo compartido para amplitud</strong>, si existe uno con prestigio en tu campo, y solo para lo que tu material no cubre.</li>
+<li><strong>Poda el mazo compartido sin piedad.</strong> Suspende o borra secciones enteras de lo que no te van a preguntar. Ese paso es lo que separa a quien usa mazos grandes con éxito de quien se ahoga en ellos.</li>
+<li><strong>Arregla o borra cualquier ficha que no puedas situar.</strong> Si no sabes de dónde salió ni por qué importa, te está costando repasos y enseñándote una frase.</li>
+</ol>
+<h2>Cómo lo hace Quat</h2>
+<p>Quat es una app para iPhone y iPad que desarrollo yo, así que esto lo escribe alguien interesado.</p>
+<p>Quat está construida alrededor del primer paso: capturas algo en lo que estuviste de verdad — una clase, una página, un enlace, un PDF — y se convierte en tarjetas selladas con su origen. Ese sello es justo lo que un mazo compartido no te puede dar, y es lo que hace que el cuarto paso sea fácil en Quat y difícil en otros sitios.</p>
+<p><strong>Compartir mazos existe, pero es deliberadamente pequeño.</strong> Puedes sellar un mazo en un código protegido con una contraseña generada y mandárselo a una persona concreta: un compañero, un grupo. <strong>No hay tienda de mazos, ni biblioteca pública, ni forma de explorar mazos de otros</strong>, así que si buscas un gran mazo comunitario, Quat no es donde lo vas a encontrar.</p>
+<p>Lo que sí puedes hacer es traerlo: la pestaña de Tarjetas acepta CSV pegado, así que un mazo exportado de otro sitio se puede importar. Esas fichas llegan sin origen, porque nunca lo tuvieron, lo cual ilustra bastante bien todo el intercambio del que habla esta página.</p>
+<p>Si en tu campo hay un mazo compartido canónico y lo estás usando bien en Anki, ese es un buen montaje y no deberías abandonarlo. Quat apunta al material que ese mazo no tiene: las clases a las que fuiste tú.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../premade-decks-vs-your-own/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

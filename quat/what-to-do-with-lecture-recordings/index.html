@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What to do with your lecture recordings — Quat</title>
+<meta name="description" content="Why re-listening is the worst option, what to do instead in order, and the honest limit: Quat records live and cannot import an existing file.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What to do with your lecture recordings — Quat">
+<meta property="og:description" content="Why re-listening is the worst option, what to do instead in order, and the honest limit: Quat records live and cannot import an existing file.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/what-to-do-with-lecture-recordings/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/what-to-do-with-lecture-recordings/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/what-to-do-with-lecture-recordings/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/estudiar-con-grabaciones-de-clase/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/what-to-do-with-lecture-recordings/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>What to do with your lecture recordings</h1><div class="eff"></div></header>
+<p>Having the lecture recorded buys a reassurance that usually costs you. The feeling that you already have it postpones the work indefinitely, and by the end of term there are forty hours of audio nobody is going to play — because re-listening to a lecture costs exactly as much time as attending it did and teaches you rather less.</p>
+<p>That is the real problem with recorded lectures. It is not that they are useless. It is that in their original form they can only be consumed in real time.</p>
+<h2>The rule everything else follows from</h2>
+<p><strong>A recording is not study material. It is raw material.</strong> It only starts being worth something once it has been turned into something you can move through faster than real time: an outline, a summary, a handful of questions.</p>
+<p>So the useful question is not "when will I listen to this", which never arrives, but "what am I taking out of it and how long will that take".</p>
+<h2>What to do, in order</h2>
+<p><strong>Do not replay it end to end.</strong> Unless you missed the lecture, this is the worst time-to-benefit ratio available. If you did miss it, play it once at 1.5x or 2x while taking notes, and treat that as having attended.</p>
+<p><strong>Go straight to the places you marked.</strong> If you take notes during class, write the timestamp whenever something does not land. Five timestamps turn a one-hour recording into six minutes of work. It is the highest-yield habit on this page and it costs two seconds a mark.</p>
+<p><strong>Get a transcript if you can.</strong> Text can be searched, skimmed and scanned. Most university capture systems — Panopto, Echo360, Teams — already generate captions or a transcript, so look for one before assuming there is none. A transcript turns an hour of audio into something you review in ten minutes.</p>
+<p><strong>Extract questions, not summaries.</strong> A summary gets read once and forgotten. What survives is a handful of questions you can get wrong. An hour of lecture yields somewhere between fifteen and forty reasonable cards; if you are producing a hundred, you are transcribing rather than selecting.</p>
+<p><strong>Record which lecture each thing came from.</strong> In two months you will look at a card and be unable to place it, and without the source you cannot check it against the recording you still have sitting there.</p>
+<p><strong>Then delete the audio once you have wrung it out.</strong> If you already have the questions, the file is dead weight that makes you feel in debt.</p>
+<h2>When it is not worth it</h2>
+<p>If the lecture came with slides or a script, working from the document is almost always the better trade: it reads faster, it is searchable, and it usually contains the same content. Keep the recording for the ten minutes where the lecturer explained something that is on no slide — which tends to be exactly what the exam asks about.</p>
+<h2>Where Quat fits, and what it cannot do</h2>
+<p>Quat is an iPhone and iPad app I make, so read this knowing who wrote it. The limit comes first, because it is quite possibly the thing you came here for:</p>
+<p><strong>Quat does not import audio.</strong> It records live through the microphone and transcribes that. You cannot hand it an existing <code>.m4a</code> or <code>.mp3</code> from Panopto, Zoom or Teams — the file picker takes PDF, <code>.docx</code>, <code>.pptx</code>, <code>.xlsx</code> and text, and refuses audio. If what you have is a folder of old recordings, Quat is not the tool for that today, and I would rather say so here than after you have downloaded it.</p>
+<p>What it is for is the lecture you are about to sit in: record while it happens, and when it ends you have the transcript, a note, and cards stamped with where they came from — instead of a file that will make you feel guilty for three months.</p>
+<p>The audio allowance is thirty minutes a month free and ten hours on a subscription, so the free tier covers trying it on one lecture rather than a whole term.</p>
+<p>If your material is recordings that already exist, the honest advice is the section above: find the transcript your university already generates, and work from the text. That advice needs no app at all.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/estudiar-con-grabaciones-de-clase/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>
