@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where did this flashcard come from? — Quat</title>
+<meta name="description" content="How to record where a card came from so you can find the source again — the Source field and tags in Anki, and how Quat stamps it automatically.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Where did this flashcard come from? — Quat">
+<meta property="og:description" content="How to record where a card came from so you can find the source again — the Source field and tags in Anki, and how Quat stamps it automatically.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/where-did-this-flashcard-come-from/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/where-did-this-flashcard-come-from/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/where-did-this-flashcard-come-from/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/de-donde-salio-esta-ficha/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/where-did-this-flashcard-come-from/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Where did this flashcard come from?</h1><div class="eff"></div></header>
+<p>A card comes up in review. You know the answer — you have seen it thirty times. What you cannot do is say where it came from, which lecture it belonged to, or what question it was originally answering. The answer is memorised and the meaning is gone.</p>
+<p>This is not a failure of memory. It is a failure of bookkeeping, and it has a cost most people underrate. Someone told me recently that they had been <em>deleting</em> cards they could not place — assuming that if they could not remember the context, they had probably written the card down wrong in the first place. They were throwing away work that was almost certainly correct. That is the real damage: not a card you distrust, but a card you destroy.</p>
+<p>The fix is to record where each card came from at the moment you make it, because that is the only moment you still know. Everything below is how to do that in Anki, which needs no app and no account. What Quat does is at the bottom, and you can stop reading before then.</p>
+<h2>Why the source disappears in the first place</h2>
+<p>Nothing in the ordinary card-making loop preserves it. You read a chapter, you write a question and an answer, and the two pieces of information you had in your head — <em>this is from Tuesday's cardiology lecture, and it was the bit about preload</em> — never make it into the file. The deck name is too coarse to help; "Cardiology" does not tell you which of forty lectures.</p>
+<p>It gets worse with shared decks, because you never had the context at all. A premade deck is somebody else's bookkeeping, and their reasons for making a card are not visible to you.</p>
+<h2>Fixing it in Anki</h2>
+<p>Anki already has the machinery. It is off by default because a fresh note type has only Front and Back.</p>
+<p><strong>Add a Source field.</strong> Tools → Manage Note Types → select your note type → Fields → Add. Call it <code>Source</code>. Then Cards, and put <code>{{Source}}</code> on the back template, usually under a horizontal rule so it reads as a footnote rather than as part of the answer:</p>
+<pre><code>{{FrontSide}}
+&lt;hr id=answer&gt;
+{{Back}}
+&lt;div class=src&gt;{{Source}}&lt;/div&gt;</code></pre>
+<p>What to put in it is the part people get wrong by being too ambitious. A full citation is a nice idea that you will abandon in a week. Write the shortest string that would let you find the source again in under a minute — <code>Cardio L12 · slide 31</code>, <code>Guyton ch9 p204</code>, <code>Tue lecture 28 Jul</code>. It only has to beat your memory, and your memory is going to be nothing.</p>
+<p><strong>Use tags for the shape, not the detail.</strong> Tags are hierarchical with <code>::</code>, so <code>lecture::cardio::L12</code> gives you a tree in the sidebar and lets you pull back every card from one lecture in one click. Tags are the right place for the structure; the Source field is the right place for the specific pointer. Doing it the other way round — a tag per page number — makes an unusable sidebar.</p>
+<p><strong>Retrofitting a deck you already have.</strong> You do not have to fix everything. Open Browse, filter to one deck or one date range with <code>added:30</code>, select all, and use Notes → Add Tags to stamp a whole batch at once. For a Source field on existing notes, Find and Replace works across a selection with regex on if you need it. Do the current term and leave the archaeology; the cards you cannot place are usually the ones you also no longer need.</p>
+<p><strong>If you use shared decks,</strong> check whether the note type already has a source-ish field the template is not showing. Many published decks carry one — a citation, a lecture code, a first-aid page — and the author simply left it off the card template. Adding <code>{{Field}}</code> to the template is a two-minute change that can restore context to thousands of cards you thought were anonymous.</p>
+<p><strong>Add-ons exist</strong> that link notes to each other or to external documents, and if you want a clickable path back to a PDF or a slide, that is the route to look down on AnkiWeb. Check the add-on's last-updated date against your Anki version before you rely on it — this corner of the ecosystem moves, and an add-on that breaks silently is worse than a text field that cannot.</p>
+<h2>The habit that actually holds</h2>
+<p>Fill the field while the source is on screen. Not later, not in a cleanup pass at the weekend — later is exactly when the information is gone, and a cleanup pass is a thing everyone plans and nobody does. If filling it in costs more than a few seconds, it will not survive a busy week, which is why the short ugly string beats the proper citation.</p>
+<h2>How Quat does it</h2>
+<p>Quat is an iPhone and iPad app I make, and this is the problem it was built around, so treat what follows as an interested party's description.</p>
+<p>The bookkeeping is not a field you remember to fill in. You capture the source itself — record the lecture, photograph the page, paste a link, or drop in a PDF — and because the cards are made <em>from</em> that capture, the app already knows what they came from. Every card carries a line like:</p>
+<pre><code>MIC · 28 JUL · CARDIO LECTU</code></pre>
+<p>That is how it came in, the date, and the first twelve characters of the note's title. The first part is one of <code>MIC</code>, <code>SCAN</code>, <code>LINK</code>, <code>DOC</code> or <code>TYPED</code>, so at a glance you know whether a card came from a recording, a photograph, a web page, a document, or your own typing. It sits under every card in review, and under every question in exam mode.</p>
+<p><strong>Two limits worth stating plainly.</strong> The stamp is text, not a link — it tells you where to look, it does not take you there. And twelve characters is short: <code>CARDIO LECTU</code> is enough to recognise a note you named well and not enough to rescue one you called "notes 3". The stamp rewards naming things properly, which is its own small piece of bookkeeping.</p>
+<p>The rest is ordinary: spaced repetition, sessions that end when the day's cards are done, no account, and what you capture stays on the device. It is free, and reviewing is free without limits.</p>
+<p>If you are happy in Anki, the Source field above is genuinely the answer and you should use it. Quat is for the case where the bookkeeping keeps not happening, because the honest truth about a manual step is that it only works if you actually do it.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/de-donde-salio-esta-ficha/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>

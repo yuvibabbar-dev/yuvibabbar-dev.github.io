@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿De dónde salió esta ficha? — Quat</title>
+<meta name="description" content="Cómo anotar de dónde sale cada tarjeta para poder volver a la fuente: el campo Fuente y las etiquetas en Anki, y cómo Quat lo sella solo.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="¿De dónde salió esta ficha? — Quat">
+<meta property="og:description" content="Cómo anotar de dónde sale cada tarjeta para poder volver a la fuente: el campo Fuente y las etiquetas en Anki, y cómo Quat lo sella solo.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/de-donde-salio-esta-ficha/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/de-donde-salio-esta-ficha/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/where-did-this-flashcard-come-from/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/de-donde-salio-esta-ficha/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/where-did-this-flashcard-come-from/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>¿De dónde salió esta ficha?</h1><div class="eff"></div></header>
+<p>Sale una tarjeta en el repaso. Te sabes la respuesta, la has visto treinta veces. Lo que no sabes es de dónde salió, a qué clase pertenecía ni qué pregunta estaba respondiendo en realidad. La respuesta está memorizada y el significado se ha perdido.</p>
+<p>Esto no es un fallo de memoria, es un fallo de registro, y sale más caro de lo que parece. Hace poco alguien me contó que había estado <em>borrando</em> tarjetas que no lograba situar, dando por hecho que si no recordaba el contexto seguramente las había apuntado mal. Estaba tirando trabajo que casi con seguridad era correcto. Ese es el daño de verdad: no una tarjeta de la que dudas, sino una tarjeta que destruyes.</p>
+<p>La solución es anotar de dónde sale cada ficha en el momento de crearla, porque es el único momento en que todavía lo sabes. Lo que viene ahora es cómo hacerlo en Anki, sin apps y sin cuenta. Lo que hace Quat está al final, y puedes dejar de leer antes de llegar.</p>
+<h2>Por qué se pierde el origen</h2>
+<p>Nada en el proceso normal lo conserva. Lees un tema, escribes una pregunta y una respuesta, y los dos datos que tenías en la cabeza — <em>esto es de la clase del martes y era la parte de la precarga</em> — no llegan a escribirse en ningún sitio. El nombre del mazo es demasiado grueso: "Cardiología" no te dice cuál de cuarenta clases.</p>
+<p>Con los mazos compartidos es peor, porque el contexto no lo tuviste nunca. Un mazo hecho por otra persona es el registro de esa persona, y sus motivos para crear una tarjeta no se ven desde fuera.</p>
+<h2>Cómo se arregla en Anki</h2>
+<p>Anki ya trae lo necesario. Viene desactivado porque un tipo de nota nuevo solo tiene Anverso y Reverso.</p>
+<p><strong>Añade un campo Fuente.</strong> Herramientas → Administrar tipos de notas → elige el tipo → Campos → Añadir. Llámalo <code>Fuente</code>. Después Tarjetas, y pon <code>{{Fuente}}</code> en la plantilla del reverso, normalmente debajo de una línea para que se lea como una nota al pie y no como parte de la respuesta:</p>
+<pre><code>{{FrontSide}}
+&lt;hr id=answer&gt;
+{{Reverso}}
+&lt;div class=src&gt;{{Fuente}}&lt;/div&gt;</code></pre>
+<p>Lo que se escribe dentro es donde casi todo el mundo se pasa de ambicioso. Una cita completa es una buena idea que abandonarás en una semana. Escribe la cadena más corta que te permita encontrar el origen en menos de un minuto: <code>Cardio T12 · diap. 31</code>, <code>Guyton cap9 p204</code>, <code>clase 28 jul</code>. Solo tiene que ganarle a tu memoria, y tu memoria no va a tener nada.</p>
+<p><strong>Usa las etiquetas para la estructura, no para el detalle.</strong> Las etiquetas son jerárquicas con <code>::</code>, así que <code>clase::cardio::T12</code> te deja un árbol en la barra lateral y te permite recuperar de un clic todas las fichas de una clase. La estructura va en las etiquetas; el puntero concreto va en el campo Fuente. Al revés — una etiqueta por número de página — la barra lateral se vuelve inservible.</p>
+<p><strong>Arreglar un mazo que ya tienes.</strong> No hace falta arreglarlo todo. Abre el Navegador, filtra por un mazo o por fechas con <code>added:30</code>, selecciona todo y usa Notas → Añadir etiquetas para marcar un lote entero de una vez. Para el campo Fuente en notas que ya existen, Buscar y reemplazar funciona sobre la selección. Haz el curso actual y deja la arqueología: las fichas que no puedes situar suelen ser también las que ya no necesitas.</p>
+<p><strong>Si usas mazos compartidos,</strong> comprueba si el tipo de nota ya tiene algún campo de origen que la plantilla no está mostrando. Muchos mazos publicados llevan uno — una cita, un código de clase, una página de referencia — y su autor simplemente no lo puso en la plantilla. Añadir <code>{{Campo}}</code> es un cambio de dos minutos que puede devolverle el contexto a miles de tarjetas que dabas por anónimas.</p>
+<p><strong>Hay complementos</strong> que enlazan notas entre sí o con documentos externos, y si quieres un enlace pulsable que te lleve a un PDF o a una diapositiva, ese es el camino que hay que mirar en AnkiWeb. Comprueba la fecha de la última actualización del complemento frente a tu versión de Anki antes de confiar en él: esta parte del ecosistema se mueve, y un complemento que se rompe en silencio es peor que un campo de texto que no puede romperse.</p>
+<h2>La costumbre que de verdad aguanta</h2>
+<p>Rellena el campo con la fuente todavía delante. No después, ni en una limpieza el fin de semana: "después" es justo cuando la información ya no está, y la limpieza del fin de semana es algo que todo el mundo planea y nadie hace. Si rellenarlo cuesta más de unos segundos, no sobrevive a una semana cargada, y por eso la cadena corta y fea le gana a la cita bien puesta.</p>
+<h2>Cómo lo hace Quat</h2>
+<p>Quat es una app para iPhone y iPad que desarrollo yo, y este es el problema sobre el que está construida, así que léelo sabiendo quién lo escribe.</p>
+<p>El registro no es un campo que tengas que acordarte de rellenar. Capturas la fuente misma — grabas la clase, fotografías la página, pegas un enlace o subes un PDF — y como las fichas se generan <em>a partir</em> de esa captura, la app ya sabe de dónde vienen. Cada tarjeta lleva una línea así:</p>
+<pre><code>MIC · 28 JUL · CLASE CARDI</code></pre>
+<p>Es decir: cómo entró, la fecha, y los doce primeros caracteres del título del apunte. La primera parte es <code>MIC</code>, <code>SCAN</code>, <code>LINK</code>, <code>DOC</code> o <code>TYPED</code>, así que de un vistazo sabes si la ficha viene de una grabación, de una foto, de una página web, de un documento o de algo que escribiste tú. Aparece debajo de cada tarjeta en el repaso y debajo de cada pregunta en el modo examen.</p>
+<p><strong>Dos límites que conviene decir claramente.</strong> El sello es texto, no un enlace: te dice dónde mirar, no te lleva. Y doce caracteres son pocos: <code>CLASE CARDI</code> basta para reconocer un apunte al que le pusiste un nombre decente, y no basta para rescatar uno que llamaste "apuntes 3". El sello premia poner buenos títulos, que es a su vez otro pequeño registro.</p>
+<p>Lo demás es lo normal: repaso espaciado, sesiones que terminan cuando se acaban las fichas del día, sin cuenta, y lo que capturas se queda en el dispositivo. Es gratis, y repasar es gratis sin límite.</p>
+<p>Si estás a gusto en Anki, el campo Fuente de arriba es la respuesta de verdad y deberías usarlo. Quat es para el caso en que ese registro nunca acaba de hacerse, porque la verdad incómoda sobre cualquier paso manual es que solo funciona si lo haces.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../where-did-this-flashcard-come-from/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>
