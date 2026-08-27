@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yuvibabbar-dev.github.io/quat/sitemap.xml

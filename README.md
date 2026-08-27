@@ -1,4 +1,45 @@
-Yuvi Babbar — Portfolio
+# Yuvi Babbar — portfolio, and the Quat site
+
+## Quat — capture it, then be tested on it
+
+Record a lecture, photograph a page, paste a link, or drop in a PDF. Quat turns
+what you captured into flashcards that test you on a spaced-repetition
+schedule, and **every card is stamped with where it came from**. Free on iPhone
+and iPad, no account, and what you capture stays on the device.
+
+- **Site:** <https://yuvibabbar-dev.github.io/quat/>
+- **En español:** <https://yuvibabbar-dev.github.io/quat/es/>
+- **App Store:** <https://apps.apple.com/app/id6797544518>
+
+### Guides
+
+- [Turn a recorded lecture into flashcards](https://yuvibabbar-dev.github.io/quat/lecture-to-flashcards/)
+- [Turn a photo of a page into flashcards](https://yuvibabbar-dev.github.io/quat/photo-to-flashcards/)
+- [Turn a link into flashcards](https://yuvibabbar-dev.github.io/quat/link-to-flashcards/)
+- [Turn a PDF or document into flashcards](https://yuvibabbar-dev.github.io/quat/pdf-to-flashcards/)
+- [How many flashcards per lecture](https://yuvibabbar-dev.github.io/quat/how-many-flashcards-per-lecture/)
+
+### Guías en español
+
+- [Convertir una clase grabada en flashcards](https://yuvibabbar-dev.github.io/quat/es/clase-a-flashcards/)
+- [Convertir una foto de una página en flashcards](https://yuvibabbar-dev.github.io/quat/es/foto-a-flashcards/)
+- [Convertir un enlace en flashcards](https://yuvibabbar-dev.github.io/quat/es/enlace-a-flashcards/)
+- [Convertir un PDF o documento en flashcards](https://yuvibabbar-dev.github.io/quat/es/pdf-a-flashcards/)
+- [Cuántas flashcards por clase](https://yuvibabbar-dev.github.io/quat/es/cuantas-flashcards-por-clase/)
+
+[Privacy](https://yuvibabbar-dev.github.io/quat/privacy/) ·
+[Support](https://yuvibabbar-dev.github.io/quat/support/)
+
+> The pages under `/quat/` are **generated**. They are built from Markdown by
+> `scripts/build-pages.py` in the app repo and copied here — edit them there,
+> or the next deploy overwrites the change.
+
+App Store and iPhone are trademarks of Apple Inc., registered in the U.S. and
+other countries and regions.
+
+---
+
+## Portfolio
 
 What’s inside
 - Static, single‑page portfolio (no build step)
