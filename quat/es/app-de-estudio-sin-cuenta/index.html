@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Una app de estudio sin cuenta: qué te da y qué te cuesta — Quat</title>
+<meta name="description" content="Por qué “sin cuenta” y “no sale nada del móvil” no son lo mismo, qué mirar en cualquier app, y el precio de no tener copia de seguridad.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Una app de estudio sin cuenta: qué te da y qué te cuesta — Quat">
+<meta property="og:description" content="Por qué “sin cuenta” y “no sale nada del móvil” no son lo mismo, qué mirar en cualquier app, y el precio de no tener copia de seguridad.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/app-de-estudio-sin-cuenta/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/app-de-estudio-sin-cuenta/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/study-app-no-account/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/app-de-estudio-sin-cuenta/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/study-app-no-account/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Qué te da de verdad una app sin cuenta, y qué te cuesta</h1><div class="eff"></div></header>
+<p>Buscar una app de estudio sin registro suele ser dos deseos con un mismo abrigo. Uno es práctico: no quieres otra contraseña, otro correo de verificación, otra cosa que dar de baja. El otro va de privacidad: no quieres que tus apuntes acaben siendo material de entrenamiento de alguien o una lista de marketing de alguien.</p>
+<p>Son preguntas distintas y tienen respuestas distintas, así que conviene separarlas antes de elegir nada.</p>
+<h2>Sin cuenta no significa que no salga nada del móvil</h2>
+<p>Esta es la confusión que hay que deshacer primero, porque a muchas apps les viene bien que siga en pie.</p>
+<p>Una cuenta es una identidad: una fila con tu correo que ata tus datos a ti entre dispositivos. Quitarla quita la identidad. No implica, por sí sola, que la app funcione sin conexión. Cualquier app que transcriba audio, lea una foto, resuma un enlace o genere tarjetas está mandando ese material a un modelo en algún sitio, porque nada de eso se ejecuta en un teléfono. "Sin cuenta" y "no sale nada del dispositivo" son dos afirmaciones, y normalmente solo se está haciendo la primera.</p>
+<p>Dicho con precisión: sin cuenta significa que nadie puede buscarte. No significa que no se transmita nada. Una app que promete las dos cosas y a la vez ofrece funciones de IA está describiendo algo que no existe.</p>
+<h2>Qué comprobar en la práctica</h2>
+<p><strong>Lee la etiqueta de privacidad de la App Store, no la página de marketing.</strong> En la ficha del producto, baja hasta Privacidad de la app. Las categorías que importan son "Datos usados para seguirte" y "Datos vinculados contigo", que son las que requieren identidad. "No se recopilan datos" o "Datos no vinculados contigo" es una postura distinta, y además es una declaración que el desarrollador le hace a Apple, no una frase que se ha escrito a sí mismo.</p>
+<p><strong>Pregunta qué pasa con el material, no solo con tu identidad.</strong> Si transcribe clases, ¿a dónde va el audio y cuánto tiempo se queda? Una línea en la política de privacidad que nombre al proveedor vale más que un párrafo de tranquilizarte.</p>
+<p><strong>Mira si las funciones de IA tienen una segunda puerta.</strong> La captura es la evidente. La que se le olvida a todo el mundo es el tutor o el chat, porque normalmente manda tus apuntes como contexto: eso privado que escribiste pasa a formar parte de una petición. No tiene por qué estar mal, pero deberías saber que ocurre.</p>
+<p><strong>Averigua qué pierdes.</strong> Esta parte no la anuncia nadie.</p>
+<h2>Lo que cuesta de verdad no tener cuenta</h2>
+<p>Casi siempre significa que no hay sincronización ni recuperación.</p>
+<p>Si tus datos viven solo en el dispositivo, perder el móvil, romperlo o borrar la app se lo lleva todo, y no hay nadie a quien escribir. No existe el paso de "inicia sesión en el nuevo", porque no hay sesión que iniciar. Ese es el intercambio real: la misma arquitectura que hace que nadie tenga tus datos hace que nadie tenga tus datos, tú incluido.</p>
+<p>Si eliges este camino, la mitigación es exportar de vez en cuando. Cualquier app a la que le confíes el trabajo de un curso debería dejarte sacar tus fichas en un formato legible, y si no te deja, eso es mucho peor señal que un formulario de registro.</p>
+<h2>Cómo lo hace Quat</h2>
+<p>Quat es una app para iPhone y iPad que desarrollo yo, así que léelo como lo que es y comprueba lo que digo en vez de creerlo.</p>
+<p>No hay cuenta, y tampoco hay sistema de cuentas: ni inicio de sesión, ni contraseña, ni correo, ni perfil en un servidor. Tus apuntes, tarjetas e historial de repaso viven en la app, en tu dispositivo. La ficha de la App Store declara "Datos no vinculados contigo" y no hay ningún SDK de analítica.</p>
+<p><strong>Qué sí sale del dispositivo, dicho claramente, porque una versión incompleta de esta frase estuvo publicada en este sitio y era falsa:</strong></p>
+<ul>
+<li>Lo que capturas, cuando lo capturas: el audio que grabas, la foto que haces, el enlace que pegas, el documento que añades. Va al servicio que lo transcribe o lo lee y produce el apunte.</li>
+<li><strong>El tutor manda el texto de tus apuntes como contexto.</strong> No es una función de captura, y era justo la omisión que volvía falsa la versión anterior de esta afirmación.</li>
+<li>Un mazo que decides compartir sale del dispositivo, sellado con una contraseña generada, no elegida por ti.</li>
+</ul>
+<p>Lo demás se queda donde está. Repasar, los exámenes, los juegos y todo lo que ya has capturado funcionan sin conexión.</p>
+<p><strong>Y el coste, que es el mismo que en cualquier otro sitio:</strong> no hay sincronización ni copia de seguridad. Borrar la app borra tus apuntes y tus tarjetas, y no hay nada en un servidor que yo pueda restaurar, porque no hay servidor que lo guarde. Dos dispositivos son dos conjuntos de apuntes distintos. Si ese intercambio no te sirve, es que de verdad no te sirve, y una app con cuenta es la mejor respuesta.</p>
+<p>Puedes exportar todo el mazo en CSV desde la pestaña de Tarjetas cuando quieras, que es la mitigación de la que hablaba y la razón para hacerlo antes de necesitarla.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../study-app-no-account/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

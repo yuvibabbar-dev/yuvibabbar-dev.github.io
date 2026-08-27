@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can you trust AI-generated flashcards? — Quat</title>
+<meta name="description" content="How AI-written cards go wrong, why spaced repetition makes a wrong card worse, and the one check that costs ten seconds and actually works.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Can you trust AI-generated flashcards? — Quat">
+<meta property="og:description" content="How AI-written cards go wrong, why spaced repetition makes a wrong card worse, and the one check that costs ten seconds and actually works.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/are-ai-flashcards-accurate/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/are-ai-flashcards-accurate/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/are-ai-flashcards-accurate/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/fiarse-de-las-fichas-de-ia/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/are-ai-flashcards-accurate/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Can you trust AI-generated flashcards?</h1><div class="eff"></div></header>
+<p>Not blindly, and the failure is worse than being wrong.</p>
+<p>A model that generates a hundred cards from your chapter will get most of them right, and the ones it gets wrong will look exactly like the ones it got right. There is no tell. Wrong cards do not arrive with hedged language or bad grammar — they arrive in the same clean question-and-answer shape as everything else, and spaced repetition then does what it is built to do: it drills them until you cannot forget them.</p>
+<p>That is the actual risk. It is not that the AI wastes your time. It is that it is a very efficient machine for memorising something false.</p>
+<h2>What models actually get wrong</h2>
+<p>Three failure modes account for most of it, and they are worth being able to recognise.</p>
+<p><strong>Invention.</strong> The model fills a gap with something plausible — a date, a mechanism, a figure that was never in your source. This is the one people mean by "hallucination", and it is most likely where your material was thin or ambiguous.</p>
+<p><strong>Compression damage.</strong> The source said something is <em>usually</em> true, or true <em>under conditions</em>, and the card says it is true. Nothing was invented; a qualifier was dropped. This is far more common than invention and much harder to spot, because the card is almost right.</p>
+<p><strong>Lost context.</strong> The card is correct and unusable, because the thing that made it meaningful — which patient, which experiment, which chapter's assumptions — was in the paragraph and not in the sentence.</p>
+<h2>The rule that actually protects you</h2>
+<p>Verify at the moment of creation, not at the moment of review.</p>
+<p>When a card is generated you still have the source open. You know what the chapter said. Ten seconds of reading the card against the paragraph it came from is cheap, and it is the only point at which the check is cheap. Three weeks later, in a review session, you have no source, no memory of the context, and no way to tell a wrong card from a right one — you will simply feel that you knew this, and press good.</p>
+<p>So: read what was generated before you keep it. Delete more than feels comfortable. A generator that produces sixty cards from a lecture has not given you sixty cards, it has given you a first draft with maybe thirty survivors, and the editing is the part that makes them yours.</p>
+<p><strong>Keep the source reachable.</strong> Whatever tool you use, write down where each card came from — Anki has a Source field, and any app worth using should give you something equivalent. A card you can check is recoverable. A card you cannot trace is one you will eventually delete out of suspicion, and that is how good work gets thrown away along with bad.</p>
+<p><strong>Prefer small cards.</strong> One fact per card is not a style preference here; it is error containment. A card carrying four facts is wrong if any one of them is wrong, and you will not know which.</p>
+<h2>What this means for choosing a tool</h2>
+<p>The useful question is not "does it use AI" — nearly everything does now. It is:</p>
+<ul>
+<li>Can you see the source a card came from, later, from the card?</li>
+<li>Can you edit or delete a card easily, after it has been made?</li>
+<li>Does it show you what it generated before it commits it to a schedule?</li>
+</ul>
+<p>A tool that generates straight into a review queue with no editable step and no path back to the source has optimised the fast part and left you the expensive part.</p>
+<h2>How Quat handles it</h2>
+<p>Quat is an iPhone and iPad app I make, so read this knowing who wrote it.</p>
+<p>It uses <code>gemini-2.5-flash</code> to turn what you capture into a note, and the note into cards. <strong>It does not fact-check anything, and neither does anything else in the pipeline.</strong> I would rather say that plainly than let the word "AI" imply a verification step that does not exist.</p>
+<p>What it does do is make checking possible. Every card carries a stamp saying how it came in, the date, and the note it came from — <code>MIC · 28 JUL · CARDIO LECTU</code> — so a card that looks wrong three weeks later can be traced to the recording or the page it came from instead of being deleted on suspicion. Cards are editable and deletable at any point. The note the cards were made from stays in the app, which means the source is still there, not just a citation of it.</p>
+<p>The generation allowance is deliberately not enormous: thirty card generations a month free, five hundred on a subscription. That is enough to work with and not enough to encourage generating a thousand cards you will never read.</p>
+<p><strong>The limit worth repeating:</strong> the stamp tells you where to look. It does not tell you the card is right. Nothing in any of these tools does. That part is still reading, and it is still yours.</p>
+<div class="store-cta"><a href="https://apps.apple.com/app/id6797544518">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/fiarse-de-las-fichas-de-ia/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>
