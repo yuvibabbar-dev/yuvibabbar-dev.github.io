@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo organizar tus apuntes de la universidad para estudiar — Quat</title>
+<meta name="description" content="Un sistema de apuntes pensado para estudiar, no para archivar: una carpeta por materia, un apunte por clase y preguntas cada semana.">
+<meta name="apple-itunes-app" content="app-id=6797544518">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cómo organizar tus apuntes de la universidad para estudiar — Quat">
+<meta property="og:description" content="Un sistema de apuntes pensado para estudiar, no para archivar: una carpeta por materia, un apunte por clase y preguntas cada semana.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/organizar-apuntes-de-la-universidad/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/organizar-apuntes-de-la-universidad/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/organize-notes-for-studying/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/organizar-apuntes-de-la-universidad/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/organize-notes-for-studying/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Cómo organizar tus apuntes de la universidad para estudiar</h1><div class="eff"></div></header>
+<p>Casi todos los sistemas de apuntes están pensados para archivar: cada cosa en su sitio y cualquier página fácil de encontrar. Estudiar hace otra pregunta: ¿puedes sacar el material de una materia y preguntarte sobre él en los próximos diez minutos? Un sistema precioso que no permite eso es un pasatiempo, no una herramienta de estudio.</p>
+<h2>Un sistema suficiente</h2>
+<ol>
+<li><strong>Una carpeta por materia.</strong> No por semana, no por profesor. Los árboles de carpetas profundos te cuestan tiempo cada vez que guardas algo y rara vez lo devuelven.</li>
+<li><strong>Un apunte por clase o por tema, con el tema y la fecha en el título.</strong> "Insuficiencia cardiaca — clase del martes" es mejor que "Clase 7".</li>
+<li><strong>Cuando un tema sigue, añade al mismo apunte.</strong> La continuación del jueves va al final del apunte del martes, no en un fragmento nuevo que olvidarás que existe.</li>
+<li><strong>Guarda la fuente.</strong> El número de diapositiva, la página del libro, la fecha: así una línea confusa se puede rastrear.</li>
+<li><strong>Convierte los apuntes en preguntas cada semana, no en época de exámenes.</strong> Cinco preguntas por clase, escritas mientras aún entiendes la clase, valen más que cincuenta escritas con prisas.</li>
+<li><strong>Lleva una lista de fallos por materia.</strong> Es el mejor plan de estudio que vas a tener, y se escribe solo.</li>
+</ol>
+<h2>Papel o pantalla</h2>
+<p>Usa el que vayas a mantener. La investigación que compara escribir a mano con teclear es mixta: un estudio muy citado de 2014 encontró que quien tomaba apuntes a mano rendía mejor en preguntas conceptuales, y una replicación posterior no encontró una diferencia clara. Importa más lo que pasa después de clase: si trabajas los apuntes y luego te preguntas sobre ellos.</p>
+<h2>Lo que puedes saltarte</h2>
+<ul>
+<li><strong>Pasar los apuntes a limpio.</strong> Parece productivo y casi nunca lo es — mira <a href="../pasar-apuntes-a-limpio/">si vale la pena pasar apuntes a limpio</a>.</li>
+<li><strong>Sistemas de colores que llevan más tiempo que estudiar.</strong></li>
+<li><strong>Subrayar como método de estudio.</strong> Marca qué estudiar; no es estudiar.</li>
+</ul>
+<h2>Cómo lo hace Quat</h2>
+<p>Quat es una app para iPhone y iPad que hago yo, así que esta parte la cuenta una parte interesada.</p>
+<p>Al guardar una captura — una foto de una página, un PDF, un enlace o la grabación de una clase — Quat te pregunta en qué carpeta va, y puedes crear una carpeta nueva ahí mismo. Las tarjetas que salen de un apunte siguen la carpeta de ese apunte, así que las tarjetas de cada materia quedan juntas. Cuando un tema sigue, puedes añadir la nueva captura al final de un apunte que ya tienes, y sus tarjetas se unen a las de ese apunte; cuando vuelves a crear tarjetas, solo se usa la parte nueva. Cada tarjeta lleva su fuente: qué la capturó, el día y el apunte.</p>
+<p><strong>Lo que Quat no hace:</strong> las carpetas tienen un solo nivel, sin carpetas dentro de carpetas. Tus apuntes viven en tu dispositivo y no en la nube, así que nada se sincroniza con otro dispositivo; si necesitas tus tarjetas en otro sitio, puedes <a href="../exportar-fichas/">exportarlas</a>.</p>
+<h2>Fuentes</h2>
+<ul>
+<li>Mueller y Oppenheimer (2014), <a href="https://doi.org/10.1177/0956797614524581">The pen is mightier than the keyboard</a>, Psychological Science.</li>
+<li>Morehead, Dunlosky y Rawson (2019), <a href="https://doi.org/10.1007/s10648-019-09468-2">How much mightier is the pen than the keyboard for note-taking?</a>, Educational Psychology Review.</li>
+<li>Dunlosky y colaboradores (2013), <a href="https://doi.org/10.1177/1529100612453266">Improving students' learning with effective learning techniques</a>, Psychological Science in the Public Interest.</li>
+</ul>
+<div class="store-cta"><a href="https://apps.apple.com/app/apple-store/id6797544518?pt=127982094&amp;ct=web-es-organizar-apuntes-de-la-universid&amp;mt=8">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../organize-notes-for-studying/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

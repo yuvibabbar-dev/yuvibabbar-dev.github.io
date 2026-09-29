@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to study for several exams in the same week — Quat</title>
+<meta name="description" content="A plan for exam weeks with more than one exam: keep every subject moving, let practice tests decide where the time goes, and handle two on one day.">
+<meta name="apple-itunes-app" content="app-id=6797544518">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to study for several exams in the same week — Quat">
+<meta property="og:description" content="A plan for exam weeks with more than one exam: keep every subject moving, let practice tests decide where the time goes, and handle two on one day.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/study-for-multiple-exams/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/study-for-multiple-exams/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/study-for-multiple-exams/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/estudiar-para-varios-examenes/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/study-for-multiple-exams/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>How to study for several exams in the same week</h1><div class="eff"></div></header>
+<p>Three exams in five days is less a time problem than an attention problem. The exam that is tomorrow shouts loudest, so it gets everything, and the one on Friday gets nothing until Thursday night — by which point there is too much of it.</p>
+<p>The fix is to keep every subject moving a little every day, with the nearest exam getting the most time, and to let practice tests decide where the time goes.</p>
+<h2>The plan</h2>
+<ol>
+<li><strong>Write the list.</strong> Every exam, its date, and how much it counts.</li>
+<li><strong>Find out where you stand.</strong> A short practice test in each subject — twenty questions — tells you more in half an hour than a day of rereading. Sort each subject's topics into know, shaky and not started.</li>
+<li><strong>Give every subject a block every day or two.</strong> The nearest exam gets the biggest block; the furthest still gets a small one, so it does not go cold.</li>
+<li><strong>One subject per block.</strong> Switch subjects between blocks, not inside them.</li>
+<li><strong>Study by testing, not rereading.</strong> Each block starts with questions and ends with a list of what you missed.</li>
+<li><strong>The day before each exam belongs to that subject</strong> — its list of misses and one mixed practice test, not new material.</li>
+<li><strong>When an exam is done, drop it</strong> and hand its time to the others.</li>
+</ol>
+<h2>Why every subject, every day</h2>
+<p>Because forgetting keeps going while you are busy with something else. Spend Monday to Wednesday only on chemistry and the biology you learned the week before quietly fades, so Thursday becomes a relearning day instead of a review day. Short sessions spread over several days produce much better retention than the same total time crammed together — the spacing effect, one of the most replicated results in the field.</p>
+<p>For exams on Tuesday, Thursday and Friday, Monday might be two hours on Tuesday's subject, ninety minutes on Thursday's and forty-five on Friday's. Wednesday shifts the weight to Thursday, with Friday's subject second.</p>
+<h2>Mixing subjects: when it helps and when it does not</h2>
+<p>You may have heard that mixing, or interleaving, beats studying one thing at a time. That research is mostly about mixing problem types within one subject — different kinds of calculus problems, say — where mixing forces you to recognise which method each problem needs. Mixing chemistry questions with history questions does not do that; it only adds the cost of switching. Mix within a subject. Keep subjects in their own blocks.</p>
+<h2>Two exams on the same day</h2>
+<ul>
+<li>Test yourself in both early in the week, so you know which has more gaps.</li>
+<li>Give the weaker one the larger share of the last two days.</li>
+<li>On the day, go through the second exam's list of misses between the two — twenty minutes, not two hours.</li>
+<li>Sleep the night before. Sleep after studying helps the day's learning settle; an all-nighter trades it for a few hours of tired rereading.</li>
+</ul>
+<h2>How you know the plan is working</h2>
+<p>The lists of misses get shorter. If one subject's list is not shrinking after two blocks, change the method for that subject — explain it out loud, find a clearer source — rather than only adding hours.</p>
+<h2>How Quat helps</h2>
+<p>Quat is an iPhone and iPad app I make, so this part is an interested party talking.</p>
+<p>Put each subject in its own folder: when you save a capture — a photo of a page, a PDF, a link or a lecture recording — you choose the folder, and the cards made from it follow. The exam screen then works as a triage board: every folder shows how many cards it has, how many need work and how many you have not seen yet. Start a practice exam on just one folder — 10, 20, 40 or every card — mark yourself right or wrong, and send the misses back into your review queue with one button.</p>
+<p><strong>What Quat does not do:</strong> there is no exam calendar or planner; the plan above is yours to keep. And the daily review session covers everything that is due across all folders — it is the practice exam that focuses on one subject.</p>
+<h2>Sources</h2>
+<ul>
+<li>Cepeda and colleagues (2006), <a href="https://doi.org/10.1037/0033-2909.132.3.354">Distributed practice in verbal recall tasks</a>, Psychological Bulletin — a review of the spacing effect.</li>
+<li>Rohrer and Taylor (2007), <a href="https://doi.org/10.1007/s11251-007-9015-8">The shuffling of mathematics problems improves learning</a>, Instructional Science — interleaving within one subject.</li>
+<li>Dunlosky and colleagues (2013), <a href="https://doi.org/10.1177/1529100612453266">Improving students' learning with effective learning techniques</a>, Psychological Science in the Public Interest.</li>
+</ul>
+<div class="store-cta"><a href="https://apps.apple.com/app/apple-store/id6797544518?pt=127982094&amp;ct=web-study-for-multiple-exams&amp;mt=8">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/estudiar-para-varios-examenes/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>

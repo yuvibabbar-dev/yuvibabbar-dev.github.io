@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo estudiar para varios exámenes a la vez — Quat</title>
+<meta name="description" content="Un plan para semanas con varios exámenes: todas las materias en marcha, exámenes de práctica para repartir el tiempo y qué hacer si caen dos el mismo día.">
+<meta name="apple-itunes-app" content="app-id=6797544518">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cómo estudiar para varios exámenes a la vez — Quat">
+<meta property="og:description" content="Un plan para semanas con varios exámenes: todas las materias en marcha, exámenes de práctica para repartir el tiempo y qué hacer si caen dos el mismo día.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/estudiar-para-varios-examenes/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/estudiar-para-varios-examenes/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/study-for-multiple-exams/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/estudiar-para-varios-examenes/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/study-for-multiple-exams/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Cómo estudiar para varios exámenes a la vez</h1><div class="eff"></div></header>
+<p>Tres exámenes en cinco días no es tanto un problema de tiempo como de atención. El examen de mañana es el que más grita, así que se lo lleva todo, y el del viernes no recibe nada hasta el jueves por la noche, cuando ya hay demasiado.</p>
+<p>La solución es mantener todas las materias en marcha un poco cada día, con el examen más cercano recibiendo más tiempo, y dejar que los exámenes de práctica decidan adónde va ese tiempo.</p>
+<h2>El plan</h2>
+<ol>
+<li><strong>Haz la lista.</strong> Cada examen, su fecha y cuánto cuenta.</li>
+<li><strong>Averigua dónde estás.</strong> Un examen de práctica corto en cada materia — veinte preguntas — te dice más en media hora que un día releyendo. Separa los temas de cada materia en sé, flojo y sin empezar.</li>
+<li><strong>Dale a cada materia un bloque cada uno o dos días.</strong> El examen más cercano recibe el bloque más grande; el más lejano, uno pequeño, para que no se enfríe.</li>
+<li><strong>Una materia por bloque.</strong> Cambia de materia entre bloques, no dentro de ellos.</li>
+<li><strong>Estudia preguntándote, no releyendo.</strong> Cada bloque empieza con preguntas y termina con la lista de lo que fallaste.</li>
+<li><strong>El día antes de cada examen es de esa materia</strong>: su lista de fallos y un examen de práctica mezclado, no material nuevo.</li>
+<li><strong>Cuando un examen pasa, suéltalo</strong> y reparte su tiempo entre los demás.</li>
+</ol>
+<h2>Por qué todas las materias, todos los días</h2>
+<p>Porque el olvido sigue funcionando mientras estás ocupado con otra cosa. Pasa de lunes a miércoles solo con química y la biología que aprendiste la semana anterior se va borrando, así que el jueves se convierte en un día de volver a aprender en lugar de repasar. Sesiones cortas repartidas en varios días dan mucha mejor retención que el mismo tiempo total concentrado — el efecto del espaciado, uno de los resultados más replicados del campo.</p>
+<p>Con exámenes el martes, el jueves y el viernes, el lunes podría ser dos horas para la materia del martes, noventa minutos para la del jueves y cuarenta y cinco para la del viernes. El miércoles el peso pasa al jueves, con la del viernes en segundo lugar.</p>
+<h2>Mezclar materias: cuándo ayuda y cuándo no</h2>
+<p>Quizá hayas oído que mezclar, o intercalar, es mejor que estudiar una cosa cada vez. Esa investigación trata sobre todo de mezclar tipos de problema dentro de una misma materia — distintos tipos de problemas de cálculo, por ejemplo —, donde mezclar te obliga a reconocer qué método necesita cada uno. Mezclar preguntas de química con preguntas de historia no hace eso; solo añade el coste de cambiar de tema. Mezcla dentro de una materia. Deja cada materia en su propio bloque.</p>
+<h2>Dos exámenes el mismo día</h2>
+<ul>
+<li>Hazte un examen de práctica de los dos al principio de la semana, para saber cuál tiene más huecos.</li>
+<li>Dale al más flojo la mayor parte de los dos últimos días.</li>
+<li>El mismo día, entre los dos exámenes, repasa la lista de fallos del segundo: veinte minutos, no dos horas.</li>
+<li>Duerme la noche anterior. Dormir después de estudiar ayuda a que lo del día se asiente; pasar la noche en vela lo cambia por unas horas de releer cansado.</li>
+</ul>
+<h2>Cómo saber que el plan funciona</h2>
+<p>Las listas de fallos se acortan. Si la lista de una materia no baja después de dos bloques, cambia el método para esa materia — explícala en voz alta, busca una fuente más clara — en lugar de solo añadir horas.</p>
+<h2>Cómo ayuda Quat</h2>
+<p>Quat es una app para iPhone y iPad que hago yo, así que esta parte la cuenta una parte interesada.</p>
+<p>Pon cada materia en su propia carpeta: al guardar una captura — una foto de una página, un PDF, un enlace o la grabación de una clase — eliges la carpeta, y las tarjetas que salen de ella la siguen. La pantalla de examen funciona entonces como un tablero de prioridades: cada carpeta muestra cuántas tarjetas tiene, cuántas están para repasar y cuántas no has visto todavía. Empieza un examen de práctica de una sola carpeta — 10, 20, 40 o todas —, márcate acierto o fallo, y manda los fallos de vuelta a tu repaso con un botón.</p>
+<p><strong>Lo que Quat no hace:</strong> no hay calendario ni planificador de exámenes; el plan de arriba lo llevas tú. Y la sesión de repaso diaria cubre todo lo que está pendiente en todas las carpetas: es el examen de práctica el que se centra en una sola materia.</p>
+<h2>Fuentes</h2>
+<ul>
+<li>Cepeda y colaboradores (2006), <a href="https://doi.org/10.1037/0033-2909.132.3.354">Distributed practice in verbal recall tasks</a>, Psychological Bulletin — una revisión del efecto del espaciado.</li>
+<li>Rohrer y Taylor (2007), <a href="https://doi.org/10.1007/s11251-007-9015-8">The shuffling of mathematics problems improves learning</a>, Instructional Science — intercalar dentro de una misma materia.</li>
+<li>Dunlosky y colaboradores (2013), <a href="https://doi.org/10.1177/1529100612453266">Improving students' learning with effective learning techniques</a>, Psychological Science in the Public Interest.</li>
+</ul>
+<div class="store-cta"><a href="https://apps.apple.com/app/apple-store/id6797544518?pt=127982094&amp;ct=web-es-estudiar-para-varios-examenes&amp;mt=8">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../study-for-multiple-exams/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>

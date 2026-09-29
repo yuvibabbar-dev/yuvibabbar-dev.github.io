@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo hacer un examen de práctica con tus apuntes — Quat</title>
+<meta name="description" content="Convierte tus apuntes, diapositivas o un PDF en un examen de práctica que encuentre lo que aún no recuerdas: buenas preguntas, cuántas y qué hacer con los fallos.">
+<meta name="apple-itunes-app" content="app-id=6797544518">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cómo hacer un examen de práctica con tus apuntes — Quat">
+<meta property="og:description" content="Convierte tus apuntes, diapositivas o un PDF en un examen de práctica que encuentre lo que aún no recuerdas: buenas preguntas, cuántas y qué hacer con los fallos.">
+<meta property="og:url" content="https://yuvibabbar-dev.github.io/quat/es/examen-de-practica-con-tus-apuntes/">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/es/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://yuvibabbar-dev.github.io/quat/es/examen-de-practica-con-tus-apuntes/">
+<link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/practice-test-from-notes/">
+<link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/examen-de-practica-con-tus-apuntes/">
+<link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/practice-test-from-notes/">
+<style>
+/* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
+   bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
+   colour on the whole site is the four rating keys — the app's chroma budget,
+   kept honestly. */
+:root {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+          --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+          --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+          --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+          --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+          --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4; }
+}
+:root[data-theme="dark"] {
+  --ink: #EDEFEC; --paper: #14171A; --panel: #262C31;
+  --muted: #98A09C; --line: #3E464B; --on-ink: #14171A;
+  --again: #A03227; --again-ink: #FFE3DE; --again-bezel: #E2685A;
+  --hard:  #D99522; --hard-ink:  #241800; --hard-bezel:  #F0B850;
+  --good:  #12796A; --good-ink:  #E4FFF9; --good-bezel:  #3FC0AA;
+  --easy:  #35A8C0; --easy-ink:  #03202A; --easy-bezel:  #6ED0E4;
+}
+:root[data-theme="light"] {
+  --ink: #101312; --paper: #E6E8E5; --panel: #F7F8F6;
+  --muted: #5C625F; --line: #CBD0CB; --on-ink: #F7F8F6;
+  --again: #A02D22; --again-ink: #FFFFFF; --again-bezel: #7C221A;
+  --hard:  #E8A317; --hard-ink:  #2B1C00; --hard-bezel:  #8C6000;
+  --good:  #0F6B5C; --good-ink:  #FFFFFF; --good-bezel:  #0B5044;
+  --easy:  #38BDD6; --easy-ink:  #04262E; --easy-bezel:  #186F82;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0 20px 96px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 56px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+.mark { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-bottom: 20px; }
+.mark i { display: block; width: 7px; background: var(--ink); border-radius: 3px; }
+.mark i:nth-child(1) { height: 8px; }
+.mark i:nth-child(2) { height: 14px; margin-left: 2px; }
+.mark i:nth-child(3) { height: 20px; margin-left: 3px; }
+.mark i:nth-child(4) { height: 26px; margin-left: 4px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.015em; }
+h2 { font-size: 19px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+p, li { color: var(--ink); }
+p { margin: 0 0 16px; }
+ul { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+a { color: var(--ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+strong { font-weight: 600; }
+code, .eff, td:first-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+code { font-size: 15px; background: var(--panel); padding: 1px 5px;
+       border: 1px solid var(--line); border-radius: 6px; }
+.eff { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 20px;
+        font-size: 15px; display: block; overflow-x: auto; }
+th { text-align: left; font-size: 12px; letter-spacing: 0.06em;
+     text-transform: uppercase; color: var(--muted); font-weight: 500;
+     padding: 0 14px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line);
+     vertical-align: top; }
+td:first-child { font-size: 14px; }
+blockquote { margin: 0 0 16px; padding-left: 16px;
+             border-left: 1px solid var(--line); color: var(--muted); }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+         color: var(--muted); font-size: 14px; }
+footer a { color: var(--muted); }
+footer .credit { display: inline-block; margin-top: 10px; font-size: 12px; opacity: 0.85; }
+ol { margin: 0 0 16px; padding-left: 26px; }
+ol li { margin-bottom: 10px; padding-left: 4px; }
+ol li::marker { font-family: var(--mono); font-variant-numeric: tabular-nums;
+                color: var(--muted); }
+.store-cta { margin: 40px 0 0; }
+.store-cta a { display: inline-block; background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 6px; padding: 13px 22px;
+  font-size: 16px; font-weight: 600; text-decoration: none; }
+.store-cta a:hover, .store-cta a:focus-visible { background: transparent;
+  color: var(--ink); }
+.store-note { color: var(--muted); font-size: 14px; margin-top: 10px; }
+pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
+      border: 1px solid var(--line); border-radius: 6px; }
+pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
+           padding: 0; border: 0; }
+</style>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Cómo hacer un examen de práctica con tus apuntes</h1><div class="eff"></div></header>
+<p>Releer los apuntes se siente como estudiar porque todo en la página te suena. Un examen de práctica es la experiencia contraria: es más lento, es incómodo y te dice la verdad sobre lo que de verdad puedes sacar de tu cabeza. Esa incomodidad es justo lo que sirve. Recuperar algo de memoria lo refuerza mucho más que volver a mirarlo — el efecto del examen, uno de los resultados más consistentes de la investigación sobre aprendizaje.</p>
+<p>Así que el trabajo de un examen de práctica no es darte una nota. Es encontrar lo que todavía no eres capaz de recordar, mientras aún hay tiempo de arreglarlo.</p>
+<h2>La versión corta</h2>
+<ol>
+<li><strong>Convierte cada idea en una pregunta con una sola respuesta.</strong> "¿Cuáles son los cuatro pilares del tratamiento de la insuficiencia cardiaca?", no "Insuficiencia cardiaca".</li>
+<li><strong>Tapa las respuestas.</strong> Tarjetas, una hoja doblada, una segunda columna que cubres con la mano.</li>
+<li><strong>Baraja.</strong> Los apuntes en orden de clase ya son una pista en sí mismos.</li>
+<li><strong>Responde antes de mirar.</strong> En voz alta o en papel, completo.</li>
+<li><strong>Acierto o fallo, sin término medio.</strong> "Más o menos me la sabía" es un fallo.</li>
+<li><strong>Apunta cada fallo.</strong> Esa lista es lo que estudias después, no otra vez el tema entero.</li>
+<li><strong>Vuelve a preguntarte los fallos uno o dos días después.</strong></li>
+</ol>
+<h2>Preguntas que de verdad evalúan algo</h2>
+<p>Casi todos los exámenes de práctica flojos lo son por las preguntas, no por el esfuerzo. Unas pocas reglas cambian mucho:</p>
+<ul>
+<li><strong>Una respuesta por pregunta.</strong> "Describe el riñón" no se puede corregir como acierto o fallo. "¿En qué parte de la nefrona actúa la furosemida?" sí.</li>
+<li><strong>Pregunta por qué, no solo qué.</strong> "¿Qué significa IECA?" evalúa una etiqueta. "¿Por qué los IECA causan tos seca?" evalúa si entiendes el mecanismo, que es lo que premian los exámenes.</li>
+<li><strong>Responde con tus propias palabras.</strong> Si copias una frase de las diapositivas y le quitas una palabra, acabas evaluando si reconoces la frase.</li>
+<li><strong>Incluye las preguntas que no querrías que te tocaran.</strong> Un examen hecho solo con lo que ya sabes es una manta de consuelo.</li>
+</ul>
+<p>Veinte preguntas buenas valen más que cien vagas.</p>
+<h2>Cuántas preguntas y en qué orden</h2>
+<ul>
+<li><strong>10 preguntas</strong> es un repaso que haces en el autobús.</li>
+<li><strong>20</strong> te dicen si un tema está listo.</li>
+<li><strong>40 o más</strong> se parece al examen real, y vale la pena hacerlo una o dos veces antes.</li>
+</ul>
+<p>Baraja siempre. Si te encuentras las mismas preguntas en el mismo orden, aprendes el orden. Y no te saltes a escondidas las que temes: sácalas al azar para no poder hacerlo.</p>
+<h2>Corregirte con honestidad</h2>
+<p>Un examen de práctica solo funciona si la nota es honesta, y el sitio más fácil para engañarte es la respuesta que recordabas a medias. Cuéntala como fallo. No te estás poniendo una nota para el expediente; estás haciendo la lista de lo que hay que arreglar.</p>
+<p>La velocidad también cuenta. Si acertaste pero necesitaste un minuto mirando al techo, anótalo: con los nervios del examen puede que no salga.</p>
+<h2>Hacerlo a partir de un PDF o de diapositivas</h2>
+<p>El método es el mismo, con un aviso: las diapositivas están hechas para que alguien hable encima, así que un título de diapositiva casi nunca es una pregunta. Toma cada diapositiva y pregúntate qué esperaría el profesor que supieras de ella. Normalmente son una o dos preguntas: una definición, un mecanismo, un número, una comparación. Las palabras en negrita de un libro son un buen punto de partida para definiciones, pero no son todo el examen.</p>
+<h2>Qué hacer con los fallos</h2>
+<p>La lista de fallos es lo más valioso que ha producido el examen. Estudia esos puntos — explícalos en voz alta, busca lo que te confundió, conviértelos en tarjetas — y vuelve a preguntártelos uno o dos días después, y otra vez unos días más tarde. Espaciar esos repasos es lo que hace que el arreglo dure.</p>
+<h2>Cómo lo hace Quat</h2>
+<p>Quat es una app para iPhone y iPad que hago yo, así que esta parte la cuenta una parte interesada.</p>
+<p>Capturas tu material — una foto de una página, un PDF, un enlace o la grabación de una clase — y Quat lo convierte en tarjetas, cada una con el origen del que salió. Cuando quieres un examen de práctica, el modo examen saca un papel barajado de todas tus tarjetas o de una sola carpeta: 10, 20, 40 o todas. Ves una tarjeta cada vez, muestras la respuesta y te marcas acierto o fallo.</p>
+<p>Antes de empezar, cada carpeta muestra cuántas tarjetas tiene, cuántas están para repasar (la última respuesta fue Otra vez o Difícil) y cuántas no has visto nunca, así eliges la materia que más lo necesita. Al final ves la nota y la lista de lo que fallaste, y un botón manda esas tarjetas de vuelta a tu repaso. El examen en sí nunca cambia cuándo te toca repasar tus tarjetas; es una medición.</p>
+<p><strong>Lo que Quat no hace, para que no lo busques:</strong> no escribe preguntas tipo test ni corrige respuestas escritas — te corriges tú. Trabaja con tu propio material; no hay bancos de preguntas ya hechos. Los exámenes son gratis y sin límite; convertir capturas en tarjetas tiene un cupo mensual en el plan gratuito.</p>
+<h2>Fuentes</h2>
+<ul>
+<li>Roediger y Karpicke (2006), <a href="https://doi.org/10.1111/j.1467-9280.2006.01693.x">Test-enhanced learning</a>, Psychological Science.</li>
+<li>Dunlosky y colaboradores (2013), <a href="https://doi.org/10.1177/1529100612453266">Improving students' learning with effective learning techniques</a>, Psychological Science in the Public Interest — califica los exámenes de práctica y el repaso espaciado como las técnicas más útiles, y releer y subrayar entre las menos útiles.</li>
+</ul>
+<div class="store-cta"><a href="https://apps.apple.com/app/apple-store/id6797544518?pt=127982094&amp;ct=web-es-examen-de-practica-con-tus-apunte&amp;mt=8">Descarga Quat en el App Store</a><p class="store-note">Gratis · iPhone y iPad · sin cuenta</p></div>
+<footer><a href="../">Quat</a> · <a href="../../privacy/">Privacidad</a> · <a href="../../support/">Soporte</a> · <a href="../../practice-test-from-notes/" lang="en">In English</a><br><span class="credit">App Store es una marca de servicio de Apple Inc.</span></footer>
+</main></body></html>
