@@ -10,7 +10,6 @@ window.__RESUME__ = {
 
   contact: {
     email: "yuvibabbar@gmail.com",
-    phone: "+1 778-522-2737",
     location: "New Westminster, BC, Canada",
     linkedin: "https://linkedin.com/in/babbary",
     github: "https://github.com/yuvibabbar-dev",
