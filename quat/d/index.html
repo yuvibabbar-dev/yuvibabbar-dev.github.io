@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Shared flashcards · Quat</title>
+<meta name="description" content="Open a deck of Quat flashcards someone sent you, in your browser. Nothing is sent anywhere.">
+<meta name="apple-itunes-app" content="app-id=6797544518">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shared flashcards">
+<meta property="og:description" content="A deck of flashcards from Quat. It opens in your browser; nothing is sent anywhere.">
+<meta property="og:image" content="https://yuvibabbar-dev.github.io/quat/og.png">
+<link rel="stylesheet" href="deck.css">
+<script src="deck.js" defer></script>
+</head><body><main>
+<header><div class="mark"><i></i><i></i><i></i><i></i></div><h1 id="viewer-title">Shared flashcards</h1><div class="eff" id="viewer-privacy">Opened in your browser; nothing is sent anywhere.</div></header>
+<noscript><p>This page needs JavaScript to open the deck. It runs only in your browser.</p></noscript>
+<section id="open" class="viewer" hidden>
+<p id="open-intro">Paste the whole message you were sent. The deck opens here, on this page, so you can read and study the cards without the app.</p>
+<form id="open-form" novalidate autocomplete="off">
+<div class="field"><label id="msg-label" for="msg">The message you were sent</label><textarea id="msg" rows="7" spellcheck="false" autocapitalize="off" autocorrect="off"></textarea></div>
+<div class="field" id="pw-row" hidden><label id="pw-label" for="pw">Password</label><input id="pw" type="text" spellcheck="false" autocapitalize="characters" autocorrect="off" autocomplete="off"></div>
+<div class="field" id="email-row" hidden><label id="email-label" for="email">Email address the deck was sent to</label><input id="email" type="email" spellcheck="false" autocapitalize="off" autocomplete="off"></div>
+<button class="btn" type="submit" id="open-btn">Open the deck</button>
+<p class="error" id="open-error" role="alert"></p>
+</form>
+</section>
+<section id="deck" class="viewer" hidden>
+<div class="deck-head"><h2 id="deck-name" tabindex="-1"></h2><div class="eff" id="deck-count"></div></div>
+<div class="study">
+<div class="meter"><span id="progress"></span><span id="tally"></span></div>
+<div class="card" id="card" aria-live="polite">
+<div class="face-label" id="q-label">Question</div><div class="face" id="front"></div>
+<div class="answer" id="answer" hidden><div class="face-label" id="a-label">Answer</div><div class="face" id="back"></div></div>
+</div>
+<div class="controls"><button class="btn" type="button" id="show">Show answer</button></div>
+<div class="controls" id="rate" hidden><button class="btn again" type="button" id="again">Again</button><button class="btn know" type="button" id="know">Know it</button></div>
+<div class="done" id="done" hidden><p id="done-text"></p><div class="controls"><button class="btn" type="button" id="retry"></button><button class="btn quiet" type="button" id="restart">Start over</button></div></div>
+</div>
+<div class="actions"><button class="btn quiet" type="button" id="csv">Download CSV</button><button class="btn quiet" type="button" id="copy">Copy for Quat</button></div>
+<p class="status" id="copy-status" role="status"></p>
+<textarea id="copy-text" readonly hidden aria-label="Message for Quat"></textarea>
+<div class="store-cta"><div class="btn-row"><a id="get" href="https://apps.apple.com/app/apple-store/id6797544518?pt=127982094&amp;ct=deck-link&amp;mt=8">Get Quat for iPhone</a><a id="open-app" class="secondary" href="quat://flashcards?paste=1">Open in Quat</a></div>
+<p class="store-note" id="store-note">Have Quat already? Tap Copy for Quat, then Open in Quat, then Paste.</p>
+<p class="store-note" id="no-iphone">No iPhone? Study the cards on this page, or download them as a CSV file.</p></div>
+<details class="all" id="all"><summary id="all-summary"></summary><ol id="all-list"></ol></details>
+<p class="another"><button class="link" type="button" id="another">Open a different deck</button></p>
+</section>
+<footer><a href="../">Quat</a> · <a id="f-privacy" href="../privacy/">Privacy</a> · <a id="f-support" href="../support/">Support</a><br><span class="credit" id="f-credit">App Store is a service mark of Apple Inc.</span></footer>
+</main></body></html>

@@ -6,6 +6,9 @@
 <meta name="description" content="What a real export contains, why scheduling almost never transfers, and how to get a CSV into Anki without losing your sources.">
 <meta name="apple-itunes-app" content="app-id=6797544518">
 <meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to get your flashcards out of an app — Quat">
 <meta property="og:description" content="What a real export contains, why scheduling almost never transfers, and how to get a CSV into Anki without losing your sources.">
@@ -16,6 +19,7 @@
 <link rel="alternate" hreflang="en" href="https://yuvibabbar-dev.github.io/quat/export-flashcards/">
 <link rel="alternate" hreflang="es" href="https://yuvibabbar-dev.github.io/quat/es/exportar-fichas/">
 <link rel="alternate" hreflang="x-default" href="https://yuvibabbar-dev.github.io/quat/export-flashcards/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to get your flashcards out of an app","description":"What a real export contains, why scheduling almost never transfers, and how to get a CSV into Anki without losing your sources.","inLanguage":"en","url":"https://yuvibabbar-dev.github.io/quat/export-flashcards/","mainEntityOfPage":"https://yuvibabbar-dev.github.io/quat/export-flashcards/","image":"https://yuvibabbar-dev.github.io/quat/og.png","datePublished":"2026-08-27","dateModified":"2026-08-27","author":{"@type":"Organization","name":"Quat","url":"https://yuvibabbar-dev.github.io/quat/"},"publisher":{"@type":"Organization","name":"Quat","url":"https://yuvibabbar-dev.github.io/quat/","logo":{"@type":"ImageObject","url":"https://yuvibabbar-dev.github.io/quat/favicon-192.png"}}}</script>
 <style>
 /* Tokens are constants/theme.ts, not an approximation of it: the chassis is a
    bead-blasted grey, the panel sits BRIGHTER on it, and the only saturated
@@ -111,6 +115,13 @@ pre { margin: 0 0 16px; padding: 14px 16px; overflow-x: auto;
       border: 1px solid var(--line); border-radius: 6px; }
 pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: none;
            padding: 0; border: 0; }
+.related { margin: 48px 0 0; }
+.related h2 { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+              color: var(--muted); font-weight: 500; margin: 0 0 4px; }
+.related ul { list-style: none; padding: 0; margin: 0; }
+.related li { margin: 0; border-bottom: 1px solid var(--line); }
+.related a { display: block; padding: 12px 0; text-decoration: none; }
+.related a:hover, .related a:focus-visible { text-decoration: underline; }
 </style>
 </head><body><main>
 <header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>How to get your flashcards out of an app</h1><div class="eff"></div></header>
@@ -146,5 +157,6 @@ interval, ease, streak, capture</code></pre>
 <p>Import is the same shape in reverse — paste CSV rows into the box in the Cards tab. The parser reads the column order from your header rather than assuming one, so a file that has been through a spreadsheet still lands correctly, and a file with no header at all is read positionally.</p>
 <p>There is no account, which means there is also no backup on a server and nothing for me to restore if you delete the app. That is the real reason to export occasionally, and it is a better reason than distrusting me.</p>
 <div class="store-cta"><a href="https://apps.apple.com/app/apple-store/id6797544518?pt=127982094&amp;ct=web-export-flashcards&amp;mt=8">Get Quat on the App Store</a><p class="store-note">Free · iPhone and iPad · no account</p></div>
+<nav class="related" aria-label="Related guides"><h2>Related guides</h2><ul><li><a href="../study-app-no-account/">A study app with no account — what it gets you, and what it costs</a></li><li><a href="../where-did-this-flashcard-come-from/">Where did this flashcard come from?</a></li><li><a href="../premade-decks-vs-your-own/">Premade decks or make your own?</a></li></ul></nav>
 <footer><a href="../">Quat</a> · <a href="../privacy/">Privacy</a> · <a href="../support/">Support</a> · <a href="../es/exportar-fichas/" lang="es">En español</a><br><span class="credit">App Store is a service mark of Apple Inc.</span></footer>
 </main></body></html>
