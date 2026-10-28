@@ -122,44 +122,58 @@ pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: non
 </head><body><main>
 <header><div class="mark"><i></i><i></i><i></i><i></i></div><h1>Quat — Privacy Policy</h1><div class="eff">Effective 27 October 2026</div></header>
 <p>Quat turns things you capture — a recording, a photo of a page, a link — into flashcards that test you. This policy explains what happens to that material.</p>
-<p>The short version: <strong>your notes and cards live on your device.</strong> Quat has no accounts, no login, and no server that stores your content. The only things that leave your phone are the specific items you hand to a capture feature, and they leave only to be read once and turned into text.</p>
+<p>The short version: <strong>your notes and cards live on your device.</strong> Quat has no accounts, no login, and no server that stores your content. The only content Quat sends is what you use an AI feature on — something you capture, a note you make cards from, or a question to the tutor — and it is sent only to be turned into text, notes, cards or an answer. Two identifiers travel with those requests so allowances can be counted, and the app checks your subscription status with RevenueCat, which handles subscriptions.</p>
 <h2>We do not collect</h2>
 <p>Quat has no user accounts and asks for no identity. Specifically, Quat does <strong>not</strong> collect:</p>
 <ul>
 <li>your name, email address, phone number, or date of birth</li>
-<li>your location</li>
+<li>your precise location — the app never asks for it. Cloudflare and RevenueCat each work out an approximate location, such as your country, from your IP address (see "Who processes it")</li>
 <li>your contacts, calendar, or health data</li>
 <li>advertising identifiers, and there is no advertising in the app</li>
-<li>analytics or usage tracking of any kind — there is no analytics SDK, no crash reporter, and no telemetry in the app</li>
+<li>tracking, or analytics from an analytics SDK — there is no analytics SDK, no crash reporter, and no telemetry in the app. Usage is counted in two places only: the relay counts AI requests and how much of each allowance they use (see "Identifiers"), and RevenueCat records when the app last connected to it, the app version and any purchases, which Quat sees as customer records and charts in RevenueCat's dashboard (see "Who processes it")</li>
 </ul>
 <h2>What stays on your device</h2>
-<p>Everything you create stays in the app's private storage on your phone and is never uploaded:</p>
+<p>Everything you create is kept in the app's private storage on your phone:</p>
 <ul>
 <li>notes, flashcards, folders and tags</li>
 <li>your review history, intervals and scheduling data</li>
 <li>statistics, streaks, XP, badges and challenge progress</li>
 <li>your language, theme and app preferences</li>
+<li>recordings waiting to be transcribed, until their text has been saved</li>
 </ul>
-<p>Deleting the app deletes all of it. There is no copy anywhere else, so <strong>there is also no way for us to restore it</strong> — export your deck if it matters to you.</p>
+<p>Quat uploads none of it for storage or backup. Parts of it leave the phone only when you use an AI feature on them, as described below, or when you share or export a deck yourself.</p>
+<p>Deleting the app deletes all of it. We keep no copy, so <strong>there is also no way for us to restore it</strong> — export your deck if it matters to you.</p>
 <h2>What leaves your device, and when</h2>
-<p>Quat sends material to be read by an AI model <strong>only at the moment you use a capture feature</strong>, and only the material that feature needs:</p>
-<table><thead><tr><th>When you</th><th>What is sent</th><th>Why</th></tr></thead><tbody><tr><td>Record audio and stop the recording</td><td>the audio recording, sent as soon as you stop</td><td>to transcribe it into text</td></tr><tr><td>Pick a photo and ask for text</td><td>the image</td><td>to read the text off the page</td></tr><tr><td>Paste a link and ask for notes</td><td>the text of the page, fetched by your device</td><td>to summarise it</td></tr><tr><td>Pick a document (PDF, Word, PowerPoint or Excel) and make notes from it</td><td>the PDF file itself, or the text of the other formats</td><td>to turn it into notes</td></tr><tr><td>Paste text and ask for cards</td><td>that text</td><td>to turn it into flashcards</td></tr><tr><td>Ask the tutor a question</td><td>your message, plus the titles and content of your ten most recent notes and forty most recent flashcards</td><td>so the answer is grounded in your own material</td></tr></tbody></table>
-<p>Nothing is sent in the background. Nothing is sent on a schedule. If you never use a capture feature, nothing you write ever leaves your phone.</p>
-<p><strong>Links you paste are fetched by your own device</strong>, so the website you link to sees your request the same way your browser would, including your IP address.</p>
+<p>Quat sends material to be read by an AI model <strong>only when you use one of the features below</strong>, and only the material that feature needs. The one thing that can finish later is a recording that was cut off part-way: its remaining parts are sent when you come back to Quat.</p>
+<table><thead><tr><th>When you</th><th>What is sent</th><th>Why</th></tr></thead><tbody><tr><td>Record audio and stop the recording</td><td>the audio recording, in parts of up to 10 minutes, sent as soon as you stop; parts not yet sent when you leave Quat or lose your connection are sent when you come back to it</td><td>to transcribe it into text</td></tr><tr><td>Take or pick a photo and ask for its text, or make cards from it (From image)</td><td>the image</td><td>to read the text off the page, or to turn it into flashcards</td></tr><tr><td>Paste a link and ask for notes</td><td>the page's title and text (up to 24,000 characters), fetched by your device, and any focus you typed</td><td>to summarise it</td></tr><tr><td>Pick a document (PDF, Word, PowerPoint, Excel or a text file) and make notes from it</td><td>the PDF file itself, or the text of the other formats, with the file's name and any focus you typed</td><td>to turn it into notes</td></tr><tr><td>Make cards from a note (Generate)</td><td>the note's text: the part not yet made into cards, or the whole note together with the questions its existing cards already ask</td><td>to turn it into flashcards</td></tr><tr><td>Ask the tutor a question</td><td>the last eight messages of the conversation (yours and the tutor's), ending with your question, plus the titles and first 800 characters of your ten most recently edited notes and the questions and answers of your forty newest flashcards</td><td>so the answer is grounded in your own material</td></tr></tbody></table>
+<p>Apart from those unfinished recording parts, none of your material is sent in the background or on a schedule. If you never use one of these features or share a deck, nothing you write leaves your phone.</p>
+<p><strong>Links you paste are fetched by your own device</strong>, so the website you link to sees the request come from your phone's IP address, as any visit would. Quat presents itself to the site as a desktop web browser, without your browser's cookies or sign-ins.</p>
 <h2>Who processes it</h2>
-<p>Material sent for processing passes through two services and is not stored by either as part of providing this feature:</p>
+<p>Material sent for processing passes through two services. Quat's relay does not keep it; Google may keep it only in the limited cases described below:</p>
 <ul>
-<li><strong>Cloudflare Workers</strong> hosts the small relay that forwards requests. It exists so that no API credential has to ship inside the app. It does not store the content of your requests, and it does not log them.</li>
-<li><strong>Google Cloud Vertex AI</strong> runs the model that produces the transcript, the extracted text, the summary or the answer. Processing is governed by the Google Cloud terms, under which customer data is not used to train Google's models. Google's own documentation on data handling: <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance">https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance</a></li>
+<li><strong>Cloudflare Workers</strong> hosts the small relay that forwards requests. It exists so that no API credential has to ship inside the app. It does not store or log the content of your requests. Quat has Cloudflare keep a log of each request for up to 7 days: when it arrived, the address it was sent to, its headers (which can include your IP address and the identifiers described below), an approximate location Cloudflare works out from your IP address, such as your country, and whether it succeeded. Cloudflare may also use traffic data such as IP addresses to protect its own network, as its privacy policy describes: <a href="https://www.cloudflare.com/privacypolicy/">https://www.cloudflare.com/privacypolicy/</a></li>
+<li><strong>Google Cloud Vertex AI</strong> (which Google renamed Gemini Enterprise Agent Platform in 2026) runs the model that produces the transcript, the extracted text, the notes, the cards or the answer, in Google's us-central1 region in the United States. Processing is governed by the Google Cloud terms, under which Google does not use it to train its models. By default Google may hold the material, or data derived from it, in a cache for up to 24 hours so repeated requests are answered faster; that cache belongs to Quat's Google Cloud project and is never served to another. Under the same terms, if Google's automated safety checks flag a request as possible abuse of its usage policies, Google may log the prompt, keep it for up to 90 days, and let authorized Google staff review it; it is not used to train models. Google's own documentation on data handling: <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention">https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention</a></li>
 </ul>
-<p>We do not sell or share your material with anyone, and there is no third party beyond those two.</p>
-<h2>The device identifier</h2>
-<p>To stop one device using the AI features without limit, Quat generates a random string the first time it needs one — for example <code>d-k3f9a2xq1b8w</code>. It is created on your device, stored there, and sent with AI requests so a daily allowance can be counted.</p>
-<p>It is <strong>not</strong> a hardware identifier, an advertising identifier, or anything issued by Apple or Google. It is not linked to you, and it identifies nothing except "some device". Deleting the app discards it, and the next install generates a new one.</p>
-<p>The relay keeps a count against that string — a number, not your content — and those counters are deleted automatically after 36 hours. If the identifier is missing, the count falls back to your IP address for the same 36 hours so the limit cannot simply be bypassed.</p>
+<p>We do not sell or share your material with anyone, and no service beyond those two receives it.</p>
+<p><strong>RevenueCat</strong> handles subscriptions, not your material. It processes subscription purchases and tells the app and the relay whether a subscription is active; Apple takes the payment itself. Each time the app runs, RevenueCat's SDK checks your subscription status and the available plans with RevenueCat. Those requests carry the anonymous ID described below and basic device and app details, such as the device model, the iOS and app version, language, App Store country, and Apple's identifier for vendor, which is the same for all of one developer's apps on your phone. RevenueCat also sees your IP address; it works out your country from it and then drops the address. RevenueCat keeps a customer record for that ID even if you never subscribe: when it was first and last seen, the app version and the country. If you subscribe or restore a purchase, RevenueCat receives the App Store transaction and adds it to that record. RevenueCat processes this on Quat's behalf: <a href="https://www.revenuecat.com/privacy">https://www.revenuecat.com/privacy</a></p>
+<h2>Identifiers</h2>
+<p>Two identifiers can be sent with AI requests, so the relay can count allowances and recognise a subscription:</p>
+<ul>
+<li><strong>A device string</strong> that Quat generates the first time it needs one: random characters followed by the time it was made, for example <code>d-k3f9a2xq1b8mh9c2k4z</code>. It is created on your device and stored there.</li>
+<li><strong>An anonymous app user ID</strong> that RevenueCat's SDK creates on your device for subscriptions. It is sent once the SDK has started.</li>
+</ul>
+<p>Neither is a hardware identifier, an advertising identifier, or anything issued by Apple or Google, and neither contains your name or email. The device string identifies one installation of Quat, not a person. If you subscribe, RevenueCat links its ID to your App Store purchase, so that ID is tied to your subscription.</p>
+<p>Deleting the app removes both from your phone, and a new install creates new ones. RevenueCat keeps its record of the old ID until it is deleted (see "Your rights"). If you restore a purchase on the new install, RevenueCat merges the old and new IDs into one customer record.</p>
+<p>What the relay keeps against these identifiers is counts and dates, never your content:</p>
+<ul>
+<li><strong>today's request count</strong>, kept against the device string, or your IP address if the string is missing. It is deleted automatically 36 hours after its last update.</li>
+<li><strong>this month's allowance counts</strong> — seconds of audio transcribed, photos and documents read, links summarised, tutor messages, and card and summary requests — kept against the RevenueCat ID, or the device string if there is none, or your IP address if both are missing. They are deleted automatically 40 days after their last update.</li>
+<li><strong>if you subscribe, your subscription status</strong> and when it ends, kept against the RevenueCat ID until a day after the subscription ends at the latest. RevenueCat's notice to the relay also carries the purchase's details, such as the product, price, currency and country; the relay reads only the status and end date and keeps nothing else.</li>
+</ul>
+<p>The fallback to your IP address is there so the limits cannot simply be bypassed.</p>
 <h2>Shared decks</h2>
-<p>If you share a deck, it is <strong>encrypted on your device before it leaves it</strong>, and travels as a single block of text that you send however you choose. We never receive it.</p>
-<p>Sharing with a classmate is the simple way, and it has no separate password: the password travels in the same message as the deck, so <strong>anyone who has the message can open it</strong> — treat it like sending a file. Your own review history is not included; your classmate gets the cards as new. To keep a deck private, switch on "Lock with a password" and send the password separately.</p>
+<p>If you share a deck, the cards are <strong>encrypted on your device before they leave it</strong>, and travel in one message that you send however you choose. We never receive it. A message to a classmate also begins with a readable line naming the deck and how many cards it holds.</p>
+<p>Sharing with a classmate is the simple way, and it has no separate password: the password travels in the same message as the deck, so <strong>anyone who has the message can open it</strong> — treat it like sending a file. Your own review history is not included; your classmate gets the cards as new. To keep a deck private, switch on "Lock with a password" and send the password separately. A locked deck keeps each card's schedule (when it is next due, its interval and streak), so you can move your own cards to another device.</p>
 <p>If you choose to bind a deck to a recipient's email address, <strong>that address is never transmitted to us or stored anywhere.</strong> It is mixed into the encryption key on your device, so the deck simply will not decrypt without it. Nobody checks it against a list, because there is no list.</p>
 <p>Be aware of the flip side: because we hold nothing, a deck you send cannot be recalled, and a lost password cannot be reset by anyone.</p>
 <h2>Notifications</h2>
@@ -172,16 +186,16 @@ pre code { font-size: 14px; line-height: 1.55; white-space: pre; background: non
 </ul>
 <p>Quat does not open the camera or microphone at any other time. You can revoke any of these in your device settings; the rest of the app keeps working.</p>
 <h2>Children</h2>
-<p>Quat is a study tool intended for a general audience, and it is not directed to children under 13. It collects no personal information from anyone, including children — no account, no name, no email, no location, no analytics.</p>
-<p>Quat is rated 4+ and is not listed in a children's category. Because the app collects no personal information at all, there is nothing it could collect from a child that it does not equally decline to collect from an adult.</p>
+<p>Quat is a study tool intended for a general audience, and it is not directed to children under 13. It asks no one, including children, to identify themselves — no account, no name, no location — and it contains no analytics SDK. The only email address it ever asks for is the optional one a shared deck can be locked to, which never leaves the device (see "Shared decks").</p>
+<p>Quat is rated 4+ and is not listed in a children's category. It handles a child's data exactly as it handles an adult's, as described above, and asks for nothing more.</p>
 <h2>Your rights</h2>
 <p>Because Quat stores your content on your device and holds no account, you already have direct control:</p>
 <ul>
 <li><strong>Access and portability</strong> — export your decks from within the app at any time</li>
-<li><strong>Deletion</strong> — delete individual items in the app, or delete the app to remove everything at once</li>
+<li><strong>Deletion</strong> — delete individual items in the app, or delete the app to remove everything on your phone at once; what the relay keeps (see "Identifiers") expires on its own. RevenueCat keeps its customer record until it is deleted, so if you subscribed, email us your App Store order ID and we will delete that record</li>
 <li><strong>Withdrawing consent</strong> — revoke microphone, camera or photo access in your device settings, or simply stop using the capture features</li>
 </ul>
-<p>If you are in the EEA, the UK, or a US state with a comprehensive privacy law, those rights apply to you and are exercised as above. There is no account for us to look up, and no stored copy of your material for us to return or erase.</p>
+<p>If you are in the EEA, the UK, or a US state with a comprehensive privacy law, those rights apply to you and are exercised as above. There is no account and no stored copy of your material for us to return or erase. The one record that does not expire on its own is RevenueCat's, described under "Deletion", and we can have it deleted on request.</p>
 <h2>Changes</h2>
 <p>If this policy changes materially, the effective date at the top changes and the new version is published here before the change takes effect.</p>
 <h2>Contact</h2>
